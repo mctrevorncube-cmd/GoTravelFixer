@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelFixer — Book Tickets &amp; Talk to Verified Local Fixers</title>
+  <meta name="description" content="Book flights and stays fast, or talk to someone who's actually been there — starting with Ghana." />
+
+  <!-- Typography: Playfair Display (Editorial Serif) + Inter (Clean UI Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emeraldBrand: '#154731',
+            emeraldHover: '#0F3524',
+            goldBrand: '#C59B49',
+            goldText: '#8F6B24',
+            ivory: '#FBF9F5',
+            stoneWarm: '#F3EFE6',
+            charcoal: '#1D1F22',
+            borderWarm: '#E2DBD0',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- React 18 & Babel Standalone for zero-build browser execution -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+      background-color: #FBF9F5;
+      color: #1D1F22;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #FBF9F5;
+      color: #1D1F22;
+      -webkit-font-smoothing: antialiased;
+    }
+    *:focus-visible {
+      outline: 2px solid #154731;
+      outline-offset: 2px;
+    }
+    @keyframes fadeInSlow {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-editorial {
+      animation: fadeInSlow 0.6s ease-out both;
+    }
+  </style>
+</head>
+<body class="bg-ivory text-charcoal selection:bg-emeraldBrand selection:text-ivory">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    /* =========================================================================
+       CUSTOM BRAND EMBLEM SVG (Deep Emerald Green #154731 & Brushed Gold #C59B49)
+       ========================================================================= */
+    function TravelFixerLogo({ variant = 'light', compact = false }) {
+      const subTextColor = variant === 'dark' ? '#E8E3D9' : '#3C4043';
+      const fixGroupColor = variant === 'dark' ? '#C59B49' : '#154731';
+
+      return (
+        <div className="inline-flex flex-col select-none" aria-label="TravelFixer — Part of the Fixer Venture Group">
+          <svg
+            viewBox="0 0 380 96"
+            className={compact ? 'h-10 w-auto' : 'h-12 sm:h-14 w-auto'}
+            role="img"
+            aria-hidden="true"
+          >
+            {/* Orbital Gold Swoosh */}
+            <path
+              d="M 22 68 C 12 46, 48 24, 122 14"
+              fill="none"
+              stroke="#C59B49"
+              strokeWidth="3.2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M 28 72 C 22 52, 54 31, 118 20"
+              fill="none"
+              stroke="#8F6B24"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+
+            {/* Gold Aeroplane Silhouette */}
+            <g transform="translate(122, 4) rotate(-8)">
+              <path
+                d="M 0 11 L 16 9 L 28 2 L 32 2 L 24 9 L 38 8 L 43 4 L 46 4 L 43 9 L 47 10 L 43 12 L 46 16 L 43 16 L 38 12 L 24 12 L 31 19 L 27 19 L 16 12 L 0 12 Z"
+                fill="#C59B49"
+              />
+            </g>
+
+            {/* Compass Rose Emblem over 'ra' */}
+            <g transform="translate(96, 26)">
+              <circle cx="0" cy="0" r="10.5" fill="#154731" stroke="#C59B49" strokeWidth="2.2" />
+              <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="#C59B49" />
+              <circle cx="0" cy="0" r="1.6" fill="#FBF9F5" />
+            </g>
+
+            {/* "Travel" in Deep Emerald Green */}
+            <text
+              x="24"
+              y="66"
+              fontFamily="'Playfair Display', Georgia, serif"
+              fontWeight="700"
+              fontSize="44"
+              letterSpacing="-1"
+              fill="#154731"
+            >
+              Travel
+            </text>
+
+            {/* Gear Accent behind X */}
+            <g transform="translate(230, 52)">
+              <circle cx="0" cy="0" r="14" fill="none" stroke="#8F6B24" strokeWidth="2.2" strokeDasharray="4 3" />
+            </g>
+
+            {/* "Fixer" in Brushed Gold */}
+            <text
+              x="164"
+              y="66"
+              fontFamily="'Playfair Display', Georgia, serif"
+              fontWeight="700"
+              fontSize="44"
+              letterSpacing="-0.5"
+              fill="#C59B49"
+            >
+              Fixer
+            </text>
+
+            {/* Skeleton Key Diagonal Overlay across the 'X' */}
+            <g transform="translate(232, 51) rotate(-38)">
+              <rect x="-18" y="-1.8" width="34" height="3.6" rx="1.5" fill="#8F6B24" />
+              <circle cx="-21" cy="0" r="5.5" fill="none" stroke="#8F6B24" strokeWidth="2.5" />
+              <rect x="10" y="1.5" width="3" height="5" fill="#8F6B24" />
+              <rect x="14" y="1.5" width="3" height="4" fill="#8F6B24" />
+            </g>
+
+            {/* Sub-caption */}
+            <text
+              x="26"
+              y="86"
+              fontFamily="Inter, system-ui, sans-serif"
+              fontWeight="700"
+              fontSize="10.2"
+              letterSpacing="1.6"
+              fill={subTextColor}
+            >
+              PART OF THE{' '}
+              <tspan fill={fixGroupColor}>FIXER VENTURE</tspan>{' '}
+              GROUP
+            </text>
+          </svg>
+        </div>
+      );
+    }
+
+    /* =========================================================================
+       DATA
+       ========================================================================= */
+    const FIXERS = [
+      {
+        id: 'ama',
+        name: 'Ama',
+        age: 34,
+        city: 'Accra',
+        years: '34 years',
+        quote: "I've lived in Accra my whole life. Here's what tourists always get wrong.",
+        speciality: 'Osu, Labone, Jamestown & local dining',
+        image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80',
+      },
+      {
+        id: 'kojo',
+        name: 'Kojo',
+        age: 41,
+        city: 'London ⇄ Accra',
+        years: '15 years',
+        quote: 'I go home twice a year. I know the airport, the money, and the family logistics.',
+        speciality: 'Kotoka arrivals, FX rates & diaspora trips',
+        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80',
+      },
+      {
+        id: 'efua',
+        name: 'Efua',
+        age: 29,
+        city: 'Kumasi',
+        years: '12 years',
+        quote: 'Ask me about markets, trotros, and what not to wear.',
+        speciality: 'Kejetia Market, Ashanti heritage & dress codes',
+        image: 'https://images.unsplash.com/photo-1523824921871-d6f1a15151f1?auto=format&fit=crop&w=700&q=80',
+      },
+      {
+        id: 'kwame',
+        name: 'Kwame',
+        age: 37,
+        city: 'Cape Coast',
+        years: '20 years',
+        quote: "I'll tell you which beaches are worth the drive.",
+        speciality: 'Central Region coast, Kakum & historic forts',
+        image: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=700&q=80',
+      },
+      {
+        id: 'abena',
+        name: 'Abena',
+        age: 45,
+        city: 'Tamale',
+        years: '25 years',
+        quote: 'The north is a different country. Let me explain it.',
+        speciality: 'Mole National Park, Northern hospitality & overland routes',
+        image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80',
+      },
+      {
+        id: 'yaw',
+        name: 'Yaw',
+        age: 31,
+        city: 'Takoradi',
+        years: '8 years',
+        quote: 'Where to eat, where to stay, who to call.',
+        speciality: 'Western Region, Busua surf & vetted drivers',
+        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=80',
+      },
+    ];
+
+    const LOCKED_INSIGHTS = [
+      {
+        id: 'trotro',
+        tag: 'Getting around',
+        title: 'Getting around: the trotro rule nobody mentions',
+        body: 'Never board an empty trotro at Circle or Kaneshie unless you have 40 minutes to spare—always pick one that is three-quarters full with the mate actively calling the final junction, and keep exact 1 and 2 Cedi notes in your front pocket.',
+      },
+      {
+        id: 'money',
+        tag: 'Money & cards',
+        title: "
