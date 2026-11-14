@@ -252,4 +252,1766 @@
       {
         id: 'money',
         tag: 'Money & cards',
-        title: "
+        title: "Money: what to do when the card machine 'isn't working'",
+        body: 'International Visa and Mastercard terminals frequently drop on local networks after 6 PM. Keep Mobile Money (MTN MoMo) loaded via a local eSIM at Kotoka Terminal 3, or carry crisp $100 bills printed after 2017 for licensed forex bureaux in Osu.',
+      },
+      {
+        id: 'culture',
+        tag: 'Etiquette',
+        title: 'The one thing to never do at a family gathering',
+        body: 'Always greet elders from right to left using your right hand before sitting down—even if you are late. Handing over a gift, envelope, or bottle of water with your left hand is read as deliberate disrespect.',
+      },
+    ];
+
+    const CITY_GUIDES = [
+      {
+        city: 'Accra',
+        quote: 'Skip the tourist traps on Oxford Street after dark; eat grilled tilapia in Labone instead.',
+        fixersCount: 14,
+      },
+      {
+        city: 'Kumasi',
+        quote: 'Go to Kejetia at 7:30 AM with a local—by noon the heat and crowds double.',
+        fixersCount: 7,
+      },
+      {
+        city: 'Cape Coast',
+        quote: 'Hire one trusted driver for the day rather than haggling three separate taxis.',
+        fixersCount: 6,
+      },
+      {
+        city: 'Tamale',
+        quote: 'Fly up in the morning, slow down your schedule, and eat tuo zaafi where locals queue.',
+        fixersCount: 5,
+      },
+    ];
+
+    const FLIGHT_RESULTS = [
+      {
+        id: 'TF-104',
+        airline: 'South African Airways',
+        route: 'JNB → ACC',
+        depart: '09:15',
+        arrive: '13:40',
+        duration: '6h 25m · Direct',
+        standardPrice: 640,
+        memberPrice: 575,
+        baggage: '1 checked bag (23kg) included',
+      },
+      {
+        id: 'TF-218',
+        airline: 'Ethiopian Airlines',
+        route: 'JNB → ADD → ACC',
+        depart: '11:50',
+        arrive: '19:10',
+        duration: '9h 20m · 1 stop (Addis Ababa)',
+        standardPrice: 545,
+        memberPrice: 489,
+        baggage: '2 checked bags (23kg) included',
+      },
+      {
+        id: 'TF-309',
+        airline: 'Kenya Airways',
+        route: 'JNB → NBO → ACC',
+        depart: '14:10',
+        arrive: '21:55',
+        duration: '9h 45m · 1 stop (Nairobi)',
+        standardPrice: 560,
+        memberPrice: 505,
+        baggage: '1 checked bag (23kg) included',
+      },
+    ];
+
+    const STAY_RESULTS = [
+      {
+        id: 'ST-01',
+        name: 'The Lennox Residence · Airport Residential',
+        area: 'Accra · 8 mins from Kotoka (ACC)',
+        note: 'Verified by Ama: reliable backup power, quiet street, fast fibre.',
+        standardPrice: 145,
+        memberPrice: 124,
+      },
+      {
+        id: 'ST-02',
+        name: 'Labone Courtyard Guesthouse',
+        area: 'Labone, Accra · Walkable to cafés',
+        note: 'Verified by Kojo: family-run, airport pickup included on 3+ nights.',
+        standardPrice: 110,
+        memberPrice: 94,
+      },
+    ];
+
+    const CAR_RESULTS = [
+      {
+        id: 'CR-01',
+        name: 'Toyota RAV4 + Vetted Accra Driver',
+        area: 'Full-day private hire · Fuel in city included',
+        note: 'Verified by Yaw: English-speaking driver, vetted for airport & Cape Coast runs.',
+        standardPrice: 85,
+        memberPrice: 72,
+      },
+    ];
+
+    const RECENT_SEARCHES = [
+      { from: 'Johannesburg (JNB)', to: 'Accra (ACC)', dates: 'Sat 12 Dec → Sun 20 Dec', price: '$545' },
+      { from: 'London (LHR)', to: 'Accra (ACC)', dates: 'Fri 18 Dec → Mon 4 Jan', price: '$790' },
+      { from: 'Harare (HRE)', to: 'Accra (ACC)', dates: 'Wed 25 Nov → Wed 2 Dec', price: '$610' },
+    ];
+
+    const COMMUNITY_POSTS = [
+      {
+        author: 'Tariro M.',
+        city: 'Harare → Accra',
+        title: 'Best local eSIM at Kotoka Terminal 3?',
+        excerpt: 'Landed at 9 PM—MTN stand right past customs took 6 minutes with my passport. Skip the roaming bundle.',
+        replies: 14,
+      },
+      {
+        author: 'David O.',
+        city: 'London → Kumasi',
+        title: 'VIP bus vs domestic flight from Accra to Kumasi',
+        excerpt: 'If you have two suitcases, the 45-minute PassionAir hop saves 6 hours of roadworks on the N6.',
+        replies: 19,
+      },
+      {
+        author: 'Nadia K.',
+        city: 'Toronto → Cape Coast',
+        title: 'Staying overnight near Kakum Canopy Walkway',
+        excerpt: 'Arrive at 6:45 AM before the tour buses reach the bridge. You will have the forest canopy to yourself.',
+        replies: 9,
+      },
+    ];
+
+    /* =========================================================================
+       MAIN APPLICATION
+       ========================================================================= */
+    function App() {
+      // User role state: 'guest' | 'free' | 'subscriber'
+      const [userRole, setUserRole] = useState('guest');
+
+      // Priority Booking Engine state (First thing visible above the fold)
+      const [bookingMode, setBookingMode] = useState('flights'); // 'flights' | 'stays' | 'cars'
+      const [tripType, setTripType] = useState('return'); // 'return' | 'oneway' | 'multicity'
+      const [origin, setOrigin] = useState('Johannesburg (JNB)');
+      const [destination, setDestination] = useState('Accra, Ghana (ACC)');
+      const [travelDate, setTravelDate] = useState('Sat 12 Dec — Sun 20 Dec');
+      const [travellers, setTravellers] = useState('1 traveller');
+      const [cabinClass, setCabinClass] = useState('Economy');
+      const [baggagePref, setBaggagePref] = useState('1 checked bag');
+      const [hasSearched, setHasSearched] = useState(false);
+
+      // Checkout & Post-Booking Save Flow (No login required to search or book)
+      const [selectedOffer, setSelectedOffer] = useState(null);
+      const [passengerName, setPassengerName] = useState('');
+      const [passengerEmail, setPassengerEmail] = useState('');
+      const [bookingConfirmed, setBookingConfirmed] = useState(null);
+      const [savedTrips, setSavedTrips] = useState([
+        {
+          ref: 'TF-88412',
+          route: 'Johannesburg (JNB) → Accra (ACC)',
+          dates: '12 Dec – 20 Dec 2026',
+          status: 'Ticketed',
+        },
+      ]);
+
+      // Modals & Interactive UI
+      const [lockModalFixer, setLockModalFixer] = useState(null);
+      const [authModalOpen, setAuthModalOpen] = useState(false);
+      const [authMode, setAuthMode] = useState('signup'); // 'signin' | 'signup'
+      const [billingCycle, setBillingCycle] = useState('annual'); // 'monthly' | 'annual'
+      const [accountTab, setAccountTab] = useState('trips'); // 'trips' | 'calls' | 'briefs'
+      const [showStickyBar, setShowStickyBar] = useState(false);
+      const [newsletterEmail, setNewsletterEmail] = useState('');
+      const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+      const [callBookedNotice, setCallBookedNotice] = useState('');
+
+      useEffect(() => {
+        const onScroll = () => {
+          setShowStickyBar(window.scrollY > 420);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+      }, []);
+
+      const handleSwapLocations = () => {
+        const prevOrigin = origin;
+        setOrigin(destination);
+        setDestination(prevOrigin);
+      };
+
+      const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        setHasSearched(true);
+        setBookingConfirmed(null);
+        const resultsEl = document.getElementById('booking-results');
+        if (resultsEl) {
+          resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      };
+
+      const handleCompleteBooking = (e) => {
+        e.preventDefault();
+        const refCode = 'TF-' + Math.floor(10000 + Math.random() * 89999);
+        const newTrip = {
+          ref: refCode,
+          route: `${origin} → ${destination}`,
+          dates: travelDate,
+          status: 'Confirmed · E-Ticket Issued',
+        };
+        setBookingConfirmed({
+          ...newTrip,
+          itemTitle: selectedOffer.airline || selectedOffer.name,
+          totalPaid: userRole === 'subscriber' ? selectedOffer.memberPrice : selectedOffer.standardPrice,
+        });
+        if (userRole !== 'guest') {
+          setSavedTrips((prev) => [newTrip, ...prev]);
+        }
+        setSelectedOffer(null);
+      };
+
+      const handleTalkToFixer = (fixer) => {
+        if (userRole === 'subscriber') {
+          setCallBookedNotice(`30-minute call request sent to ${fixer.name} (${fixer.city}). Check "My Fixer Calls" below.`);
+          setTimeout(() => setCallBookedNotice(''), 6000);
+        } else {
+          setLockModalFixer(fixer);
+        }
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col bg-ivory text-charcoal">
+          {/* =================================================================
+              ROLE PREVIEW BAR (Allows testing Guest / Free / Subscriber states)
+              ================================================================= */}
+          <div className="bg-charcoal text-ivory text-xs px-4 py-2 border-b border-stoneWarm/15">
+            <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+              <span className="text-ivory/80">
+                Preview state:{' '}
+                <strong className="text-goldBrand uppercase tracking-wider">
+                  {userRole === 'guest' && 'Guest (No login required to book)'}
+                  {userRole === 'free' && 'Free Member (Field notes unlocked)'}
+                  {userRole === 'subscriber' && 'Fixer+ Subscriber ($0 fees & Fixer calls active)'}
+                </strong>
+              </span>
+              <div className="inline-flex rounded border border-ivory/20 overflow-hidden" role="group" aria-label="Switch membership preview state">
+                {[
+                  { id: 'guest', label: 'Guest' },
+                  { id: 'free', label: 'Free Member' },
+                  { id: 'subscriber', label: 'Subscriber' },
+                ].map((st) => (
+                  <button
+                    key={st.id}
+                    type="button"
+                    onClick={() => setUserRole(st.id)}
+                    className={`px-3 py-1 font-medium transition-colors ${
+                      userRole === st.id
+                        ? 'bg-goldBrand text-charcoal font-semibold'
+                        : 'bg-transparent text-ivory/80 hover:text-ivory'
+                    }`}
+                  >
+                    {st.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* =================================================================
+              1. NAVIGATION BAR
+              ================================================================= */}
+          <header className="sticky top-0 z-40 bg-ivory/95 backdrop-blur-sm border-b border-borderWarm">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+              <a href="#top" className="shrink-0" aria-label="TravelFixer Home">
+                <TravelFixerLogo variant="light" compact />
+              </a>
+
+              <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-charcoal/85" aria-label="Primary navigation">
+                <a href="#destinations" className="hover:text-emeraldBrand transition-colors">Destinations</a>
+                <a href="#fixers" className="hover:text-emeraldBrand transition-colors">Fixers</a>
+                <a href="#how-it-works" className="hover:text-emeraldBrand transition-colors">How it Works</a>
+                <a href="#book" className="text-emeraldBrand font-semibold">Book</a>
+                <a href="#pricing" className="hover:text-emeraldBrand transition-colors">Pricing</a>
+              </nav>
+
+              <div className="flex items-center gap-2.5">
+                {userRole === 'guest' ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => { setAuthMode('signin'); setAuthModalOpen(true); }}
+                      className="px-3.5 py-2 text-sm font-medium text-charcoal border border-borderWarm rounded-lg hover:border-emeraldBrand transition-colors"
+                    >
+                      Sign in
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setAuthMode('signup'); setAuthModalOpen(true); }}
+                      className="px-4 py-2 text-sm font-semibold bg-emeraldBrand text-ivory rounded-lg hover:bg-emeraldHover transition-colors"
+                    >
+                      Join free
+                    </button>
+                  </>
+                ) : (
+                  <a
+                    href="#account"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-semibold bg-stoneWarm border border-borderWarm text-emeraldBrand rounded-lg hover:border-emeraldBrand transition-colors"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-emeraldBrand"></span>
+                    {userRole === 'subscriber' ? 'Fixer+ Account' : 'Member Account'}
+                  </a>
+                )}
+              </div>
+            </div>
+          </header>
+
+          {/* =================================================================
+              2. PRIORITY BOOKING MODULE — FIRST THING YOU SEE ABOVE THE FOLD
+              ================================================================= */}
+          <main id="top" className="flex-1">
+            <section id="book" className="pt-5 pb-12 sm:pt-8 sm:pb-16 px-4 sm:px-6 border-b border-borderWarm bg-ivory">
+              <div className="max-w-3xl mx-auto">
+                {/* Clean Greeting & Direct Booking Headline */}
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-goldText">
+                      Instant Ticket Booking · No Account Required
+                    </p>
+                    <h1 className="font-serif text-2xl sm:text-4xl font-semibold text-charcoal mt-1">
+                      Where are you flying next?
+                    </h1>
+                  </div>
+                  <span className="hidden sm:inline-block text-xs font-medium px-3 py-1.5 rounded-full bg-stoneWarm text-emeraldBrand border border-borderWarm">
+                    {userRole === 'subscriber' ? '$0 Fixer+ Booking Fees Active' : 'Direct Airline & Stay Rates'}
+                  </span>
+                </div>
+
+                {/* Mobile-First Ticket Search Card (Inspired by clean 3-tile mode layout) */}
+                <div className="bg-white border border-borderWarm rounded-2xl p-4 sm:p-6">
+                  {/* Three Mode Tiles: Flights | Stays | Cars */}
+                  <div className="grid grid-cols-3 gap-3 max-w-sm mx-auto mb-5" role="tablist" aria-label="Travel booking category">
+                    {[
+                      {
+                        id: 'flights',
+                        label: 'Flights',
+                        icon: (
+                          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        id: 'stays',
+                        label: 'Stays',
+                        icon: (
+                          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        id: 'cars',
+                        label: 'Cars',
+                        icon: (
+                          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
+                          </svg>
+                        ),
+                      },
+                    ].map((mode) => {
+                      const active = bookingMode === mode.id;
+                      return (
+                        <button
+                          key={mode.id}
+                          type="button"
+                          role="tab"
+                          aria-selected={active}
+                          onClick={() => { setBookingMode(mode.id); setHasSearched(false); }}
+                          className="flex flex-col items-center gap-1.5 group"
+                        >
+                          <span
+                            className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-colors ${
+                              active
+                                ? 'bg-goldBrand border-goldBrand text-charcoal'
+                                : 'bg-ivory border-borderWarm text-charcoal group-hover:border-emeraldBrand'
+                            }`}
+                          >
+                            {mode.icon}
+                          </span>
+                          <span className={`text-xs ${active ? 'font-bold text-charcoal' : 'font-medium text-charcoal/75'}`}>
+                            {mode.label}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Return | One-way | Multi-city Sub-tabs (shown for Flights) */}
+                  {bookingMode === 'flights' && (
+                    <div className="flex items-center justify-center gap-6 border-b border-borderWarm pb-3 mb-4 text-sm">
+                      {[
+                        { id: 'return', label: 'Return' },
+                        { id: 'oneway', label: 'One-way' },
+                        { id: 'multicity', label: 'Multi-city' },
+                      ].map((tab) => (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => setTripType(tab.id)}
+                          className={`pb-1 transition-colors ${
+                            tripType === tab.id
+                              ? 'font-bold text-charcoal border-b-2 border-emeraldBrand'
+                              : 'font-medium text-charcoal/60 hover:text-charcoal'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Search Form */}
+                  <form onSubmit={handleSearchSubmit} className="space-y-3">
+                    {/* Stacked From / To Card with Swap Button */}
+                    <div className="relative border border-borderWarm rounded-xl bg-ivory divide-y divide-borderWarm">
+                      <div className="px-4 py-3">
+                        <label htmlFor="origin-input" className="block text-[11px] font-semibold uppercase tracking-wider text-charcoal/60">
+                          {bookingMode === 'flights' ? 'From' : 'City or Airport'}
+                        </label>
+                        <input
+                          id="origin-input"
+                          type="text"
+                          value={origin}
+                          onChange={(e) => setOrigin(e.target.value)}
+                          className="w-full bg-transparent text-sm sm:text-base font-medium text-charcoal mt-0.5 focus:outline-none"
+                          placeholder="City or airport"
+                          required
+                        />
+                      </div>
+
+                      {bookingMode === 'flights' && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={handleSwapLocations}
+                            aria-label="Swap departure and arrival cities"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white border border-borderWarm flex items-center justify-center text-charcoal hover:border-emeraldBrand transition-colors"
+                          >
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M7 4v16M7 4l-3 3M7 4l3 3M17 20V4M17 20l-3-3M17 20l3-3" />
+                            </svg>
+                          </button>
+
+                          <div className="px-4 py-3 pr-14">
+                            <label htmlFor="dest-input" className="block text-[11px] font-semibold uppercase tracking-wider text-charcoal/60">
+                              To
+                            </label>
+                            <input
+                              id="dest-input"
+                              type="text"
+                              value={destination}
+                              onChange={(e) => setDestination(e.target.value)}
+                              className="w-full bg-transparent text-sm sm:text-base font-medium text-charcoal mt-0.5 focus:outline-none"
+                              placeholder="Destination city or airport"
+                              required
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Dates Field */}
+                    <div className="border border-borderWarm rounded-xl bg-ivory px-4 py-3">
+                      <label htmlFor="date-input" className="block text-[11px] font-semibold uppercase tracking-wider text-charcoal/60">
+                        {tripType === 'oneway' && bookingMode === 'flights' ? 'Departure Date' : 'Dates'}
+                      </label>
+                      <input
+                        id="date-input"
+                        type="text"
+                        value={travelDate}
+                        onChange={(e) => setTravelDate(e.target.value)}
+                        className="w-full bg-transparent text-sm sm:text-base font-medium text-charcoal mt-0.5 focus:outline-none"
+                        required
+                      />
+                    </div>
+
+                    {/* Filter Pills: Travellers | Cabin | Baggage */}
+                    <div className="flex flex-wrap gap-2">
+                      <select
+                        aria-label="Number of travellers"
+                        value={travellers}
+                        onChange={(e) => setTravellers(e.target.value)}
+                        className="px-3 py-2 text-xs sm:text-sm font-medium bg-white border border-borderWarm rounded-lg text-charcoal"
+                      >
+                        <option>1 traveller</option>
+                        <option>2 travellers</option>
+                        <option>3 travellers</option>
+                        <option>Family (4)</option>
+                      </select>
+
+                      {bookingMode === 'flights' && (
+                        <>
+                          <select
+                            aria-label="Cabin class"
+                            value={cabinClass}
+                            onChange={(e) => setCabinClass(e.target.value)}
+                            className="px-3 py-2 text-xs sm:text-sm font-medium bg-white border border-borderWarm rounded-lg text-charcoal"
+                          >
+                            <option>Economy</option>
+                            <option>Premium Economy</option>
+                            <option>Business</option>
+                          </select>
+
+                          <select
+                            aria-label="Baggage allowance"
+                            value={baggagePref}
+                            onChange={(e) => setBaggagePref(e.target.value)}
+                            className="px-3 py-2 text-xs sm:text-sm font-medium bg-white border border-borderWarm rounded-lg text-charcoal"
+                          >
+                            <option>1 checked bag</option>
+                            <option>0 cabin bags only</option>
+                            <option>2 checked bags</option>
+                          </select>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Full-Width Brushed Gold Search CTA */}
+                    <button
+                      type="submit"
+                      className="w-full py-3.5 px-6 rounded-xl bg-goldBrand hover:bg-goldBrand/90 text-charcoal font-bold text-base tracking-tight transition-colors"
+                    >
+                      Search {bookingMode === 'flights' ? 'flights' : bookingMode === 'stays' ? 'stays' : 'cars'}
+                    </button>
+                  </form>
+
+                  {/* Helper link to Fixers */}
+                  <div className="mt-3 text-center">
+                    <a
+                      href="#fixers"
+                      className="text-xs sm:text-sm font-medium text-emeraldBrand hover:underline"
+                    >
+                      Or let a Fixer plan it with you →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Live Search Results (Appears immediately on Search — No account required) */}
+                {hasSearched && (
+                  <div id="booking-results" className="mt-6 bg-white border border-emeraldBrand/40 rounded-2xl p-4 sm:p-6 animate-editorial">
+                    <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-borderWarm">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-emeraldBrand">
+                          Available {bookingMode} · No login required
+                        </p>
+                        <h2 className="font-serif text-xl font-semibold text-charcoal">
+                          {bookingMode === 'flights' ? `${origin} → ${destination}` : origin}
+                        </h2>
+                        <p className="text-xs text-charcoal/70">{travelDate} · {travellers}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setHasSearched(false)}
+                        className="text-xs font-medium text-charcoal/70 hover:text-charcoal underline"
+                      >
+                        Close results
+                      </button>
+                    </div>
+
+                    <div className="mt-4 space-y-3">
+                      {bookingMode === 'flights' &&
+                        FLIGHT_RESULTS.map((flight) => {
+                          const price = userRole === 'subscriber' ? flight.memberPrice : flight.standardPrice;
+                          return (
+                            <div
+                              key={flight.id}
+                              className="p-4 rounded-xl bg-ivory border border-borderWarm flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                            >
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-semibold text-charcoal">{flight.airline}</span>
+                                  <span className="text-xs px-2 py-0.5 rounded bg-stoneWarm text-charcoal/80">{flight.id}</span>
+                                </div>
+                                <p className="text-sm font-medium text-charcoal mt-1">
+                                  {flight.depart} – {flight.arrive}{' '}
+                                  <span className="text-charcoal/65 font-normal">({flight.duration})</span>
+                                </p>
+                                <p className="text-xs text-emeraldBrand mt-1">{flight.baggage}</p>
+                              </div>
+
+                              <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2">
+                                <div className="text-right">
+                                  <span className="text-xl font-bold text-charcoal">${price}</span>
+                                  <span className="block text-[11px] text-charcoal/65">
+                                    {userRole === 'subscriber'
+                                      ? `Fixer+ fare (saved $${flight.standardPrice - flight.memberPrice})`
+                                      : `Fixer+ members pay $${flight.memberPrice}`}
+                                  </span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedOffer(flight)}
+                                  className="px-4 py-2 rounded-lg bg-emeraldBrand text-ivory text-sm font-semibold hover:bg-emeraldHover transition-colors"
+                                >
+                                  Select ticket
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+
+                      {bookingMode === 'stays' &&
+                        STAY_RESULTS.map((stay) => {
+                          const price = userRole === 'subscriber' ? stay.memberPrice : stay.standardPrice;
+                          return (
+                            <div
+                              key={stay.id}
+                              className="p-4 rounded-xl bg-ivory border border-borderWarm flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                            >
+                              <div>
+                                <h3 className="font-semibold text-charcoal">{stay.name}</h3>
+                                <p className="text-xs text-charcoal/70 mt-0.5">{stay.area}</p>
+                                <p className="text-xs text-emeraldBrand mt-1.5 font-medium">{stay.note}</p>
+                              </div>
+                              <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2">
+                                <div className="text-right">
+                                  <span className="text-xl font-bold text-charcoal">${price}</span>
+                                  <span className="text-xs text-charcoal/65"> / night</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedOffer(stay)}
+                                  className="px-4 py-2 rounded-lg bg-emeraldBrand text-ivory text-sm font-semibold hover:bg-emeraldHover"
+                                >
+                                  Book stay
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+
+                      {bookingMode === 'cars' &&
+                        CAR_RESULTS.map((car) => {
+                          const price = userRole === 'subscriber' ? car.memberPrice : car.standardPrice;
+                          return (
+                            <div
+                              key={car.id}
+                              className="p-4 rounded-xl bg-ivory border border-borderWarm flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                            >
+                              <div>
+                                <h3 className="font-semibold text-charcoal">{car.name}</h3>
+                                <p className="text-xs text-charcoal/70 mt-0.5">{car.area}</p>
+                                <p className="text-xs text-emeraldBrand mt-1.5 font-medium">{car.note}</p>
+                              </div>
+                              <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2">
+                                <div className="text-right">
+                                  <span className="text-xl font-bold text-charcoal">${price}</span>
+                                  <span className="text-xs text-charcoal/65"> / day</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedOffer(car)}
+                                  className="px-4 py-2 rounded-lg bg-emeraldBrand text-ivory text-sm font-semibold hover:bg-emeraldHover"
+                                >
+                                  Reserve driver
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Post-Booking Confirmation & Optional "Save this trip" Prompt */}
+                {bookingConfirmed && (
+                  <div className="mt-6 p-5 rounded-2xl bg-emeraldBrand text-ivory animate-editorial">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-goldBrand">
+                          Booking Reference {bookingConfirmed.ref}
+                        </p>
+                        <h3 className="font-serif text-xl font-semibold mt-1">
+                          {bookingConfirmed.itemTitle} — Confirmed
+                        </h3>
+                        <p className="text-sm text-ivory/85 mt-1">
+                          {bookingConfirmed.route} · {bookingConfirmed.dates} · Paid ${bookingConfirmed.totalPaid}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setBookingConfirmed(null)}
+                        className="text-xs text-ivory/75 underline"
+                      >
+                        Dismiss
+                      </button>
+                    </div>
+
+                    {userRole === 'guest' && (
+                      <div className="mt-4 pt-4 border-t border-ivory/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <p className="text-sm text-ivory/90">
+                          Want to keep this itinerary and price alerts in one place?
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSavedTrips((prev) => [bookingConfirmed, ...prev]);
+                            setAuthMode('signup');
+                            setAuthModalOpen(true);
+                          }}
+                          className="px-4 py-2 rounded-lg bg-goldBrand text-charcoal text-sm font-bold shrink-0"
+                        >
+                          Save this trip (Free)
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Your Recent Searches (Horizontal scroll on mobile, 3-col grid on desktop) */}
+                <div className="mt-7">
+                  <h2 className="text-base font-bold text-charcoal mb-3">Your recent searches</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {RECENT_SEARCHES.map((item, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          setBookingMode('flights');
+                          setOrigin(item.from);
+                          setDestination(item.to);
+                          setTravelDate(item.dates);
+                          setHasSearched(true);
+                        }}
+                        className="text-left p-4 rounded-xl bg-white border border-borderWarm hover:border-emeraldBrand transition-colors"
+                      >
+                        <p className="text-sm font-semibold text-charcoal">
+                          {item.from.split(' ')[0]} → {item.to.split(' ')[0]}
+                        </p>
+                        <p className="text-xs text-charcoal/70 mt-1">{item.dates}</p>
+                        <p className="text-xs font-semibold text-emeraldBrand mt-2">From {item.price}</p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                3. EDITORIAL HERO — HUMAN-FIRST FIXER PROMISE
+                ================================================================= */}
+            <section className="py-16 sm:py-24 px-4 sm:px-6 border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                <div className="lg:col-span-6 space-y-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-goldText">
+                    Ghana, from someone who's actually been there
+                  </p>
+                  <h2 className="font-serif text-4xl sm:text-5xl lg:text-[54px] font-semibold leading-[1.1] text-charcoal">
+                    Talk to someone who's actually been there.
+                  </h2>
+                  <p className="text-base sm:text-lg text-charcoal/80 leading-relaxed max-w-xl">
+                    Travel Fixer pairs you with people who have lived in or travelled Ghana deeply — so you know what to do, what to skip, and what nobody tells you online.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <a
+                      href="#fixers"
+                      className="px-6 py-3.5 rounded-xl bg-emeraldBrand text-ivory font-semibold text-sm sm:text-base hover:bg-emeraldHover transition-colors"
+                    >
+                      Meet the Fixers
+                    </a>
+                    <a
+                      href="#book"
+                      className="px-6 py-3.5 rounded-xl border border-charcoal/30 text-charcoal font-semibold text-sm sm:text-base hover:border-emeraldBrand hover:text-emeraldBrand transition-colors"
+                    >
+                      Book a flight
+                    </a>
+                  </div>
+                  <p className="text-xs text-charcoal/65 pt-1">
+                    Verified people. Real experience. No stock advice.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-6">
+                  <figure className="relative rounded-2xl overflow-hidden border border-borderWarm bg-stoneWarm">
+                    <img
+                      src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1000&q=85"
+                      alt="Ama, verified Travel Fixer based in Accra, Ghana"
+                      className="w-full h-[420px] sm:h-[500px] object-cover object-center"
+                    />
+                    <figcaption className="p-4 sm:p-5 bg-white border-t border-borderWarm flex items-center justify-between gap-4">
+                      <div>
+                        <p className="font-serif font-semibold text-charcoal">Ama, 34 · Accra</p>
+                        <p className="text-xs text-charcoal/70">Verified Local Fixer · 34 years on the ground</p>
+                      </div>
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-stoneWarm text-emeraldBrand">
+                        Verified Fixer
+                      </span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                4. THE THREE DOORS
+                ================================================================= */}
+            <section className="py-16 sm:py-20 px-4 sm:px-6 bg-stoneWarm border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="max-w-xl mb-10">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Three ways in</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                    Start with a ticket, a guide, or a conversation.
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Door 1: Book */}
+                  <div className="bg-ivory border border-borderWarm rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-emeraldBrand">01 · Book</span>
+                      <h3 className="font-serif text-2xl font-semibold text-charcoal mt-2">Direct tickets</h3>
+                      <p className="text-sm sm:text-base text-charcoal/80 mt-3 leading-relaxed">
+                        Just need a ticket? Search flights and hotels — no account required.
+                      </p>
+                    </div>
+                    <a
+                      href="#book"
+                      className="mt-8 inline-flex justify-center items-center px-5 py-3 rounded-xl border border-charcoal/30 text-charcoal font-semibold text-sm hover:border-emeraldBrand hover:text-emeraldBrand transition-colors"
+                    >
+                      Search flights &amp; stays
+                    </a>
+                  </div>
+
+                  {/* Door 2: Join Free */}
+                  <div className="bg-ivory border border-borderWarm rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-emeraldBrand">02 · Join Free</span>
+                      <h3 className="font-serif text-2xl font-semibold text-charcoal mt-2">Local field notes</h3>
+                      <p className="text-sm sm:text-base text-charcoal/80 mt-3 leading-relaxed">
+                        Read Fixer stories, city guides and community advice. Free forever.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (userRole === 'guest') {
+                          setAuthMode('signup');
+                          setAuthModalOpen(true);
+                        } else {
+                          document.getElementById('locked-notes')?.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="mt-8 inline-flex justify-center items-center px-5 py-3 rounded-xl border border-emeraldBrand text-emeraldBrand font-semibold text-sm hover:bg-emeraldBrand hover:text-ivory transition-colors"
+                    >
+                      {userRole === 'guest' ? 'Join free' : 'Read unlocked notes'}
+                    </button>
+                  </div>
+
+                  {/* Door 3: Subscribe (Most popular) */}
+                  <div className="bg-white border-2 border-goldBrand rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative">
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-bold uppercase tracking-widest text-goldText">03 · Subscribe</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-goldBrand text-charcoal">
+                          Most popular
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-2xl font-semibold text-charcoal mt-2">Fixer+ Membership</h3>
+                      <p className="text-sm sm:text-base text-charcoal/80 mt-3 leading-relaxed">
+                        Unlock a monthly call with a Fixer, member fares and zero fees.
+                      </p>
+                    </div>
+                    <a
+                      href="#pricing"
+                      className="mt-8 inline-flex justify-center items-center px-5 py-3 rounded-xl bg-emeraldBrand text-ivory font-semibold text-sm hover:bg-emeraldHover transition-colors"
+                    >
+                      See Fixer+ membership
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                5. MEET THE FIXERS (6 Verified Locals)
+                ================================================================= */}
+            <section id="fixers" className="py-16 sm:py-24 px-4 sm:px-6 border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Verified Local Network</p>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                      Meet the Fixers
+                    </h2>
+                  </div>
+                  <p className="text-sm text-charcoal/75 max-w-md">
+                    Every Fixer is vetted for lived experience. No paid influencers, no scripted tours.
+                  </p>
+                </div>
+
+                {callBookedNotice && (
+                  <div className="mb-6 p-4 rounded-xl bg-emeraldBrand text-ivory text-sm font-medium">
+                    {callBookedNotice}
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {FIXERS.map((fixer) => (
+                    <article
+                      key={fixer.id}
+                      className="bg-white border border-borderWarm rounded-2xl overflow-hidden flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="aspect-[4/3] bg-stoneWarm overflow-hidden">
+                          <img
+                            src={fixer.image}
+                            alt={`${fixer.name}, ${fixer.age}, Travel Fixer in ${fixer.city}`}
+                            className="w-full h-full object-cover object-center"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="p-5 sm:p-6">
+                          <div className="flex items-baseline justify-between gap-2">
+                            <h3 className="font-serif text-xl font-semibold text-charcoal">
+                              {fixer.name}, {fixer.age}
+                            </h3>
+                            <span className="text-xs font-medium text-emeraldBrand">
+                              {fixer.city} · {fixer.years}
+                            </span>
+                          </div>
+                          <blockquote className="mt-3 font-serif italic text-base text-charcoal leading-relaxed">
+                            “{fixer.quote}”
+                          </blockquote>
+                          <p className="mt-3 text-xs text-charcoal/65">{fixer.speciality}</p>
+                        </div>
+                      </div>
+
+                      <div className="px-5 pb-5 sm:px-6 sm:pb-6">
+                        <button
+                          type="button"
+                          onClick={() => handleTalkToFixer(fixer)}
+                          className="w-full py-3 px-4 rounded-xl border border-emeraldBrand text-emeraldBrand font-semibold text-sm hover:bg-emeraldBrand hover:text-ivory transition-colors"
+                        >
+                          Talk to {fixer.name}
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                6. HOW IT WORKS (4 Numbered Steps)
+                ================================================================= */}
+            <section id="how-it-works" className="py-16 sm:py-20 px-4 sm:px-6 bg-stoneWarm border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="max-w-xl mb-12">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-goldText">How it works</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                    Four calm steps from question to boarding pass.
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[
+                    {
+                      step: '01',
+                      title: 'Pick a place.',
+                      desc: 'Choose Accra, Kumasi, Cape Coast, or Tamale—and the kind of trip you are planning.',
+                    },
+                    {
+                      step: '02',
+                      title: 'Talk to a Fixer.',
+                      desc: 'Spend 30 minutes on a call with someone who actually lives there.',
+                    },
+                    {
+                      step: '03',
+                      title: 'Get your Trip Brief.',
+                      desc: 'Receive a written, personalised document with places to skip, contacts, and money advice.',
+                    },
+                    {
+                      step: '04',
+                      title: 'Book it.',
+                      desc: 'Book your flights and vetted stays right here with zero member booking fees.',
+                    },
+                  ].map((item) => (
+                    <div key={item.step} className="bg-ivory border border-borderWarm rounded-2xl p-6">
+                      <span className="font-serif text-2xl font-bold text-goldText">{item.step}</span>
+                      <h3 className="font-serif text-xl font-semibold text-charcoal mt-3">{item.title}</h3>
+                      <p className="text-sm text-charcoal/75 mt-2 leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                7. THE LOCKED SECTION (Key Conversion Driver)
+                ================================================================= */}
+            <section id="locked-notes" className="py-16 sm:py-24 px-4 sm:px-6 border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="max-w-2xl mb-10">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Accra Field Notes</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                    Three things only a local would tell you about Accra
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {LOCKED_INSIGHTS.map((note) => {
+                    const isUnlocked = userRole === 'free' || userRole === 'subscriber';
+                    return (
+                      <article
+                        key={note.id}
+                        className="bg-white border border-borderWarm rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative"
+                      >
+                        <div>
+                          <span className="text-xs font-semibold uppercase tracking-wider text-emeraldBrand">
+                            {note.tag}
+                          </span>
+                          <h3 className="font-serif text-xl font-semibold text-charcoal mt-2 leading-snug">
+                            {note.title}
+                          </h3>
+
+                          <div className="relative mt-4">
+                            <p
+                              className={`text-sm text-charcoal/85 leading-relaxed transition-all duration-300 ${
+                                isUnlocked ? '' : 'blur-[5px] select-none opacity-65'
+                              }`}
+                              aria-hidden={!isUnlocked}
+                            >
+                              {note.body}
+                            </p>
+
+                            {!isUnlocked && (
+                              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3 bg-ivory/60 rounded-xl border border-borderWarm/80">
+                                <span className="w-9 h-9 rounded-full bg-emeraldBrand text-ivory flex items-center justify-center mb-2">
+                                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                  </svg>
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => { setAuthMode('signup'); setAuthModalOpen(true); }}
+                                  className="px-4 py-2 rounded-lg bg-emeraldBrand text-ivory text-xs font-semibold hover:bg-emeraldHover transition-colors"
+                                >
+                                  Unlock with a free account.
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="mt-6 pt-4 border-t border-borderWarm flex items-center justify-between text-xs text-charcoal/65">
+                          <span>Written by Ama · Accra</span>
+                          <span>{isUnlocked ? 'Unlocked' : 'Free account required'}</span>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                8. CITY GUIDES (Accra, Kumasi, Cape Coast, Tamale)
+                ================================================================= */}
+            <section id="destinations" className="py-16 sm:py-20 px-4 sm:px-6 bg-stoneWarm border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="max-w-xl mb-10">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Starting in Ghana</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                    City guides written from experience.
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {CITY_GUIDES.map((guide) => (
+                    <div
+                      key={guide.city}
+                      className="bg-ivory border border-borderWarm rounded-2xl p-6 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <h3 className="font-serif text-2xl font-semibold text-charcoal">{guide.city}</h3>
+                          <span className="text-xs font-semibold text-emeraldBrand">
+                            {guide.fixersCount} Fixers available
+                          </span>
+                        </div>
+                        <p className="text-sm text-charcoal/80 italic font-serif mt-4 leading-relaxed">
+                          “{guide.quote}”
+                        </p>
+                      </div>
+                      <a
+                        href="#fixers"
+                        className="mt-6 inline-block text-xs font-semibold uppercase tracking-wider text-emeraldBrand hover:underline"
+                      >
+                        Meet {guide.city} Fixers →
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                9. PRICING (Free | Fixer+ | Fixer Pro with Monthly/Annual Toggle)
+                ================================================================= */}
+            <section id="pricing" className="py-16 sm:py-24 px-4 sm:px-6 border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Transparent Pricing</p>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                      Pay nothing to browse. Subscribe when you want a Fixer.
+                    </h2>
+                  </div>
+
+                  {/* Monthly / Annual Toggle */}
+                  <div className="inline-flex items-center gap-2 bg-stoneWarm p-1.5 rounded-xl border border-borderWarm self-start">
+                    <button
+                      type="button"
+                      onClick={() => setBillingCycle('monthly')}
+                      className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+                        billingCycle === 'monthly'
+                          ? 'bg-white text-charcoal border border-borderWarm'
+                          : 'text-charcoal/70 hover:text-charcoal'
+                      }`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setBillingCycle('annual')}
+                      className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 ${
+                        billingCycle === 'annual'
+                          ? 'bg-emeraldBrand text-ivory'
+                          : 'text-charcoal/70 hover:text-charcoal'
+                      }`}
+                    >
+                      <span>Annual</span>
+                      <span className="px-2 py-0.5 text-[10px] font-bold uppercase rounded bg-goldBrand text-charcoal">
+                        Save 28%
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Tier 1: FREE */}
+                  <div className="bg-white border border-borderWarm rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-charcoal/70">Free</h3>
+                      <div className="mt-3 flex items-baseline gap-1">
+                        <span className="font-serif text-4xl font-bold text-charcoal">$0</span>
+                        <span className="text-sm text-charcoal/65">/ forever</span>
+                      </div>
+                      <ul className="mt-6 space-y-3 text-sm text-charcoal/85">
+                        <li>• Read everything &amp; unlock field notes</li>
+                        <li>• Book flights &amp; stays at standard rates</li>
+                        <li>• Save trips &amp; set fare price alerts</li>
+                        <li>• Read &amp; post in the community</li>
+                      </ul>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => { setUserRole('free'); }}
+                      className="mt-8 w-full py-3 px-4 rounded-xl border border-charcoal/30 text-charcoal font-semibold text-sm hover:border-emeraldBrand transition-colors"
+                    >
+                      {userRole === 'free' ? 'Current plan' : 'Join free'}
+                    </button>
+                  </div>
+
+                  {/* Tier 2: FIXER+ (Most popular) */}
+                  <div className="bg-white border-2 border-goldBrand rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-goldText">Fixer+</h3>
+                        <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-goldBrand text-charcoal">
+                          Most popular
+                        </span>
+                      </div>
+                      <div className="mt-3 flex items-baseline gap-1">
+                        <span className="font-serif text-4xl font-bold text-charcoal">
+                          {billingCycle === 'annual' ? '$129' : '$15'}
+                        </span>
+                        <span className="text-sm text-charcoal/65">
+                          {billingCycle === 'annual' ? '/ yr ($10.75/mo)' : '/ mo'}
+                        </span>
+                      </div>
+                      <ul className="mt-6 space-y-3 text-sm text-charcoal/85">
+                        <li>• 1 private Fixer video call per month</li>
+                        <li>• Written Trip Brief after every call</li>
+                        <li>• Member-only fares on flights &amp; stays</li>
+                        <li>• Zero booking fees &amp; priority matching</li>
+                      </ul>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setUserRole('subscriber')}
+                      className="mt-8 w-full py-3 px-4 rounded-xl bg-emeraldBrand text-ivory font-semibold text-sm hover:bg-emeraldHover transition-colors"
+                    >
+                      {userRole === 'subscriber' ? 'Active Fixer+ plan' : 'Start Fixer+'}
+                    </button>
+                  </div>
+
+                  {/* Tier 3: FIXER PRO */}
+                  <div className="bg-white border border-borderWarm rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-emeraldBrand">Fixer Pro</h3>
+                      <div className="mt-3 flex items-baseline gap-1">
+                        <span className="font-serif text-4xl font-bold text-charcoal">$399</span>
+                        <span className="text-sm text-charcoal/65">/ yr</span>
+                      </div>
+                      <ul className="mt-6 space-y-3 text-sm text-charcoal/85">
+                        <li>• Unlimited Fixer calls across all cities</li>
+                        <li>• Full end-to-end itinerary built for you</li>
+                        <li>• Direct WhatsApp concierge on the ground</li>
+                        <li>• Priority everything &amp; $0 booking fees</li>
+                      </ul>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setUserRole('subscriber')}
+                      className="mt-8 w-full py-3 px-4 rounded-xl border border-emeraldBrand text-emeraldBrand font-semibold text-sm hover:bg-emeraldBrand hover:text-ivory transition-colors"
+                    >
+                      Choose Fixer Pro
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                10. TRIP BRIEF SHOWCASE
+                ================================================================= */}
+            <section className="py-16 sm:py-24 px-4 sm:px-6 bg-stoneWarm border-b border-borderWarm">
+              <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div className="lg:col-span-5 space-y-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-goldText">The Deliverable</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal leading-tight">
+                    Every conversation ends with something you can actually use.
+                  </h2>
+                  <p className="text-sm sm:text-base text-charcoal/80 leading-relaxed">
+                    Within 24 hours of your call, your Fixer delivers a structured Trip Brief you can download offline before you board.
+                  </p>
+                </div>
+
+                {/* Editorial Trip Brief Document Mockup */}
+                <div className="lg:col-span-7 bg-white border border-borderWarm rounded-2xl p-6 sm:p-8">
+                  <div className="flex items-center justify-between pb-4 border-b border-borderWarm">
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-emeraldBrand">
+                        Official Trip Brief · Accra &amp; Cape Coast
+                      </span>
+                      <h3 className="font-serif text-xl font-semibold text-charcoal mt-0.5">
+                        Prepared by Ama · 7-Day Ghana Itinerary
+                      </h3>
+                    </div>
+                    <span className="text-xs font-medium px-2.5 py-1 rounded bg-ivory border border-borderWarm text-charcoal/75">
+                      Offline PDF
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 text-sm">
+                    <div className="p-4 rounded-xl bg-ivory border border-borderWarm">
+                      <h4 className="font-serif font-semibold text-charcoal">What we'd skip</h4>
+                      <p className="text-xs text-charcoal/75 mt-1.5 leading-relaxed">
+                        Skip midday Art Centre haggling on Day 1. Go to Loom Gallery or Wild Gecko first to benchmark fair prices.
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-ivory border border-borderWarm">
+                      <h4 className="font-serif font-semibold text-charcoal">How to get around</h4>
+                      <p className="text-xs text-charcoal/75 mt-1.5 leading-relaxed">
+                        Use Bolt Comfort inside Osu/Labone; book Kwame’s vetted driver ($72/day) for the Cape Coast highway run.
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-ivory border border-borderWarm">
+                      <h4 className="font-serif font-semibold text-charcoal">People to call</h4>
+                      <p className="text-xs text-charcoal/75 mt-1.5 leading-relaxed">
+                        Kofi (Airport pickup · +233 24 XXX XXXX), Auntie Mansa (Labone tilapia table reservation).
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-ivory border border-borderWarm">
+                      <h4 className="font-serif font-semibold text-charcoal">Money &amp; safety</h4>
+                      <p className="text-xs text-charcoal/75 mt-1.5 leading-relaxed">
+                        Change $200 at Kotoka arrivals for small notes; keep your primary card locked to chip-and-PIN daytime use.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                11. BECOME A FIXER (Forest/Emerald Green Band, White Text)
+                ================================================================= */}
+            <section className="py-16 sm:py-20 px-4 sm:px-6 bg-emeraldBrand text-ivory">
+              <div className="max-w-4xl mx-auto text-center space-y-5">
+                <p className="text-xs font-semibold uppercase tracking-widest text-goldBrand">
+                  Join the Fixer Network
+                </p>
+                <h2 className="font-serif text-3xl sm:text-5xl font-semibold leading-tight">
+                  Loved Ghana? Tell someone how to do it properly.
+                </h2>
+                <p className="text-base sm:text-lg text-ivory/85 max-w-xl mx-auto">
+                  Register your story. Share what you know. Get paid for it.
+                </p>
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => { setAuthMode('signup'); setAuthModalOpen(true); }}
+                    className="px-7 py-3.5 rounded-xl bg-goldBrand text-charcoal font-bold text-sm sm:text-base hover:bg-goldBrand/90 transition-colors"
+                  >
+                    Apply to be a Fixer
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================================
+                12. COMMUNITY & SIMPLE ACCOUNT AREA MOCKUP
+                ================================================================= */}
+            <section className="py-16 sm:py-24 px-4 sm:px-6 border-b border-borderWarm">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Traveller Notes</p>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal mt-1">
+                      From the community
+                    </h2>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setAuthMode('signup'); setAuthModalOpen(true); }}
+                    className="text-sm font-semibold text-emeraldBrand hover:underline self-start sm:self-auto"
+                  >
+                    Read the community →
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {COMMUNITY_POSTS.map((post, idx) => (
+                    <article key={idx} className="bg-white border border-borderWarm rounded-2xl p-6 flex flex-col justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-emeraldBrand">{post.city}</p>
+                        <h3 className="font-serif text-lg font-semibold text-charcoal mt-1.5">{post.title}</h3>
+                        <p className="text-sm text-charcoal/80 mt-2.5 leading-relaxed">{post.excerpt}</p>
+                      </div>
+                      <div className="mt-6 pt-4 border-t border-borderWarm flex items-center justify-between text-xs text-charcoal/65">
+                        <span className="font-medium text-charcoal">{post.author}</span>
+                        <span>{post.replies} replies</span>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
+                {/* Simple Account Area Mockup: Saved Trips | My Fixer Calls | My Trip Briefs */}
+                <div id="account" className="mt-16 bg-white border border-borderWarm rounded-2xl p-6 sm:p-8">
+                  <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-borderWarm">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-goldText">Traveller Workspace</p>
+                      <h3 className="font-serif text-2xl font-semibold text-charcoal mt-0.5">
+                        My Account
+                      </h3>
+                    </div>
+
+                    <div className="inline-flex rounded-xl bg-ivory border border-borderWarm p-1">
+                      {[
+                        { id: 'trips', label: `Saved Trips (${savedTrips.length})` },
+                        { id: 'calls', label: 'My Fixer Calls' },
+                        { id: 'briefs', label: 'My Trip Briefs' },
+                      ].map((t) => (
+                        <button
+                          key={t.id}
+                          type="button"
+                          onClick={() => setAccountTab(t.id)}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+                            accountTab === t.id
+                              ? 'bg-emeraldBrand text-ivory'
+                              : 'text-charcoal/75 hover:text-charcoal'
+                          }`}
+                        >
+                          {t.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-5">
+                    {accountTab === 'trips' && (
+                      <div className="space-y-3">
+                        {savedTrips.map((trip, i) => (
+                          <div key={i} className="p-4 rounded-xl bg-ivory border border-borderWarm flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                              <p className="font-semibold text-sm text-charcoal">{trip.route}</p>
+                              <p className="text-xs text-charcoal/70">{trip.dates} · Ref {trip.ref}</p>
+                            </div>
+                            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-stoneWarm text-emeraldBrand">
+                              {trip.status}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {accountTab === 'calls' && (
+                      <div className="p-4 rounded-xl bg-ivory border border-borderWarm flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                          <p className="font-semibold text-sm text-charcoal">30-Min Accra Orientation with Ama</p>
+                          <p className="text-xs text-charcoal/70">
+                            {userRole === 'subscriber'
+                              ? 'Included in your Fixer+ membership · Ready to schedule'
+                              : 'Available with Fixer+ ($15/mo or $129/yr)'}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleTalkToFixer(FIXERS[0])}
+                          className="px-4 py-2 rounded-lg bg-emeraldBrand text-ivory text-xs font-semibold"
+                        >
+                          {userRole === 'subscriber' ? 'Pick a time slot' : 'Upgrade to book call'}
+                        </button>
+                      </div>
+                    )}
+
+                    {accountTab === 'briefs' && (
+                      <div className="p-4 rounded-xl bg-ivory border border-borderWarm flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                          <p className="font-semibold text-sm text-charcoal">Accra &amp; Cape Coast 7-Day Brief (Ama)</p>
+                          <p className="text-xs text-charcoal/70">Includes driver contacts, MoMo guide &amp; restaurant list</p>
+                        </div>
+                        <span className="text-xs font-semibold text-emeraldBrand">Ready offline</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          {/* =================================================================
+              13. FOOTER
+              ================================================================= */}
+          <footer className="bg-charcoal text-ivory pt-16 pb-24 sm:pb-16 px-4 sm:px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-ivory/15">
+                <div className="md:col-span-4 space-y-4">
+                  <TravelFixerLogo variant="dark" />
+                  <p className="text-sm text-ivory/75 max-w-xs leading-relaxed">
+                    Talk to someone who's actually been there — so you know what to skip.
+                  </p>
+                </div>
+
+                <div className="md:col-span-2 space-y-2.5 text-sm">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-goldBrand">Destinations</h4>
+                  <ul className="space-y-2 text-ivory/75">
+                    <li><a href="#destinations" className="hover:text-ivory">Accra</a></li>
+                    <li><a href="#destinations" className="hover:text-ivory">Kumasi</a></li>
+                    <li><a href="#destinations" className="hover:text-ivory">Cape Coast</a></li>
+                    <li><a href="#destinations" className="hover:text-ivory">Tamale</a></li>
+                  </ul>
+                </div>
+
+                <div className="md:col-span-2 space-y-2.5 text-sm">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-goldBrand">Fixers</h4>
+                  <ul className="space-y-2 text-ivory/75">
+                    <li><a href="#fixers" className="hover:text-ivory">Meet the Fixers</a></li>
+                    <li><a href="#how-it-works" className="hover:text-ivory">Trip Briefs</a></li>
+                    <li><a href="#pricing" className="hover:text-ivory">Fixer+ Membership</a></li>
+                    <li><a href="#fixers" className="hover:text-ivory">Apply as a Fixer</a></li>
+                  </ul>
+                </div>
+
+                <div className="md:col-span-4 space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-goldBrand">Field Dispatch</h4>
+                  <p className="text-sm text-ivory/75">
+                    One honest note from Ghana every fortnight. No spam.
+                  </p>
+                  {newsletterSubscribed ? (
+                    <p className="text-sm font-medium text-goldBrand">You're on the list.</p>
+                  ) : (
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        if (newsletterEmail) setNewsletterSubscribed(true);
+                      }}
+                      className="flex gap-2"
+                    >
+                      <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+                      <input
+                        id="newsletter-email"
+                        type="email"
+                        required
+                        value={newsletterEmail}
+                        onChange={(e) => setNewsletterEmail(e.target.value)}
+                        placeholder="you@example.com"
+                        className="flex-1 px-3.5 py-2.5 rounded-lg bg-ivory/10 border border-ivory/20 text-sm text-ivory placeholder:text-ivory/45 focus:outline-none focus:border-goldBrand"
+                      />
+                      <button
+                        type="submit"
+                        className="px-4 py-2.5 rounded-lg bg-goldBrand text-charcoal text-sm font-bold shrink-0"
+                      >
+                        Subscribe
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </div>
+
+              <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ivory/60">
+                <p>© {new Date().getFullYear()} TravelFixer · Part of the Fixer Venture Group. All rights reserved.</p>
+                <div className="flex items-center gap-6">
+                  <a href="#top" className="hover:text-ivory">Privacy</a>
+                  <a href="#top" className="hover:text-ivory">Terms</a>
+                  <a href="#top" className="hover:text-ivory">Fixer Verification</a>
+                </div>
+              </div>
+            </div>
+          </footer>
+
+          {/* =================================================================
+              STICKY MOBILE CTA BAR ON SCROLL (For Guests)
+              ================================================================= */}
+          {showStickyBar && userRole === 'guest' && (
+            <div className="fixed bottom-0 inset-x-0 z-40 sm:hidden bg-ivory border-t border-borderWarm px-4 py-3 flex items-center justify-between gap-3">
+              <span className="text-xs font-medium text-charcoal">
+                Unlock Accra field notes &amp; saved trips.
+              </span>
+              <button
+                type="button"
+                onClick={() => { setAuthMode('signup'); setAuthModalOpen(true); }}
+                className="px-4 py-2 rounded-lg bg-emeraldBrand text-ivory text-xs font-bold shrink-0"
+              >
+                Join free
+              </button>
+            </div>
+          )}
+
+          {/* =================================================================
+              MODAL 1: "TALK TO A FIXER" LOCK MODAL (For Non-Subscribers)
+              ================================================================= */}
+          {lockModalFixer && (
+            <div
+              className="fixed inset-0 z-50 bg-charcoal/70 flex items-center justify-center p-4"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="lock-modal-title"
+            >
+              <div className="bg-ivory border border-borderWarm rounded-2xl max-w-md w-full p-6 sm:p-8 space-y-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-goldText">
+                      Private 1-on-1 Call · {lockModalFixer.city}
+                    </p>
+                    <h3 id="lock-modal-title" className="font-serif text-2xl font-semibold text-charcoal mt-1">
+                      Free to join. Subscribe to talk.
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setLockModalFixer(null)}
+                    aria-label="Close modal"
+                    className="text-charcoal/60 hover:text-charcoal text-lg font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <p className="text-sm text-charcoal/80 leading-relaxed">
+                  Direct video calls with <strong>{lockModalFixer.name}</strong> and personalised written Trip Briefs are included with <strong>Fixer+</strong> ($15/mo or $129/yr).
+                </p>
+
+                <div className="space-y-2.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUserRole('subscriber');
+                      setLockModalFixer(null);
+                    }}
+                    className="w-full py-3 px-4 rounded-xl bg-emeraldBrand text-ivory font-semibold text-sm hover:bg-emeraldHover"
+                  >
+                    Subscribe to Fixer+ ($15/mo)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUserRole('free');
+                      setLockModalFixer(null);
+                    }}
+                    className="w-full py-3 px-4 rounded-xl border border-borderWarm bg-white text-charcoal font-semibold text-sm hover:border-emeraldBrand"
+                  >
+                    Join free to read field notes
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* =================================================================
+              MODAL 2: NO-LOGIN EXPRESS TICKET CHECKOUT
+              ================================================================= */}
+          {selectedOffer && (
+            <div
+              className="fixed inset-0 z-50 bg-charcoal/70 flex items-center justify-center p-4"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="checkout-modal-title"
+            >
+              <div className="bg-ivory border border-borderWarm rounded-2xl max-w-md w-full p-6 sm:p-8">
+                <div className="flex items-start justify-between gap-4 pb-4 border-b border-borderWarm">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-emeraldBrand">
+                      Express Guest Checkout
+                    </p>
+                    <h3 id="checkout-modal-title" className="font-serif text-xl font-semibold text-charcoal mt-0.5">
+                      {selectedOffer.airline || selectedOffer.name}
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedOffer(null)}
+                    aria-label="Close checkout"
+                    className="text-charcoal/60 hover:text-charcoal font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <form onSubmit={handleCompleteBooking} className="mt-4 space-y-4">
+                  <div>
+                    <label htmlFor="pax-name" className="block text-xs font-semibold text-charcoal mb-1">
+                      Lead traveller full name (as on passport)
+                    </label>
+                    <input
+                      id="pax-name"
+                      type="text"
+                      required
+                      value={passengerName}
+                      onChange={(e) => setPassengerName(e.target.value)}
+                      placeholder="e.g. Mike T S Ncube"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-borderWarm text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="pax-email" className="block text-xs font-semibold text-charcoal mb-1">
+                      Email for instant e-ticket
+                    </label>
+                    <input
+                      id="pax-email"
+                      type="email"
+                      required
+                      value={passengerEmail}
+                      onChange={(e) => setPassengerEmail(e.target.value)}
+                      placeholder="you@example.com"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-borderWarm text-sm"
+                    />
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-stoneWarm flex items-center justify-between text-sm">
+                    <span>Total due today</span>
+                    <strong className="text-lg text-charcoal">
+                      ${userRole === 'subscriber' ? selectedOffer.memberPrice : selectedOffer.standardPrice}
+                    </strong>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 px-4 rounded-xl bg-goldBrand text-charcoal font-bold text-sm hover:bg-goldBrand/90"
+                  >
+                    Confirm &amp; issue e-ticket
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* =================================================================
+              MODAL 3: SIGN IN / JOIN FREE (Email + Google)
+              ================================================================= */}
+          {authModalOpen && (
+            <div
+              className="fixed inset-0 z-50 bg-charcoal/70 flex items-center justify-center p-4"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="auth-modal-title"
+            >
+              <div className="bg-ivory border border-borderWarm rounded-2xl max-w-md w-full p-6 sm:p-8 space-y-5">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-goldText">
+                      {authMode === 'signup' ? 'Free Forever' : 'Welcome Back'}
+                    </p>
+                    <h3 id="auth-modal-title" className="font-serif text-2xl font-semibold text-charcoal mt-1">
+                      {authMode === 'signup' ? 'Create your free account' : 'Sign in to TravelFixer'}
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setAuthModalOpen(false)}
+                    aria-label="Close authentication modal"
+                    className="text-charcoal/60 hover:text-charcoal font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => { setUserRole('free'); setAuthModalOpen(false); }}
+                  className="w-full py-3 px-4 rounded-xl bg-white border border-borderWarm text-charcoal font-semibold text-sm hover:border-emeraldBrand flex items-center justify-center gap-2"
+                >
+                  <span>Continue with Google</span>
+                </button>
+
+                <div className="text-center text-xs text-charcoal/50">or with email</div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setUserRole('free');
+                    setAuthModalOpen(false);
+                  }}
+                  className="space-y-3"
+                >
+                  <div>
+                    <label htmlFor="auth-email" className="sr-only">Email address</label>
+                    <input
+                      id="auth-email"
+                      type="email"
+                      required
+                      placeholder="Email address"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-borderWarm text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="auth-pass" className="sr-only">Password</label>
+                    <input
+                      id="auth-pass"
+                      type="password"
+                      required
+                      placeholder="Password"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-borderWarm text-sm"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full py-3 px-4 rounded-xl bg-emeraldBrand text-ivory font-semibold text-sm hover:bg-emeraldHover"
+                  >
+                    {authMode === 'signup' ? 'Join free' : 'Sign in'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
