@@ -1,2 +1,1 @@
-# GoTravelFixer
-Website for travelling 
+TravelFixer
