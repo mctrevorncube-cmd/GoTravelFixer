@@ -1,0 +1,3389 @@
+import React, { useState } from 'react';
+import {
+  Lock,
+  X,
+  Menu,
+  Check,
+  Search,
+  ArrowRight,
+  ArrowUpDown,
+  Plane,
+  BedDouble,
+  Car,
+  Compass,
+  FileText,
+  PhoneCall,
+  ShieldCheck,
+  ChevronRight,
+  ChevronDown,
+  Calendar,
+  Briefcase,
+  Users,
+  Bookmark,
+  User,
+  Sparkles
+} from 'lucide-react';
+
+/**
+ * Bespoke SVG reproduction of the official TravelFixer emblem:
+ * - "Travel" in Deep Emerald Green (#154731)
+ * - Sweeping Brushed Gold (#C59B49) orbital swoosh around "T" ascending into a gold aircraft silhouette
+ * - Circular Emerald & Gold compass rose nestled above "r/a"
+ * - "Fixer" in Brushed Gold (#C59B49) with the "X" crafted from a vintage skeleton key crossed over a mechanical gear wheel
+ * - Sub-caption: "PART OF THE FIXER VENTURE GROUP"
+ */
+const TravelFixerLogo = ({ variant = 'light', className = '' }) => {
+  const isDark = variant === 'dark';
+  const emeraldColor = isDark ? '#25704F' : '#154731';
+  const emeraldInner = isDark ? '#154731' : '#0F3524';
+  const goldColor = '#C59B49';
+  const goldHighlight = '#D8B365';
+  const slateColor = isDark ? '#B0B5BA' : '#52565E';
+  const ventureColor = isDark ? '#2E8B61' : '#154731';
+
+  return (
+    <svg
+      viewBox="0 0 380 112"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`select-none ${className}`}
+      role="img"
+      aria-label="TravelFixer — Part of the Fixer Venture Group"
+    >
+      {/* Sweeping Brushed Gold Orbital Swoosh around the 'T' */}
+      <path
+        d="M 42 74 C 14 78, 8 44, 38 26 C 64 10, 96 6, 128 11 C 94 12, 62 19, 41 34 C 21 48, 22 70, 46 73 Z"
+        fill={goldColor}
+      />
+      <path
+        d="M 92 22 C 110 14, 126 22, 123 36 C 122 25, 108 19, 92 22 Z"
+        fill={goldColor}
+      />
+
+      {/* Gold Aircraft Silhouette at Top-Centre */}
+      <g transform="translate(132, 3) rotate(-11)">
+        <path
+          d="M 4 14 L 46 8 C 52 7, 56 9, 57 11 C 55 13, 49 14, 43 14 L 8 17 L 2 20 L 0 18 L 4 14 Z"
+          fill={goldColor}
+        />
+        <path d="M 22 10 L 11 2 L 16 2 L 30 9 Z" fill={goldHighlight} />
+        <path d="M 24 13 L 13 22 L 19 22 L 33 13 Z" fill={goldColor} />
+        <path d="M 6 14 L 1 6 L 5 6 L 11 13 Z" fill={goldColor} />
+      </g>
+
+      {/* Circular Emerald & Gold Compass Rose above 'r/a' */}
+      <g transform="translate(107, 29)">
+        <circle cx="0" cy="0" r="11.5" fill={goldColor} />
+        <circle cx="0" cy="0" r="9.2" fill={emeraldColor} />
+        <circle cx="0" cy="0" r="7.5" stroke={goldHighlight} strokeWidth="0.6" />
+        <polygon
+          points="0,-7 1.8,-1.8 7,0 1.8,1.8 0,7 -1.8,1.8 -7,0 -1.8,-1.8"
+          fill={goldHighlight}
+        />
+        <circle cx="0" cy="0" r="1.4" fill={emeraldInner} />
+      </g>
+
+      {/* "Travel" in Deep Emerald Green */}
+      <text
+        x="35"
+        y="74"
+        fill={emeraldColor}
+        style={{
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontWeight: 700,
+          fontSize: '46px',
+          letterSpacing: '-0.03em'
+        }}
+      >
+        Travel
+      </text>
+
+      {/* "Fi" in Brushed Gold */}
+      <text
+        x="170"
+        y="74"
+        fill={goldColor}
+        style={{
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontWeight: 700,
+          fontSize: '46px',
+          letterSpacing: '-0.02em'
+        }}
+      >
+        Fi
+      </text>
+
+      {/* Mechanical Gear Wheel + Vintage Skeleton Key forming the "X" */}
+      <g transform="translate(237, 58)">
+        <circle cx="0" cy="0" r="14" stroke={goldColor} strokeWidth="3.2" fill="none" />
+        <circle
+          cx="0"
+          cy="0"
+          r="9"
+          stroke={goldColor}
+          strokeWidth="1.2"
+          strokeDasharray="2.5 2"
+          fill="none"
+        />
+        {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
+          <rect
+            key={deg}
+            x="-1.8"
+            y="-18.2"
+            width="3.6"
+            height="4.5"
+            rx="0.6"
+            fill={goldColor}
+            transform={`rotate(${deg})`}
+          />
+        ))}
+        <path
+          d="M -14 -14 L -8 -14 L 15 16 L 9 16 Z"
+          fill={goldHighlight}
+          stroke={emeraldInner}
+          strokeWidth="0.6"
+        />
+        <g transform="rotate(-42)">
+          <rect x="-20" y="-2.2" width="42" height="4.4" rx="1" fill={goldColor} />
+          <circle
+            cx="-23"
+            cy="0"
+            r="6.5"
+            stroke={goldColor}
+            strokeWidth="3"
+            fill={isDark ? '#1D1F22' : '#FBF9F5'}
+          />
+          <circle cx="-23" cy="0" r="2.2" fill={goldColor} />
+          <rect x="-14" y="-4" width="2.4" height="8" rx="0.8" fill={goldHighlight} />
+          <rect x="13" y="2" width="3.2" height="6" fill={goldColor} />
+          <rect x="18.5" y="2" width="3.2" height="7" fill={goldColor} />
+        </g>
+      </g>
+
+      {/* "er" in Brushed Gold */}
+      <text
+        x="257"
+        y="74"
+        fill={goldColor}
+        style={{
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontWeight: 700,
+          fontSize: '46px',
+          letterSpacing: '-0.02em'
+        }}
+      >
+        er
+      </text>
+
+      {/* Sub-caption: PART OF THE FIXER VENTURE GROUP */}
+      <text
+        x="190"
+        y="99"
+        textAnchor="middle"
+        style={{
+          fontFamily: "'Inter', sans-serif",
+          fontWeight: 700,
+          fontSize: '10.2px',
+          letterSpacing: '0.16em'
+        }}
+      >
+        <tspan fill={slateColor}>PART OF THE </tspan>
+        <tspan fill={ventureColor}>FIXER VENTURE</tspan>
+        <tspan fill={slateColor}> GROUP</tspan>
+      </text>
+    </svg>
+  );
+};
+
+/**
+ * Editorial Portrait component with warm stone fallback
+ */
+const FixerPortrait = ({ src, alt, className = '' }) => {
+  const [imgError, setImgError] = useState(false);
+
+  if (imgError) {
+    return (
+      <div
+        className={`bg-[#F3EFE6] border border-[#DED8CC] flex flex-col items-center justify-center p-6 text-center ${className}`}
+      >
+        <div className="w-16 h-16 rounded-full bg-[#154731] text-[#FBF9F5] flex items-center justify-center font-serif-editorial text-2xl mb-3">
+          {alt.charAt(0)}
+        </div>
+        <span className="font-serif-editorial text-lg text-[#1D1F22]">{alt}</span>
+        <span className="text-xs uppercase tracking-widest text-[#8F6B24] mt-1">
+          Verified Fixer
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      onError={() => setImgError(true)}
+      className={className}
+      loading="lazy"
+    />
+  );
+};
+
+// --- DATA ---
+
+const AIRPORTS = [
+  'Johannesburg, South Africa (JNB)',
+  'Accra, Ghana (ACC)',
+  'Harare, Zimbabwe (HRE)',
+  'London, United Kingdom (LHR)',
+  'New York, United States (JFK)',
+  'Lagos, Nigeria (LOS)',
+  'Nairobi, Kenya (NBO)',
+  'Kumasi, Ghana (KMS)',
+  'Tamale, Ghana (TML)',
+  'Cape Coast, Ghana',
+  'Antalya, Türkiye (AYT)',
+  'Cape Town, South Africa (CPT)'
+];
+
+const DEPARTURE_DATES = [
+  'Sat, 14 Nov 2026',
+  'Fri, 18 Dec 2026',
+  'Wed, 30 Dec 2026',
+  'Mon, 11 Jan 2027'
+];
+
+const RETURN_DATES = [
+  'Sun, 22 Nov 2026',
+  'Sun, 03 Jan 2027',
+  'Mon, 04 Jan 2027',
+  'Tue, 26 Jan 2027'
+];
+
+const RECENT_SEARCHES = [
+  {
+    id: 'rs-1',
+    routeLabel: 'Johannesburg ▸ Accra',
+    origin: 'Johannesburg, South Africa (JNB)',
+    destination: 'Accra, Ghana (ACC)',
+    tripType: 'Return',
+    depart: 'Wed, 30 Dec 2026',
+    ret: 'Sun, 03 Jan 2027',
+    dateLabel: 'Wed 30/12 ▸ Sun 3/1',
+    priceLabel: 'From $485'
+  },
+  {
+    id: 'rs-2',
+    routeLabel: 'Harare ▸ Accra',
+    origin: 'Harare, Zimbabwe (HRE)',
+    destination: 'Accra, Ghana (ACC)',
+    tripType: 'One-way',
+    depart: 'Sat, 14 Nov 2026',
+    ret: 'Sun, 22 Nov 2026',
+    dateLabel: 'Sat 14/11 (One-way)',
+    priceLabel: 'From $340'
+  },
+  {
+    id: 'rs-3',
+    routeLabel: 'London ▸ Accra',
+    origin: 'London, United Kingdom (LHR)',
+    destination: 'Accra, Ghana (ACC)',
+    tripType: 'Return',
+    depart: 'Fri, 18 Dec 2026',
+    ret: 'Mon, 04 Jan 2027',
+    dateLabel: 'Fri 18/12 ▸ Mon 04/01',
+    priceLabel: 'From $640'
+  }
+];
+
+const FLIGHT_TICKETS = [
+  {
+    id: 'kq-jnb-acc',
+    airline: 'Kenya Airways',
+    flightNo: 'KQ 761 / 508',
+    stops: '1 stop (Nairobi)',
+    departTime: '13:15',
+    arriveTime: '22:40',
+    duration: '9h 25m',
+    standardFare: 530,
+    memberFare: 485,
+    baggageNote: '1x 23kg checked bag included'
+  },
+  {
+    id: 'et-jnb-acc',
+    airline: 'Ethiopian Airlines',
+    flightNo: 'ET 808 / 921',
+    stops: '1 stop (Addis Ababa)',
+    departTime: '14:10',
+    arriveTime: '11:45+1',
+    duration: '11h 35m',
+    standardFare: 510,
+    memberFare: 468,
+    baggageNote: '2x 23kg checked bags included'
+  },
+  {
+    id: 'sa-direct',
+    airline: 'South African Airways',
+    flightNo: 'SA 052',
+    stops: 'Direct',
+    departTime: '18:30',
+    arriveTime: '22:45',
+    duration: '6h 15m',
+    standardFare: 695,
+    memberFare: 640,
+    baggageNote: 'Non-stop · Evening arrival at Terminal 3'
+  }
+];
+
+const STAY_TICKETS = [
+  {
+    id: 'stay-urbano',
+    name: 'Urbano Hotel Osu',
+    location: 'Oxford Street, Osu · Accra',
+    meta: 'Walkable to Osu eateries · Fibre Wi-Fi & backup power',
+    standardFare: 145,
+    memberFare: 122
+  },
+  {
+    id: 'stay-labadi',
+    name: 'Labadi Beach Hotel',
+    location: 'La Road · Accra',
+    meta: '15 mins from Kotoka Airport · Breakfast included',
+    standardFare: 290,
+    memberFare: 248
+  },
+  {
+    id: 'stay-number-one',
+    name: 'Number One Oxford Street',
+    location: 'Osu · Accra',
+    meta: 'Suites with kitchenette · Rooftop pool & airport shuttle',
+    standardFare: 235,
+    memberFare: 198
+  }
+];
+
+const CAR_TICKETS = [
+  {
+    id: 'car-vetted-driver',
+    name: 'Vetted Accra Airport Pickup + Full-Day Driver',
+    location: 'Kotoka Terminal 3 · Accra',
+    meta: 'Air-conditioned SUV · Fuel & vetted local driver included',
+    standardFare: 85,
+    memberFare: 68
+  },
+  {
+    id: 'car-cape-coast',
+    name: 'Accra ⇄ Cape Coast Private Return Transfer',
+    location: 'Door-to-door · Central Region',
+    meta: 'Experienced coastal highway driver · Flexible stops',
+    standardFare: 165,
+    memberFare: 138
+  }
+];
+
+const FIXERS_DATA = [
+  {
+    id: 'ama',
+    name: 'Ama',
+    age: 34,
+    city: 'Accra',
+    years: '34 years',
+    quote: "I've lived in Accra my whole life. Here's what tourists always get wrong.",
+    img: 'https://images.unsplash.com/photo-1531123897727-8f129e1bfd8c?auto=format&fit=crop&w=800&q=85'
+  },
+  {
+    id: 'kojo',
+    name: 'Kojo',
+    age: 41,
+    city: 'London ⇄ Accra',
+    years: '15 years',
+    quote: 'I go home twice a year. I know the airport, the money, and the family logistics.',
+    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85'
+  },
+  {
+    id: 'efua',
+    name: 'Efua',
+    age: 29,
+    city: 'Kumasi',
+    years: '12 years',
+    quote: 'Ask me about markets, trotros, and what not to wear.',
+    img: 'https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=800&q=85'
+  },
+  {
+    id: 'kwame',
+    name: 'Kwame',
+    age: 37,
+    city: 'Cape Coast',
+    years: '20 years',
+    quote: "I'll tell you which beaches are worth the drive.",
+    img: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=800&q=85'
+  },
+  {
+    id: 'abena',
+    name: 'Abena',
+    age: 45,
+    city: 'Tamale',
+    years: '25 years',
+    quote: 'The north is a different country. Let me explain it.',
+    img: 'https://images.unsplash.com/photo-1589156191108-c762ff4b96ab?auto=format&fit=crop&w=800&q=85'
+  },
+  {
+    id: 'yaw',
+    name: 'Yaw',
+    age: 31,
+    city: 'Takoradi',
+    years: '8 years',
+    quote: 'Where to eat, where to stay, who to call.',
+    img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=85'
+  }
+];
+
+const LOCKED_ACCRA_SECRETS = [
+  {
+    id: 'trotro',
+    title: 'Getting around: the trotro rule nobody mentions',
+    unlockedText:
+      'Never board an empty trotro at a major junction unless you have forty minutes to spare—they will not pull out until every last seat is filled. Walk fifty metres past the station and flag one that already has two or three empty seats. Always carry 5 and 10 cedi notes; handing a mate a 100 cedi note at 8 AM will get you left at the kerb.'
+  },
+  {
+    id: 'money',
+    title: "Money: what to do when the card machine 'isn't working'",
+    unlockedText:
+      'When a restaurant or shop tells you the POS network is down, they almost always accept MTN Mobile Money (MoMo). Before leaving Kotoka Terminal 3, register an MTN SIM with your passport and load 500–1,000 GHS onto MoMo. For physical cash, skip airport bureaus and use the Stanbic or Ecobank ATMs inside Accra Mall or Marina Mall.'
+  },
+  {
+    id: 'gathering',
+    title: 'The one thing to never do at a family gathering',
+    unlockedText:
+      'Never greet elders from left to right, and never hand over a gift, plate, or glass with your left hand—even if your right hand is holding your phone. Greet elders from right to left with a slight nod, and if you must pass something while your right hand is full, pause and put your phone down first.'
+  }
+];
+
+const CITY_GUIDES_DATA = [
+  {
+    id: 'accra',
+    name: 'Accra',
+    quote: 'Skip the hotel buffet; eat waakye from a leaf before 9 AM.',
+    fixersCount: 14,
+    summary:
+      'Accra rewards early risers and ruins tight schedules. Traffic between East Legon and Osu can turn a 20-minute drive into 90 minutes after 4 PM. Plan one neighbourhood per half-day.',
+    highlights: [
+      'Best morning meal: Auntie Muni waakye in Labone before 8:30 AM.',
+      'Skip: Weekend afternoon visits to Makola Market without a local companion.',
+      'Stay: Osu or Labone for walkable dinner spots; Cantonments for quiet mornings.'
+    ]
+  },
+  {
+    id: 'kumasi',
+    name: 'Kumasi',
+    quote: 'Kejetia Market is easy once you know which gate to enter from.',
+    fixersCount: 8,
+    summary:
+      'The cultural heart of the Ashanti Kingdom. Warm, proud, and structured around royal traditions that visitors often miss without an introduction.',
+    highlights: [
+      'Enter Kejetia via the Adehyeman Gardens side for fabrics and beads.',
+      'Visit Bonwire kente weavers on a weekday morning to watch master looms.',
+      'Take the VIP or OA Travel coach from Circle in Accra (book front-row seats a day prior).'
+    ]
+  },
+  {
+    id: 'cape-coast',
+    name: 'Cape Coast',
+    quote: 'Go to the castle early morning, then head west past Elmina.',
+    fixersCount: 6,
+    summary:
+      'Two and a half hours west of Accra on a good morning, Cape Coast holds profound history alongside quiet fishing towns that few day-trippers ever reach.',
+    highlights: [
+      'Arrive at Cape Coast Castle at 9:00 AM sharp before tour buses arrive from Accra.',
+      'Eat grilled red snapper at a family spot overlooking Elmina lagoon.',
+      'Skip midday Kakum canopy walks; go at 7:30 AM for mist and birdlife.'
+    ]
+  },
+  {
+    id: 'tamale',
+    name: 'Tamale',
+    quote: 'The pace slows down north of Kintampo — plan your transport ahead.',
+    fixersCount: 5,
+    summary:
+      'The gateway to northern Ghana. Hospitable, dry, and deeply distinct from the coast—with motorbike-lined avenues, guinea fowl grills, and access to Mole National Park.',
+    highlights: [
+      'Fly PassionAir or Africa World Airlines from Accra (1 hour) rather than the 12-hour bus.',
+      'Arrange your Larabanga & Mole driver through a Tamale Fixer 48 hours ahead.',
+      'Try freshly pressed shea butter and spiced guinea fowl near Central Mosque.'
+    ]
+  }
+];
+
+const COMMUNITY_POSTS = [
+  {
+    id: 'post-1',
+    title: 'Best SIM card setup right outside Kotoka Terminal 3',
+    author: 'Kwesi B.',
+    city: 'Accra',
+    topic: 'Arrivals & Connectivity',
+    excerpt:
+      'Skip the unofficial hawkers by the baggage trolleys. Walk out the main sliding doors, turn right past the exchange booths to the official MTN kiosk, and bring your physical passport.',
+    fullDiscussion:
+      'Skip the unofficial hawkers by the baggage trolleys. Walk out the main sliding doors, turn right past the exchange booths to the official MTN kiosk, and bring your physical passport. Registration takes 6 minutes, and you can immediately ask the attendant to activate your Mobile Money wallet and load a 15GB data bundle for around 90 GHS.'
+  },
+  {
+    id: 'post-2',
+    title: 'What to pack for harmattan season in Tamale',
+    author: 'Mariama I.',
+    city: 'Tamale',
+    topic: 'Northern Packing',
+    excerpt:
+      'Between late November and February, the dry Saharan wind drops humidity below 20%. Nights can dip to 16°C while afternoons hit 36°C. Leave white linen shirts at home.',
+    fullDiscussion:
+      'Between late November and February, the dry Saharan wind drops humidity below 20%. Nights can dip to 16°C while afternoons hit 36°C. Leave white linen shirts at home—fine red laterite dust settles on everything. Pack a light cotton scarf, thick shea butter (or buy it fresh in Tamale), saline nasal spray, and closed-toe walking shoes.'
+  },
+  {
+    id: 'post-3',
+    title: 'Taking children to Cape Coast: realistic driving times',
+    author: 'Daniel O.',
+    city: 'London ⇄ Cape Coast',
+    topic: 'Family Logistics',
+    excerpt:
+      'Google Maps says 2 hours 40 minutes from Accra, but with two kids and roadworks around Kasoa, budget 4 hours each way. Leave Accra at 6:30 AM sharp.',
+    fullDiscussion:
+      'Google Maps says 2 hours 40 minutes from Accra, but with two kids and roadworks around Kasoa, budget 4 hours each way. Leave Accra at 6:30 AM sharp before Kasoa traffic builds up. Stop at West Hills Mall for clean washrooms and snacks before hitting the coastal highway.'
+  }
+];
+
+export default function App() {
+  // User state: 'guest' | 'free' | 'subscriber'
+  const [userState, setUserState] = useState('guest');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Booking Engine State (Above the Fold First)
+  const [bookingMode, setBookingMode] = useState('Flights'); // 'Flights' | 'Stays' | 'Cars'
+  const [tripType, setTripType] = useState('Return'); // 'Return' | 'One-way' | 'Multi-city'
+  const [origin, setOrigin] = useState('Johannesburg, South Africa (JNB)');
+  const [destination, setDestination] = useState('Accra, Ghana (ACC)');
+  const [departDate, setDepartDate] = useState('Sat, 14 Nov 2026');
+  const [returnDate, setReturnDate] = useState('Sun, 22 Nov 2026');
+  const [multiCityLeg2, setMultiCityLeg2] = useState('Accra (ACC) → Tamale (TML)');
+
+  // Filter Pills State
+  const [adults, setAdults] = useState(1);
+  const [childrenCount, setChildrenCount] = useState(0);
+  const [cabinClass, setCabinClass] = useState('Economy');
+  const [cabinBags, setCabinBags] = useState(0);
+  const [checkedBags, setCheckedBags] = useState(0);
+  const [activePopover, setActivePopover] = useState(null); // 'travellers' | 'cabin' | 'bags' | null
+
+  // Search Results & Express Checkout State
+  const [hasSearched, setHasSearched] = useState(false);
+  const [sortOrder, setSortOrder] = useState('recommended'); // 'recommended' | 'cheapest' | 'fastest'
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [passengerName, setPassengerName] = useState('');
+  const [passengerEmail, setPassengerEmail] = useState('');
+  const [passportNumber, setPassportNumber] = useState('');
+  const [issuedBooking, setIssuedBooking] = useState(null);
+
+  // Pricing Billing Toggle
+  const [annualBilling, setAnnualBilling] = useState(true);
+
+  // Account Workspace State
+  const [savedTrips, setSavedTrips] = useState([
+    {
+      id: 'TF-84920',
+      type: 'Flight',
+      title: 'Johannesburg (JNB) → Accra (ACC)',
+      dates: 'Sat, 14 Nov 2026 · Return',
+      details: 'Kenya Airways KQ 761 · 1 traveller · Economy',
+      status: 'Saved itinerary'
+    }
+  ]);
+
+  const [fixerCalls, setFixerCalls] = useState([
+    {
+      id: 'CALL-104',
+      fixer: 'Ama (Accra)',
+      date: 'Tuesday, 17 Nov 2026 · 18:30 GMT',
+      topic: 'Airport arrival, Osu guesthouses & driver contact',
+      status: 'Confirmed'
+    }
+  ]);
+
+  // Modals State
+  const [talkModalFixer, setTalkModalFixer] = useState(null);
+  const [callDate, setCallDate] = useState('Thursday, 19 Nov 2026 · 18:00 GMT');
+  const [callNotes, setCallNotes] = useState('');
+  const [callBookedBanner, setCallBookedBanner] = useState(false);
+
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState('join'); // 'join' | 'signin'
+  const [authEmail, setAuthEmail] = useState('');
+
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
+  const [accountTab, setAccountTab] = useState('trips'); // 'trips' | 'calls' | 'briefs'
+
+  const [selectedCityGuide, setSelectedCityGuide] = useState(null);
+  const [applyFixerOpen, setApplyFixerOpen] = useState(false);
+  const [fixerAppSubmitted, setFixerAppSubmitted] = useState(false);
+  const [communityModalOpen, setCommunityModalOpen] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+
+  const totalTravellers = adults + childrenCount;
+
+  // Swap Origin & Destination
+  const handleSwapAirports = () => {
+    const prevOrigin = origin;
+    setOrigin(destination);
+    setDestination(prevOrigin);
+  };
+
+  // Run Ticket Search
+  const handleSearchTickets = (e) => {
+    if (e) e.preventDefault();
+    setActivePopover(null);
+    setHasSearched(true);
+    setSelectedTicket(null);
+    setIssuedBooking(null);
+  };
+
+  // Apply Recent Search Pill
+  const handleSelectRecentSearch = (item) => {
+    setBookingMode('Flights');
+    setOrigin(item.origin);
+    setDestination(item.destination);
+    setTripType(item.tripType);
+    setDepartDate(item.depart);
+    setReturnDate(item.ret);
+    setActivePopover(null);
+    setHasSearched(true);
+    setSelectedTicket(null);
+    setIssuedBooking(null);
+  };
+
+  // Complete Express Checkout (No login required)
+  const handleIssueTicket = (e) => {
+    e.preventDefault();
+    const refNumber = `TF-${Math.floor(10000 + Math.random() * 89999)}`;
+    const isSubscriber = userState === 'subscriber';
+    const pricePaid = isSubscriber ? selectedTicket.memberFare : selectedTicket.standardFare;
+
+    const confirmed = {
+      id: refNumber,
+      type: bookingMode === 'Flights' ? 'Flight' : bookingMode === 'Stays' ? 'Stay' : 'Transfer',
+      title:
+        bookingMode === 'Flights'
+          ? `${origin.split('(')[0].trim()} → ${destination.split('(')[0].trim()}`
+          : selectedTicket.name,
+      dates:
+        bookingMode === 'Flights'
+          ? `${departDate}${tripType === 'Return' ? ` – ${returnDate}` : ` (${tripType})`}`
+          : `${departDate} – ${returnDate}`,
+      details:
+        bookingMode === 'Flights'
+          ? `${selectedTicket.airline} (${selectedTicket.flightNo}) · ${totalTravellers} ${
+              totalTravellers === 1 ? 'traveller' : 'travellers'
+            } · ${cabinClass} · $${pricePaid}`
+          : `${selectedTicket.location} · $${pricePaid}`,
+      status: 'Ticket Issued'
+    };
+
+    setIssuedBooking(confirmed);
+    setSelectedTicket(null);
+
+    if (userState !== 'guest') {
+      setSavedTrips((prev) => [confirmed, ...prev]);
+    }
+  };
+
+  // Open Talk to Fixer modal
+  const handleTalkToFixer = (fixer) => {
+    setCallBookedBanner(false);
+    setTalkModalFixer(fixer);
+  };
+
+  const handleConfirmFixerCall = (e) => {
+    e.preventDefault();
+    const newCall = {
+      id: `CALL-${Math.floor(200 + Math.random() * 700)}`,
+      fixer: `${talkModalFixer.name} (${talkModalFixer.city})`,
+      date: callDate,
+      topic: callNotes.trim() || 'Route planning, local safety & driver contacts',
+      status: 'Confirmed'
+    };
+    setFixerCalls((prev) => [newCall, ...prev]);
+    setCallBookedBanner(true);
+    setCallNotes('');
+  };
+
+  const handleAuthSuccess = (tier = 'free') => {
+    setUserState(tier);
+    setAuthModalOpen(false);
+    if (issuedBooking) {
+      setSavedTrips((prev) => {
+        if (prev.some((t) => t.id === issuedBooking.id)) return prev;
+        return [issuedBooking, ...prev];
+      });
+    }
+  };
+
+  // Sorted Flight Results
+  const sortedFlightTickets = [...FLIGHT_TICKETS].sort((a, b) => {
+    if (sortOrder === 'cheapest') return a.memberFare - b.memberFare;
+    if (sortOrder === 'fastest') return a.id === 'sa-direct' ? -1 : 1;
+    return 0;
+  });
+
+  return (
+    <div className="min-h-screen bg-[#FBF9F5] text-[#1D1F22] antialiased selection:bg-[#154731] selection:text-[#FBF9F5] pb-24 md:pb-0">
+      {/* Typography & Scrollbar Rules */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap');
+            .font-serif-editorial { font-family: 'Playfair Display', Georgia, serif; }
+            .font-sans-ui { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+          `
+        }}
+      />
+
+      {/* 1. TOP UTILITY & NAVIGATION BAR */}
+      <div className="bg-[#1D1F22] text-[#FBF9F5] border-b border-[#32363B] px-4 sm:px-8 py-2 text-xs font-sans-ui">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="text-[#B0B5BA] uppercase tracking-wider font-medium text-[11px]">
+              State:
+            </span>
+            <div className="inline-flex border border-[#3E4349] rounded-sm overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setUserState('guest')}
+                className={`px-2.5 py-1 transition-colors ${
+                  userState === 'guest'
+                    ? 'bg-[#C59B49] text-[#1D1F22] font-semibold'
+                    : 'bg-transparent text-[#FBF9F5] hover:bg-[#2A2D32]'
+                }`}
+              >
+                Guest
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserState('free')}
+                className={`px-2.5 py-1 border-l border-[#3E4349] transition-colors ${
+                  userState === 'free'
+                    ? 'bg-[#C59B49] text-[#1D1F22] font-semibold'
+                    : 'bg-transparent text-[#FBF9F5] hover:bg-[#2A2D32]'
+                }`}
+              >
+                Free Member
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserState('subscriber')}
+                className={`px-2.5 py-1 border-l border-[#3E4349] transition-colors ${
+                  userState === 'subscriber'
+                    ? 'bg-[#C59B49] text-[#1D1F22] font-semibold'
+                    : 'bg-transparent text-[#FBF9F5] hover:bg-[#2A2D32]'
+                }`}
+              >
+                Fixer+ Subscriber
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {userState !== 'guest' ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setAccountTab('trips');
+                  setAccountModalOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 text-[#C59B49] hover:text-[#FBF9F5] font-semibold transition-colors"
+              >
+                <span>My Account ({savedTrips.length} saved)</span>
+              </button>
+            ) : (
+              <span className="text-[#B0B5BA] hidden sm:inline">
+                Book tickets instantly — no account required
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Sticky Header */}
+      <header className="sticky top-0 z-40 bg-[#FBF9F5] border-b border-[#DED8CC] font-sans-ui">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
+          <a href="#book-tickets" className="flex items-center" aria-label="TravelFixer Home">
+            <TravelFixerLogo variant="light" className="h-12 sm:h-14 w-auto" />
+          </a>
+
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#1D1F22]">
+            <a href="#book-tickets" className="text-[#154731] font-semibold">
+              Book Tickets
+            </a>
+            <a href="#fixers" className="hover:text-[#154731] transition-colors">
+              Fixers
+            </a>
+            <a href="#city-guides" className="hover:text-[#154731] transition-colors">
+              City Guides
+            </a>
+            <a href="#how-it-works" className="hover:text-[#154731] transition-colors">
+              How it Works
+            </a>
+            <a href="#pricing" className="hover:text-[#154731] transition-colors">
+              Pricing
+            </a>
+          </nav>
+
+          <div className="hidden md:flex items-center gap-3">
+            {userState === 'guest' ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('signin');
+                    setAuthModalOpen(true);
+                  }}
+                  className="px-4 py-2.5 text-sm font-medium text-[#1D1F22] border border-[#1D1F22] rounded-sm hover:bg-[#F3EFE6] transition-colors"
+                >
+                  Sign in
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('join');
+                    setAuthModalOpen(true);
+                  }}
+                  className="px-5 py-2.5 text-sm font-medium bg-[#154731] text-[#FBF9F5] rounded-sm hover:bg-[#0F3524] transition-colors"
+                >
+                  Join free
+                </button>
+              </>
+            ) : (
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-semibold px-3 py-1.5 bg-[#F3EFE6] border border-[#DED8CC] rounded-sm text-[#154731]">
+                  {userState === 'subscriber' ? 'Fixer+ Member' : 'Free Member'}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setAccountModalOpen(true)}
+                  className="px-4 py-2 text-sm font-medium bg-[#154731] text-[#FBF9F5] rounded-sm hover:bg-[#0F3524] transition-colors"
+                >
+                  My Account
+                </button>
+              </div>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2.5 text-[#1D1F22] border border-[#DED8CC] rounded-sm"
+            aria-label="Open menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-[#FBF9F5] border-b border-[#DED8CC] px-5 py-6 space-y-5">
+            <div className="flex flex-col space-y-4 font-serif-editorial text-xl text-[#1D1F22]">
+              <a href="#book-tickets" onClick={() => setMobileMenuOpen(false)}>
+                Book Tickets
+              </a>
+              <a href="#fixers" onClick={() => setMobileMenuOpen(false)}>
+                Fixers
+              </a>
+              <a href="#city-guides" onClick={() => setMobileMenuOpen(false)}>
+                City Guides
+              </a>
+              <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)}>
+                How it Works
+              </a>
+              <a href="#pricing" onClick={() => setMobileMenuOpen(false)}>
+                Pricing
+              </a>
+            </div>
+            <div className="pt-4 border-t border-[#DED8CC] flex flex-col gap-3">
+              {userState === 'guest' ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setAuthMode('signin');
+                      setAuthModalOpen(true);
+                    }}
+                    className="w-full py-3 text-sm font-medium border border-[#1D1F22] rounded-sm"
+                  >
+                    Sign in
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setAuthMode('join');
+                      setAuthModalOpen(true);
+                    }}
+                    className="w-full py-3 text-sm font-medium bg-[#154731] text-[#FBF9F5] rounded-sm"
+                  >
+                    Join free
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setAccountModalOpen(true);
+                  }}
+                  className="w-full py-3 text-sm font-medium bg-[#154731] text-[#FBF9F5] rounded-sm"
+                >
+                  My Account
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </header>
+
+      <main>
+        {/* 2. ABOVE-THE-FOLD HERO: TICKET BOOKING ENGINE FIRST */}
+        <section
+          id="book-tickets"
+          className="bg-[#F3EFE6] border-b border-[#DED8CC] pt-6 pb-10 sm:pt-10 sm:pb-14"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-8">
+            {/* Compact Greeting / Header Line */}
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-5">
+              <h1 className="font-serif-editorial text-2xl sm:text-4xl font-semibold text-[#1D1F22] tracking-tight">
+                Where are you flying?
+              </h1>
+              <p className="font-sans-ui text-xs sm:text-sm text-[#52565E]">
+                Instant tickets. Zero account required to search or book.
+              </p>
+            </div>
+
+            {/* Three Square Icon Mode Tiles (Flights | Stays | Cars) */}
+            <div className="grid grid-cols-3 gap-3 max-w-xs sm:max-w-sm mx-auto sm:mx-0 mb-5 font-sans-ui">
+              {[
+                { id: 'Flights', label: 'Flights', icon: Plane },
+                { id: 'Stays', label: 'Stays', icon: BedDouble },
+                { id: 'Cars', label: 'Cars', icon: Car }
+              ].map((mode) => {
+                const ModeIcon = mode.icon;
+                const isActive = bookingMode === mode.id;
+                return (
+                  <button
+                    key={mode.id}
+                    type="button"
+                    onClick={() => {
+                      setBookingMode(mode.id);
+                      setHasSearched(false);
+                      setSelectedTicket(null);
+                      setIssuedBooking(null);
+                      setActivePopover(null);
+                    }}
+                    className="flex flex-col items-center justify-center gap-2 group focus:outline-none"
+                  >
+                    <div
+                      className={`w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center border transition-colors ${
+                        isActive
+                          ? 'bg-[#C59B49] border-[#8F6B24] text-[#1D1F22]'
+                          : 'bg-[#FFFFFF] border-[#DED8CC] text-[#1D1F22] group-hover:border-[#154731]'
+                      }`}
+                    >
+                      <ModeIcon className="w-6 h-6" strokeWidth={1.8} />
+                    </div>
+                    <span
+                      className={`text-xs font-semibold ${
+                        isActive ? 'text-[#1D1F22]' : 'text-[#52565E]'
+                      }`}
+                    >
+                      {mode.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Main Booking Card Container */}
+            <div className="bg-[#FFFFFF] border border-[#DED8CC] rounded-xl p-4 sm:p-6 font-sans-ui">
+              {/* Trip-type tabs when Flights is active */}
+              {bookingMode === 'Flights' && (
+                <div className="flex items-center justify-around sm:justify-start sm:gap-8 border-b border-[#DED8CC] mb-4">
+                  {['Return', 'One-way', 'Multi-city'].map((type) => {
+                    const active = tripType === type;
+                    return (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => {
+                          setTripType(type);
+                          setHasSearched(false);
+                        }}
+                        className={`pb-3 text-sm font-semibold border-b-2 transition-colors ${
+                          active
+                            ? 'border-[#1D1F22] text-[#1D1F22]'
+                            : 'border-transparent text-[#52565E] hover:text-[#1D1F22]'
+                        }`}
+                      >
+                        {type}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              <form onSubmit={handleSearchTickets} className="space-y-3">
+                {/* Stacked Origin / Destination Box with Straddling Swap Button */}
+                {bookingMode === 'Flights' ? (
+                  <div className="relative border border-[#DED8CC] rounded-lg bg-[#FFFFFF]">
+                    {/* Origin Field */}
+                    <div className="px-4 py-3 border-b border-[#DED8CC] pr-14">
+                      <label
+                        htmlFor="origin-select"
+                        className="block text-[11px] font-semibold uppercase tracking-wider text-[#52565E] mb-0.5"
+                      >
+                        From
+                      </label>
+                      <select
+                        id="origin-select"
+                        value={origin}
+                        onChange={(e) => setOrigin(e.target.value)}
+                        className="w-full bg-transparent text-sm sm:text-base font-medium text-[#1D1F22] outline-none cursor-pointer"
+                      >
+                        {AIRPORTS.map((airport) => (
+                          <option key={`orig-${airport}`} value={airport}>
+                            {airport}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Circular Swap Button Straddling the Divider */}
+                    <button
+                      type="button"
+                      onClick={handleSwapAirports}
+                      aria-label="Swap origin and destination"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#FFFFFF] border border-[#DED8CC] hover:border-[#154731] flex items-center justify-center text-[#1D1F22] transition-colors"
+                    >
+                      <ArrowUpDown className="w-4 h-4" />
+                    </button>
+
+                    {/* Destination Field */}
+                    <div className="px-4 py-3 pr-14">
+                      <label
+                        htmlFor="destination-select"
+                        className="block text-[11px] font-semibold uppercase tracking-wider text-[#52565E] mb-0.5"
+                      >
+                        To
+                      </label>
+                      <select
+                        id="destination-select"
+                        value={destination}
+                        onChange={(e) => setDestination(e.target.value)}
+                        className="w-full bg-transparent text-sm sm:text-base font-medium text-[#1D1F22] outline-none cursor-pointer"
+                      >
+                        {AIRPORTS.map((airport) => (
+                          <option key={`dest-${airport}`} value={airport}>
+                            {airport}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="border border-[#DED8CC] rounded-lg bg-[#FFFFFF] px-4 py-3">
+                    <label
+                      htmlFor="city-stay-select"
+                      className="block text-[11px] font-semibold uppercase tracking-wider text-[#52565E] mb-0.5"
+                    >
+                      {bookingMode === 'Stays' ? 'Destination City' : 'Pickup Location'}
+                    </label>
+                    <select
+                      id="city-stay-select"
+                      value={destination}
+                      onChange={(e) => setDestination(e.target.value)}
+                      className="w-full bg-transparent text-sm sm:text-base font-medium text-[#1D1F22] outline-none cursor-pointer"
+                    >
+                      <option value="Accra, Ghana (ACC)">Accra, Ghana (ACC)</option>
+                      <option value="Kumasi, Ghana (KMS)">Kumasi, Ghana (KMS)</option>
+                      <option value="Cape Coast, Ghana">Cape Coast, Ghana</option>
+                      <option value="Tamale, Ghana (TML)">Tamale, Ghana (TML)</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Date Selector Row */}
+                <div
+                  className={`grid gap-3 ${
+                    bookingMode === 'Flights' && tripType === 'One-way'
+                      ? 'grid-cols-1'
+                      : 'grid-cols-1 sm:grid-cols-2'
+                  }`}
+                >
+                  <div className="border border-[#DED8CC] rounded-lg px-4 py-3 bg-[#FFFFFF] flex items-center justify-between">
+                    <div className="w-full">
+                      <label
+                        htmlFor="depart-date-select"
+                        className="block text-[11px] font-semibold uppercase tracking-wider text-[#52565E] mb-0.5"
+                      >
+                        {bookingMode === 'Flights' ? 'Departure' : 'Check-in / Pickup'}
+                      </label>
+                      <select
+                        id="depart-date-select"
+                        value={departDate}
+                        onChange={(e) => setDepartDate(e.target.value)}
+                        className="w-full bg-transparent text-sm font-medium text-[#1D1F22] outline-none cursor-pointer"
+                      >
+                        {DEPARTURE_DATES.map((d) => (
+                          <option key={d} value={d}>
+                            {d}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <Calendar className="w-4 h-4 text-[#8F6B24] shrink-0 ml-2" />
+                  </div>
+
+                  {!(bookingMode === 'Flights' && tripType === 'One-way') && (
+                    <div className="border border-[#DED8CC] rounded-lg px-4 py-3 bg-[#FFFFFF] flex items-center justify-between">
+                      <div className="w-full">
+                        <label
+                          htmlFor="return-date-select"
+                          className="block text-[11px] font-semibold uppercase tracking-wider text-[#52565E] mb-0.5"
+                        >
+                          {bookingMode === 'Flights'
+                            ? tripType === 'Multi-city'
+                              ? 'Second Leg'
+                              : 'Return'
+                            : 'Check-out / Drop-off'}
+                        </label>
+                        {bookingMode === 'Flights' && tripType === 'Multi-city' ? (
+                          <select
+                            id="return-date-select"
+                            value={multiCityLeg2}
+                            onChange={(e) => setMultiCityLeg2(e.target.value)}
+                            className="w-full bg-transparent text-sm font-medium text-[#1D1F22] outline-none cursor-pointer"
+                          >
+                            <option>Accra (ACC) → Tamale (TML)</option>
+                            <option>Accra (ACC) → Kumasi (KMS)</option>
+                            <option>Kumasi (KMS) → Johannesburg (JNB)</option>
+                          </select>
+                        ) : (
+                          <select
+                            id="return-date-select"
+                            value={returnDate}
+                            onChange={(e) => setReturnDate(e.target.value)}
+                            className="w-full bg-transparent text-sm font-medium text-[#1D1F22] outline-none cursor-pointer"
+                          >
+                            {RETURN_DATES.map((d) => (
+                              <option key={d} value={d}>
+                                {d}
+                              </option>
+                            ))}
+                          </select>
+                        )}
+                      </div>
+                      <Calendar className="w-4 h-4 text-[#8F6B24] shrink-0 ml-2" />
+                    </div>
+                  )}
+                </div>
+
+                {/* Compact Horizontal Filter Pills Row */}
+                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActivePopover(activePopover === 'travellers' ? null : 'travellers')
+                    }
+                    className={`shrink-0 px-3.5 py-2 border rounded-lg text-xs sm:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${
+                      activePopover === 'travellers'
+                        ? 'border-[#154731] bg-[#F3EFE6] text-[#1D1F22]'
+                        : 'border-[#DED8CC] bg-[#FFFFFF] text-[#1D1F22] hover:border-[#1D1F22]'
+                    }`}
+                  >
+                    <span>
+                      {totalTravellers} {totalTravellers === 1 ? 'traveller' : 'travellers'}
+                    </span>
+                    <ChevronDown className="w-3.5 h-3.5 text-[#52565E]" />
+                  </button>
+
+                  {bookingMode === 'Flights' && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setActivePopover(activePopover === 'cabin' ? null : 'cabin')}
+                        className={`shrink-0 px-3.5 py-2 border rounded-lg text-xs sm:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${
+                          activePopover === 'cabin'
+                            ? 'border-[#154731] bg-[#F3EFE6] text-[#1D1F22]'
+                            : 'border-[#DED8CC] bg-[#FFFFFF] text-[#1D1F22] hover:border-[#1D1F22]'
+                        }`}
+                      >
+                        <span>{cabinClass}</span>
+                        <ChevronDown className="w-3.5 h-3.5 text-[#52565E]" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setActivePopover(activePopover === 'bags' ? null : 'bags')}
+                        className={`shrink-0 px-3.5 py-2 border rounded-lg text-xs sm:text-sm font-medium inline-flex items-center gap-1.5 transition-colors ${
+                          activePopover === 'bags'
+                            ? 'border-[#154731] bg-[#F3EFE6] text-[#1D1F22]'
+                            : 'border-[#DED8CC] bg-[#FFFFFF] text-[#1D1F22] hover:border-[#1D1F22]'
+                        }`}
+                      >
+                        <span>
+                          {cabinBags} cabin {cabinBags === 1 ? 'bag' : 'bags'}, {checkedBags} checked
+                        </span>
+                        <ChevronDown className="w-3.5 h-3.5 text-[#52565E]" />
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {/* Interactive Filter Popover Panel */}
+                {activePopover === 'travellers' && (
+                  <div className="bg-[#F3EFE6] border border-[#DED8CC] rounded-lg p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-semibold text-[#1D1F22]">Adults</p>
+                        <p className="text-xs text-[#52565E]">Aged 12+</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setAdults(Math.max(1, adults - 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          −
+                        </button>
+                        <span className="text-sm font-semibold w-4 text-center">{adults}</span>
+                        <button
+                          type="button"
+                          onClick={() => setAdults(Math.min(8, adults + 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between pt-2 border-t border-[#DED8CC]">
+                      <div>
+                        <p className="text-sm font-semibold text-[#1D1F22]">Children</p>
+                        <p className="text-xs text-[#52565E]">Aged 2–11</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          −
+                        </button>
+                        <span className="text-sm font-semibold w-4 text-center">{childrenCount}</span>
+                        <button
+                          type="button"
+                          onClick={() => setChildrenCount(Math.min(6, childrenCount + 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activePopover === 'cabin' && (
+                  <div className="bg-[#F3EFE6] border border-[#DED8CC] rounded-lg p-3 flex flex-wrap gap-2">
+                    {['Economy', 'Premium Economy', 'Business'].map((cls) => (
+                      <button
+                        key={cls}
+                        type="button"
+                        onClick={() => {
+                          setCabinClass(cls);
+                          setActivePopover(null);
+                        }}
+                        className={`px-3.5 py-2 rounded-sm text-xs font-semibold border ${
+                          cabinClass === cls
+                            ? 'bg-[#154731] text-[#FBF9F5] border-[#154731]'
+                            : 'bg-[#FFFFFF] text-[#1D1F22] border-[#DED8CC]'
+                        }`}
+                      >
+                        {cls}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {activePopover === 'bags' && (
+                  <div className="bg-[#F3EFE6] border border-[#DED8CC] rounded-lg p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-[#1D1F22]">Cabin bags (8kg)</p>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setCabinBags(Math.max(0, cabinBags - 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          −
+                        </button>
+                        <span className="text-sm font-semibold w-4 text-center">{cabinBags}</span>
+                        <button
+                          type="button"
+                          onClick={() => setCabinBags(Math.min(4, cabinBags + 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between pt-2 border-t border-[#DED8CC]">
+                      <p className="text-sm font-semibold text-[#1D1F22]">Checked bags (23kg)</p>
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setCheckedBags(Math.max(0, checkedBags - 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          −
+                        </button>
+                        <span className="text-sm font-semibold w-4 text-center">{checkedBags}</span>
+                        <button
+                          type="button"
+                          onClick={() => setCheckedBags(Math.min(6, checkedBags + 1))}
+                          className="w-8 h-8 border border-[#DED8CC] bg-[#FFFFFF] rounded-sm font-semibold"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Full-Width Solid Brushed Gold (#C59B49) Primary Search Button */}
+                <button
+                  type="submit"
+                  className="w-full py-3.5 px-6 bg-[#C59B49] hover:bg-[#D5AD5C] text-[#1D1F22] font-bold text-base rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <span>Search</span>
+                </button>
+              </form>
+
+              {/* Single Clean Helper Link Below Search Button */}
+              <div className="mt-3.5 text-center sm:text-left">
+                <button
+                  type="button"
+                  onClick={() => handleTalkToFixer(FIXERS_DATA[0])}
+                  className="text-xs sm:text-sm font-medium text-[#154731] hover:text-[#0F3524] transition-colors inline-flex items-center gap-1"
+                >
+                  <span>Not sure where to land or stay? Talk to a Fixer first →</span>
+                </button>
+              </div>
+
+              {/* LIVE INTERACTIVE RESULTS (NO LOGIN REQUIRED) */}
+              {hasSearched && !selectedTicket && !issuedBooking && (
+                <div className="mt-6 pt-5 border-t border-[#DED8CC] space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#8F6B24] block">
+                        Available Tickets · No Account Required
+                      </span>
+                      <h2 className="font-serif-editorial text-xl font-semibold text-[#1D1F22]">
+                        {bookingMode === 'Flights'
+                          ? `${origin.split('(')[0].trim()} → ${destination.split('(')[0].trim()}`
+                          : `${bookingMode} in ${destination.split('(')[0].trim()}`}
+                      </h2>
+                    </div>
+
+                    {bookingMode === 'Flights' && (
+                      <div className="inline-flex border border-[#DED8CC] rounded-sm overflow-hidden text-xs">
+                        {[
+                          { id: 'recommended', label: 'Recommended' },
+                          { id: 'cheapest', label: 'Lowest Fare' },
+                          { id: 'fastest', label: 'Fastest' }
+                        ].map((tab) => (
+                          <button
+                            key={tab.id}
+                            type="button"
+                            onClick={() => setSortOrder(tab.id)}
+                            className={`px-3 py-1.5 font-medium ${
+                              sortOrder === tab.id
+                                ? 'bg-[#1D1F22] text-[#FBF9F5]'
+                                : 'bg-[#FBF9F5] text-[#52565E]'
+                            }`}
+                          >
+                            {tab.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {bookingMode === 'Flights' &&
+                    sortedFlightTickets.map((flight) => (
+                      <div
+                        key={flight.id}
+                        className="border border-[#DED8CC] bg-[#FBF9F5] rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                      >
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-sm sm:text-base text-[#1D1F22]">
+                              {flight.airline}
+                            </span>
+                            <span className="text-xs text-[#52565E]">
+                              · {flight.flightNo} · {flight.stops}
+                            </span>
+                          </div>
+                          <p className="text-sm font-medium text-[#1D1F22]">
+                            {flight.departTime} — {flight.arriveTime}{' '}
+                            <span className="text-[#52565E] font-normal">({flight.duration})</span>
+                          </p>
+                          <p className="text-xs text-[#8F6B24]">{flight.baggageNote}</p>
+                        </div>
+
+                        <div className="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-[#DED8CC] gap-2">
+                          <div className="sm:text-right">
+                            {userState === 'subscriber' ? (
+                              <>
+                                <span className="text-xs line-through text-[#52565E] mr-1.5">
+                                  ${flight.standardFare}
+                                </span>
+                                <span className="text-lg font-bold text-[#154731]">
+                                  ${flight.memberFare}
+                                </span>
+                                <span className="block text-[11px] font-semibold text-[#8F6B24]">
+                                  Fixer+ Fare ($0 booking fee)
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <span className="text-lg font-bold text-[#1D1F22]">
+                                  ${flight.standardFare}
+                                </span>
+                                <span className="block text-[11px] text-[#8F6B24]">
+                                  Fixer+ Member Fare: ${flight.memberFare} ($0 fee)
+                                </span>
+                              </>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedTicket(flight)}
+                            className="px-5 py-2 bg-[#154731] hover:bg-[#0F3524] text-[#FBF9F5] text-xs font-semibold rounded-sm transition-colors"
+                          >
+                            Select ticket
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+
+                  {bookingMode === 'Stays' &&
+                    STAY_TICKETS.map((stay) => (
+                      <div
+                        key={stay.id}
+                        className="border border-[#DED8CC] bg-[#FBF9F5] rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                      >
+                        <div className="space-y-1">
+                          <h3 className="font-bold text-sm sm:text-base text-[#1D1F22]">
+                            {stay.name}
+                          </h3>
+                          <p className="text-xs text-[#52565E]">{stay.location}</p>
+                          <p className="text-xs text-[#8F6B24]">{stay.meta}</p>
+                        </div>
+                        <div className="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-[#DED8CC] gap-2">
+                          <div className="sm:text-right">
+                            <span className="text-lg font-bold text-[#1D1F22]">
+                              $
+                              {userState === 'subscriber' ? stay.memberFare : stay.standardFare}
+                              /night
+                            </span>
+                            <span className="block text-[11px] text-[#8F6B24]">
+                              {userState === 'subscriber'
+                                ? 'Fixer+ Member Rate'
+                                : `Fixer+ Rate: $${stay.memberFare}/night`}
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedTicket(stay)}
+                            className="px-5 py-2 bg-[#154731] hover:bg-[#0F3524] text-[#FBF9F5] text-xs font-semibold rounded-sm transition-colors"
+                          >
+                            Reserve stay
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+
+                  {bookingMode === 'Cars' &&
+                    CAR_TICKETS.map((car) => (
+                      <div
+                        key={car.id}
+                        className="border border-[#DED8CC] bg-[#FBF9F5] rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                      >
+                        <div className="space-y-1">
+                          <h3 className="font-bold text-sm sm:text-base text-[#1D1F22]">
+                            {car.name}
+                          </h3>
+                          <p className="text-xs text-[#52565E]">{car.location}</p>
+                          <p className="text-xs text-[#8F6B24]">{car.meta}</p>
+                        </div>
+                        <div className="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-[#DED8CC] gap-2">
+                          <div className="sm:text-right">
+                            <span className="text-lg font-bold text-[#1D1F22]">
+                              ${userState === 'subscriber' ? car.memberFare : car.standardFare}
+                            </span>
+                            <span className="block text-[11px] text-[#8F6B24]">
+                              {userState === 'subscriber'
+                                ? 'Fixer+ Member Rate'
+                                : `Fixer+ Rate: $${car.memberFare}`}
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedTicket(car)}
+                            className="px-5 py-2 bg-[#154731] hover:bg-[#0F3524] text-[#FBF9F5] text-xs font-semibold rounded-sm transition-colors"
+                          >
+                            Book transfer
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
+
+              {/* EXPRESS PASSENGER CHECKOUT PANEL (NO LOGIN REQUIRED) */}
+              {selectedTicket && !issuedBooking && (
+                <form
+                  onSubmit={handleIssueTicket}
+                  className="mt-6 pt-5 border-t border-[#DED8CC] space-y-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#8F6B24] block">
+                        Express Checkout · Instant E-Ticket
+                      </span>
+                      <h3 className="font-serif-editorial text-xl font-semibold text-[#1D1F22]">
+                        {bookingMode === 'Flights'
+                          ? `${selectedTicket.airline} (${selectedTicket.flightNo})`
+                          : selectedTicket.name}
+                      </h3>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedTicket(null)}
+                      className="text-xs text-[#52565E] underline hover:text-[#1D1F22]"
+                    >
+                      Back to fares
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                        Full Name (as on passport)
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Tendai Moyo"
+                        value={passengerName}
+                        onChange={(e) => setPassengerName(e.target.value)}
+                        className="w-full px-3 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                        Email for E-Ticket
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="traveller@example.com"
+                        value={passengerEmail}
+                        onChange={(e) => setPassengerEmail(e.target.value)}
+                        className="w-full px-3 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                        Passport / ID Number
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. A0948271"
+                        value={passportNumber}
+                        onChange={(e) => setPassportNumber(e.target.value)}
+                        className="w-full px-3 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="bg-[#F3EFE6] border border-[#DED8CC] rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <p className="text-xs text-[#52565E]">Total due today</p>
+                      <p className="text-2xl font-bold text-[#1D1F22]">
+                        $
+                        {userState === 'subscriber'
+                          ? selectedTicket.memberFare
+                          : selectedTicket.standardFare}
+                      </p>
+                      <p className="text-xs text-[#154731]">
+                        {userState === 'subscriber'
+                          ? 'Fixer+ member rate · $0 booking fee'
+                          : 'Standard rate · Includes taxes & booking fee'}
+                      </p>
+                    </div>
+                    <button
+                      type="submit"
+                      className="px-6 py-3 bg-[#C59B49] hover:bg-[#D5AD5C] text-[#1D1F22] font-bold text-sm rounded-lg transition-colors"
+                    >
+                      Confirm &amp; Issue Ticket
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* POST-BOOKING CONFIRMATION + OPTIONAL SAVE PROMPT (ONLY AFTER BOOKING) */}
+              {issuedBooking && (
+                <div className="mt-6 pt-5 border-t border-[#DED8CC] space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-[#154731] text-[#FBF9F5] flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#154731]">
+                        Confirmed · Reference {issuedBooking.id}
+                      </span>
+                      <h3 className="font-serif-editorial text-xl font-semibold text-[#1D1F22]">
+                        {issuedBooking.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52565E]">
+                        {issuedBooking.dates} · {issuedBooking.details}
+                      </p>
+                    </div>
+                  </div>
+
+                  {userState === 'guest' ? (
+                    <div className="bg-[#F3EFE6] border border-[#C59B49] rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-[#1D1F22]">
+                          Save this trip to your account
+                        </p>
+                        <p className="text-xs text-[#52565E]">
+                          Optional: create a free account to keep your boarding reference and Fixer notes together.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAuthMode('join');
+                          setAuthModalOpen(true);
+                        }}
+                        className="px-4 py-2 bg-[#154731] text-[#FBF9F5] text-xs font-semibold rounded-sm shrink-0 hover:bg-[#0F3524]"
+                      >
+                        Save this trip
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="bg-[#F3EFE6] border border-[#DED8CC] rounded-lg p-3.5 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-[#154731]">
+                        Saved to your account under Saved Trips.
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAccountTab('trips');
+                          setAccountModalOpen(true);
+                        }}
+                        className="text-xs font-semibold text-[#154731] underline"
+                      >
+                        Open Trips
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* YOUR RECENT SEARCHES STRIP (Directly Underneath Booking Card) */}
+            <div className="mt-7 font-sans-ui">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="font-serif-editorial text-lg sm:text-xl font-semibold text-[#1D1F22]">
+                  Your recent searches
+                </h2>
+                <span className="text-xs text-[#52565E]">Tap to load route</span>
+              </div>
+
+              <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
+                {RECENT_SEARCHES.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleSelectRecentSearch(item)}
+                    className="flex-none w-[240px] sm:w-[255px] text-left bg-[#FFFFFF] border border-[#DED8CC] hover:border-[#154731] rounded-xl p-3.5 transition-colors flex items-start gap-3"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-[#F3EFE6] border border-[#DED8CC] flex items-center justify-center shrink-0 text-[#154731] mt-0.5">
+                      <Plane className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-[#1D1F22] truncate">
+                        {item.routeLabel}
+                      </p>
+                      <p className="text-xs text-[#52565E] mt-0.5">{item.dateLabel}</p>
+                      <p className="text-xs font-semibold text-[#8F6B24] mt-1.5">
+                        {item.priceLabel}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. EDITORIAL BRAND STORY & FIXER INTRODUCTION (SECOND SECTION) */}
+        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-6 space-y-6">
+              <p className="font-sans-ui text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-[#8F6B24]">
+                Ghana, from someone who's actually been there
+              </p>
+              <h2 className="font-serif-editorial text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#1D1F22] leading-[1.08] tracking-tight">
+                Talk to someone who's actually been there.
+              </h2>
+              <p className="font-sans-ui text-base sm:text-lg text-[#52565E] leading-relaxed max-w-xl">
+                Travel Fixer pairs you with people who have lived in or travelled Ghana deeply — so you know what to do, what to skip, and what nobody tells you online.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
+                <a
+                  href="#fixers"
+                  className="px-7 py-3.5 bg-[#154731] text-[#FBF9F5] font-sans-ui text-sm font-medium rounded-sm text-center hover:bg-[#0F3524] transition-colors"
+                >
+                  Meet the Fixers
+                </a>
+                <a
+                  href="#how-it-works"
+                  className="px-7 py-3.5 border border-[#1D1F22] text-[#1D1F22] font-sans-ui text-sm font-medium rounded-sm text-center hover:bg-[#F3EFE6] transition-colors"
+                >
+                  How it works
+                </a>
+              </div>
+
+              <p className="font-sans-ui text-xs text-[#52565E] pt-1 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#154731] shrink-0" />
+                <span>Verified people. Real experience. No stock advice.</span>
+              </p>
+            </div>
+
+            <div className="lg:col-span-6">
+              <figure className="border border-[#DED8CC] bg-[#F3EFE6] p-3 sm:p-4 rounded-sm">
+                <div className="aspect-[4/5] w-full overflow-hidden bg-[#DED8CC]">
+                  <FixerPortrait
+                    src="https://images.unsplash.com/photo-1531123897727-8f129e1bfd8c?auto=format&fit=crop&w=1000&q=85"
+                    alt="Ama, 34 — Osu, Accra Verified Fixer"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <figcaption className="pt-3.5 pb-1 px-1 flex flex-wrap items-center justify-between gap-2 text-xs font-sans-ui">
+                  <span className="font-semibold text-[#1D1F22]">
+                    Ama, 34 · Osu, Accra · Verified Fixer
+                  </span>
+                  <span className="text-[#8F6B24] font-medium">34 years in Accra</span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. THE THREE DOORS */}
+        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Door 1: BOOK */}
+            <div className="bg-[#FBF9F5] border border-[#DED8CC] p-7 sm:p-8 rounded-sm flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-sans-ui font-bold uppercase tracking-[0.16em] text-[#8F6B24] block mb-3">
+                  01 · Book
+                </span>
+                <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22] mb-3">
+                  Instant tickets &amp; stays
+                </h3>
+                <p className="font-sans-ui text-sm text-[#52565E] leading-relaxed mb-8">
+                  Just need a ticket? Search flights and stays above — no account required.
+                </p>
+              </div>
+              <a
+                href="#book-tickets"
+                className="inline-flex items-center gap-2 text-sm font-sans-ui font-semibold text-[#154731] hover:text-[#0F3524] transition-colors"
+              >
+                <span>Search tickets ↑</span>
+              </a>
+            </div>
+
+            {/* Door 2: JOIN FREE */}
+            <div className="bg-[#FBF9F5] border border-[#DED8CC] p-7 sm:p-8 rounded-sm flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-sans-ui font-bold uppercase tracking-[0.16em] text-[#8F6B24] block mb-3">
+                  02 · Join Free
+                </span>
+                <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22] mb-3">
+                  Local guides &amp; stories
+                </h3>
+                <p className="font-sans-ui text-sm text-[#52565E] leading-relaxed mb-8">
+                  Read Fixer stories, city guides and community advice. Free forever.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('join');
+                  setAuthModalOpen(true);
+                }}
+                className="inline-flex items-center gap-2 text-sm font-sans-ui font-semibold text-[#154731] hover:text-[#0F3524] transition-colors text-left"
+              >
+                <span>Join free</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Door 3: SUBSCRIBE */}
+            <div className="bg-[#F3EFE6] border-2 border-[#C59B49] p-7 sm:p-8 rounded-sm flex flex-col justify-between relative">
+              <span className="absolute -top-3 right-6 bg-[#C59B49] text-[#1D1F22] font-sans-ui text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-sm">
+                Most popular
+              </span>
+              <div>
+                <span className="text-[11px] font-sans-ui font-bold uppercase tracking-[0.16em] text-[#154731] block mb-3">
+                  03 · Subscribe
+                </span>
+                <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22] mb-3">
+                  Talk to a Fixer monthly
+                </h3>
+                <p className="font-sans-ui text-sm text-[#1D1F22]/85 leading-relaxed mb-8">
+                  Unlock a monthly call with a Fixer, member fares and zero fees.
+                </p>
+              </div>
+              <a
+                href="#pricing"
+                className="inline-flex items-center gap-2 text-sm font-sans-ui font-semibold text-[#154731] hover:text-[#0F3524] transition-colors"
+              >
+                <span>See Fixer+</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. MEET THE FIXERS (6 VERIFIED FIXERS) */}
+        <section id="fixers" className="py-20 border-t border-[#DED8CC] bg-[#FBF9F5]">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="max-w-2xl mb-12">
+              <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24] mb-3">
+                The Directory
+              </p>
+              <h2 className="font-serif-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1D1F22] mb-4">
+                Meet the Fixers
+              </h2>
+              <p className="font-sans-ui text-base text-[#52565E]">
+                Real people with years on the ground across Ghana. Pick someone who knows the way you travel.
+              </p>
+            </div>
+
+            <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 md:pb-0">
+              {FIXERS_DATA.map((fixer) => (
+                <article
+                  key={fixer.id}
+                  className="flex-none w-[290px] sm:w-[320px] md:w-auto snap-start bg-[#FBF9F5] border border-[#DED8CC] p-5 rounded-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="aspect-[4/4] w-full overflow-hidden bg-[#F3EFE6] mb-5 border border-[#DED8CC]">
+                      <FixerPortrait
+                        src={fixer.img}
+                        alt={`${fixer.name}, ${fixer.age} — ${fixer.city}`}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+
+                    <div className="flex items-baseline justify-between gap-2 mb-1">
+                      <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22]">
+                        {fixer.name}, {fixer.age}
+                      </h3>
+                      <span className="font-sans-ui text-xs font-semibold text-[#8F6B24]">
+                        {fixer.years}
+                      </span>
+                    </div>
+
+                    <p className="font-sans-ui text-xs uppercase tracking-wider text-[#52565E] font-medium mb-4">
+                      {fixer.city}
+                    </p>
+
+                    <blockquote className="font-serif-editorial italic text-lg text-[#1D1F22] leading-snug mb-6">
+                      “{fixer.quote}”
+                    </blockquote>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleTalkToFixer(fixer)}
+                    className="w-full py-3 px-4 bg-[#154731] text-[#FBF9F5] font-sans-ui text-sm font-medium rounded-sm hover:bg-[#0F3524] transition-colors flex items-center justify-center gap-2"
+                  >
+                    {userState !== 'subscriber' && <Lock className="w-3.5 h-3.5 text-[#C59B49]" />}
+                    <span>Talk to {fixer.name}</span>
+                  </button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 6. HOW IT WORKS */}
+        <section id="how-it-works" className="bg-[#F3EFE6] border-y border-[#DED8CC] py-20">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="max-w-2xl mb-14">
+              <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24] mb-3">
+                How it Works
+              </p>
+              <h2 className="font-serif-editorial text-3xl sm:text-4xl font-semibold text-[#1D1F22]">
+                Four steps from ticket to local clarity.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  num: '01',
+                  icon: Plane,
+                  title: 'Book or pick a place.',
+                  desc: 'Lock in your flight immediately or pick the Ghanaian city you want to explore.'
+                },
+                {
+                  num: '02',
+                  icon: PhoneCall,
+                  title: 'Talk to a Fixer.',
+                  desc: 'Have a candid 30-minute call. Ask what to skip, where to stay, and what it really costs.'
+                },
+                {
+                  num: '03',
+                  icon: FileText,
+                  title: 'Get your Trip Brief.',
+                  desc: 'Receive a written, personalised brief with vetted driver contacts, neighbourhood notes, and money advice.'
+                },
+                {
+                  num: '04',
+                  icon: Compass,
+                  title: 'Travel properly.',
+                  desc: 'Land with a clear plan, member fares, and direct contacts you can rely on.'
+                }
+              ].map((step) => {
+                const StepIcon = step.icon;
+                return (
+                  <div key={step.num} className="bg-[#FBF9F5] border border-[#DED8CC] p-7 rounded-sm">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="font-serif-editorial text-3xl font-semibold text-[#154731]">
+                        {step.num}
+                      </span>
+                      <StepIcon className="w-5 h-5 text-[#8F6B24]" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="font-serif-editorial text-xl font-semibold text-[#1D1F22] mb-2.5">
+                      {step.title}
+                    </h3>
+                    <p className="font-sans-ui text-sm text-[#52565E] leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* 7. THE LOCKED SECTION (KEY CONVERSION DRIVER) */}
+        <section className="py-20 bg-[#FBF9F5] border-b border-[#DED8CC]">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+              <div>
+                <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24] mb-3">
+                  Field Notes · Accra
+                </p>
+                <h2 className="font-serif-editorial text-3xl sm:text-4xl font-semibold text-[#1D1F22]">
+                  Three things only a local would tell you about Accra
+                </h2>
+              </div>
+              {userState !== 'guest' && (
+                <span className="inline-flex items-center gap-1.5 text-xs font-sans-ui font-semibold text-[#154731] bg-[#F3EFE6] border border-[#DED8CC] px-3 py-1.5 rounded-sm self-start">
+                  <Check className="w-4 h-4 text-[#154731]" />
+                  Unlocked with your member account
+                </span>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {LOCKED_ACCRA_SECRETS.map((item, idx) => (
+                <article
+                  key={item.id}
+                  className="bg-[#F3EFE6] border border-[#DED8CC] p-7 rounded-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="font-sans-ui text-xs font-bold uppercase tracking-widest text-[#8F6B24] block mb-2">
+                      Note 0{idx + 1}
+                    </span>
+                    <h3 className="font-serif-editorial text-xl font-semibold text-[#1D1F22] mb-4 leading-snug">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  {userState === 'guest' ? (
+                    <div className="relative mt-2 pt-3 border-t border-[#DED8CC]">
+                      <p
+                        aria-hidden="true"
+                        className="font-sans-ui text-sm text-[#52565E] leading-relaxed blur-[5px] select-none"
+                      >
+                        {item.unlockedText}
+                      </p>
+
+                      <div className="inset-0 absolute flex flex-col items-center justify-center bg-[#F3EFE6]/85 p-4 text-center">
+                        <div className="w-10 h-10 rounded-full bg-[#FBF9F5] border border-[#C59B49] flex items-center justify-center mb-3">
+                          <Lock className="w-4 h-4 text-[#154731]" />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAuthMode('join');
+                            setAuthModalOpen(true);
+                          }}
+                          className="px-4 py-2.5 bg-[#154731] text-[#FBF9F5] font-sans-ui text-xs font-semibold rounded-sm hover:bg-[#0F3524] transition-colors"
+                        >
+                          Unlock with a free account.
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mt-2 pt-3 border-t border-[#DED8CC]">
+                      <p className="font-sans-ui text-sm text-[#1D1F22] leading-relaxed">
+                        {item.unlockedText}
+                      </p>
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 8. CITY GUIDES */}
+        <section id="city-guides" className="py-20 bg-[#FBF9F5]">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="max-w-2xl mb-12">
+              <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24] mb-3">
+                Destinations · Ghana
+              </p>
+              <h2 className="font-serif-editorial text-3xl sm:text-4xl font-semibold text-[#1D1F22] mb-3">
+                City Guides
+              </h2>
+              <p className="font-sans-ui text-base text-[#52565E]">
+                Honest orientation notes written by people who live there. Select a city to read Fixer notes.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {CITY_GUIDES_DATA.map((city) => (
+                <button
+                  key={city.id}
+                  type="button"
+                  onClick={() => setSelectedCityGuide(city)}
+                  className="text-left bg-[#FBF9F5] border border-[#DED8CC] hover:border-[#154731] p-6 rounded-sm transition-colors flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-sans-ui text-xs font-semibold text-[#154731] bg-[#F3EFE6] px-2.5 py-1 rounded-sm">
+                        {city.fixersCount} Fixers available
+                      </span>
+                      <ChevronRight className="w-4 h-4 text-[#52565E] group-hover:text-[#154731] transition-colors" />
+                    </div>
+                    <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22] mb-3">
+                      {city.name}
+                    </h3>
+                    <p className="font-serif-editorial italic text-base text-[#52565E] leading-relaxed mb-6">
+                      “{city.quote}”
+                    </p>
+                  </div>
+                  <span className="font-sans-ui text-xs font-semibold uppercase tracking-wider text-[#8F6B24] group-hover:text-[#154731]">
+                    Read {city.name} notes →
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 9. PRICING */}
+        <section id="pricing" className="py-20 bg-[#F3EFE6] border-y border-[#DED8CC]">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+              <div>
+                <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24] mb-3">
+                  Membership
+                </p>
+                <h2 className="font-serif-editorial text-3xl sm:text-4xl font-semibold text-[#1D1F22]">
+                  Straightforward membership.
+                </h2>
+              </div>
+
+              {/* Monthly / Annual Toggle */}
+              <div className="inline-flex items-center bg-[#FBF9F5] border border-[#DED8CC] p-1 rounded-sm font-sans-ui text-sm self-start">
+                <button
+                  type="button"
+                  onClick={() => setAnnualBilling(false)}
+                  className={`px-4 py-2 rounded-sm font-medium transition-colors ${
+                    !annualBilling
+                      ? 'bg-[#1D1F22] text-[#FBF9F5]'
+                      : 'text-[#52565E] hover:text-[#1D1F22]'
+                  }`}
+                >
+                  Monthly
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAnnualBilling(true)}
+                  className={`px-4 py-2 rounded-sm font-medium transition-colors flex items-center gap-2 ${
+                    annualBilling
+                      ? 'bg-[#1D1F22] text-[#FBF9F5]'
+                      : 'text-[#52565E] hover:text-[#1D1F22]'
+                  }`}
+                >
+                  <span>Annual</span>
+                  <span className="bg-[#C59B49] text-[#1D1F22] text-[11px] font-bold px-2 py-0.5 rounded-sm">
+                    Save 28%
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+              {/* Tier 1: FREE */}
+              <div className="bg-[#FBF9F5] border border-[#DED8CC] p-8 rounded-sm flex flex-col justify-between">
+                <div>
+                  <span className="font-sans-ui text-xs font-bold uppercase tracking-widest text-[#52565E] block mb-2">
+                    FREE
+                  </span>
+                  <div className="flex items-baseline gap-1 mb-4">
+                    <span className="font-serif-editorial text-4xl font-semibold text-[#1D1F22]">
+                      $0
+                    </span>
+                    <span className="font-sans-ui text-sm text-[#52565E]">forever</span>
+                  </div>
+                  <p className="font-sans-ui text-sm text-[#52565E] leading-relaxed mb-6">
+                    Read everything, book at standard rates, save trips, price alerts.
+                  </p>
+                  <ul className="space-y-3 font-sans-ui text-sm text-[#1D1F22] border-t border-[#DED8CC] pt-6 mb-8">
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>All Accra, Kumasi, Cape Coast &amp; Tamale guides</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Book flights &amp; hotels at standard rates</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Save trips &amp; route price alerts</span>
+                    </li>
+                  </ul>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('join');
+                    setAuthModalOpen(true);
+                  }}
+                  className="w-full py-3.5 border border-[#1D1F22] text-[#1D1F22] font-sans-ui text-sm font-semibold rounded-sm hover:bg-[#F3EFE6] transition-colors"
+                >
+                  Join free
+                </button>
+              </div>
+
+              {/* Tier 2: FIXER+ */}
+              <div className="bg-[#FFFFFF] border-2 border-[#C59B49] p-8 rounded-sm flex flex-col justify-between relative">
+                <span className="absolute -top-3.5 left-8 bg-[#C59B49] text-[#1D1F22] font-sans-ui text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-sm">
+                  Most popular
+                </span>
+                <div>
+                  <span className="font-sans-ui text-xs font-bold uppercase tracking-widest text-[#154731] block mb-2">
+                    FIXER+
+                  </span>
+                  <div className="flex items-baseline gap-1.5 mb-4">
+                    <span className="font-serif-editorial text-4xl font-semibold text-[#1D1F22]">
+                      {annualBilling ? '$129' : '$15'}
+                    </span>
+                    <span className="font-sans-ui text-sm text-[#52565E]">
+                      {annualBilling ? '/yr' : '/mo'}
+                    </span>
+                  </div>
+                  <p className="font-sans-ui text-sm text-[#1D1F22]/85 leading-relaxed mb-6">
+                    1 Fixer call per month, member-only fares, zero booking fees, priority matching.
+                  </p>
+                  <ul className="space-y-3 font-sans-ui text-sm text-[#1D1F22] border-t border-[#DED8CC] pt-6 mb-8">
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>1 thirty-minute Fixer video call every month</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Written personalised Trip Brief after every call</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Member-only fares &amp; zero booking fees</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Priority Fixer matching</span>
+                    </li>
+                  </ul>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setUserState('subscriber');
+                    setAccountTab('calls');
+                    setAccountModalOpen(true);
+                  }}
+                  className="w-full py-3.5 bg-[#154731] text-[#FBF9F5] font-sans-ui text-sm font-semibold rounded-sm hover:bg-[#0F3524] transition-colors"
+                >
+                  Start Fixer+
+                </button>
+              </div>
+
+              {/* Tier 3: FIXER PRO */}
+              <div className="bg-[#FBF9F5] border border-[#DED8CC] p-8 rounded-sm flex flex-col justify-between">
+                <div>
+                  <span className="font-sans-ui text-xs font-bold uppercase tracking-widest text-[#8F6B24] block mb-2">
+                    FIXER PRO
+                  </span>
+                  <div className="flex items-baseline gap-1.5 mb-4">
+                    <span className="font-serif-editorial text-4xl font-semibold text-[#1D1F22]">
+                      $399
+                    </span>
+                    <span className="font-sans-ui text-sm text-[#52565E]">/yr</span>
+                  </div>
+                  <p className="font-sans-ui text-sm text-[#52565E] leading-relaxed mb-6">
+                    Unlimited calls, itinerary built for you, priority everything.
+                  </p>
+                  <ul className="space-y-3 font-sans-ui text-sm text-[#1D1F22] border-t border-[#DED8CC] pt-6 mb-8">
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Unlimited Fixer calls across all regions</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Day-by-day custom itinerary built for you</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Direct vetted driver &amp; local introductions</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                      <span>Priority support throughout your stay</span>
+                    </li>
+                  </ul>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setUserState('subscriber');
+                    setAccountTab('briefs');
+                    setAccountModalOpen(true);
+                  }}
+                  className="w-full py-3.5 border border-[#1D1F22] text-[#1D1F22] font-sans-ui text-sm font-semibold rounded-sm hover:bg-[#FFFFFF] transition-colors"
+                >
+                  Choose Fixer Pro
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 10. TRIP BRIEF SHOWCASE */}
+        <section className="py-20 bg-[#FBF9F5]">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-5 space-y-5">
+                <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24]">
+                  The Trip Brief
+                </p>
+                <h2 className="font-serif-editorial text-3xl sm:text-4xl font-semibold text-[#1D1F22] leading-tight">
+                  Every conversation ends with something you can actually use.
+                </h2>
+                <p className="font-sans-ui text-base text-[#52565E] leading-relaxed">
+                  Within 24 hours of your call, your Fixer writes a structured, plain-English Trip Brief tailored to your dates, budget, and pace—no vague lists, just actionable instructions.
+                </p>
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => handleTalkToFixer(FIXERS_DATA[0])}
+                    className="px-6 py-3 bg-[#154731] text-[#FBF9F5] font-sans-ui text-sm font-medium rounded-sm hover:bg-[#0F3524] transition-colors"
+                  >
+                    Talk to Ama for your brief
+                  </button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7">
+                <div className="bg-[#FFFFFF] border border-[#DED8CC] p-6 sm:p-10 rounded-sm">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#DED8CC]">
+                    <TravelFixerLogo variant="light" className="h-11 w-auto self-start" />
+                    <div className="sm:text-right font-sans-ui">
+                      <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8F6B24] block">
+                        ACCRA &amp; COAST FIELD BRIEF — PREPARED BY AMA
+                      </span>
+                      <span className="text-xs text-[#52565E]">10-Day Route · Written Dossier</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 font-sans-ui">
+                    <div className="border-b sm:border-b-0 sm:border-r border-[#DED8CC] pb-5 sm:pb-0 sm:pr-6">
+                      <h3 className="font-serif-editorial text-lg font-semibold text-[#154731] mb-2">
+                        What we'd skip
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52565E] leading-relaxed">
+                        Skip the unmarked taxis outside arrivals (often triple the fair rate) and skip weekend afternoon visits to the Arts Centre. Go Tuesday at 10 AM instead.
+                      </p>
+                    </div>
+
+                    <div className="pb-5 sm:pb-0 border-b sm:border-b-0 border-[#DED8CC]">
+                      <h3 className="font-serif-editorial text-lg font-semibold text-[#154731] mb-2">
+                        How to get around
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52565E] leading-relaxed">
+                        Use Bolt for short hops in Osu and Labone, but book a dedicated daily driver (650 GHS/day) for your Cape Coast run. Trotro rules included on page 2.
+                      </p>
+                    </div>
+
+                    <div className="border-b sm:border-b-0 sm:border-r border-[#DED8CC] pb-5 sm:pb-0 sm:pr-6 sm:pt-4 sm:border-t">
+                      <h3 className="font-serif-editorial text-lg font-semibold text-[#154731] mb-2">
+                        People to call
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52565E] leading-relaxed">
+                        • Kweku (Vetted Accra &amp; Cape Coast driver)
+                        <br />
+                        • Auntie Efia (Tailor in Osu — 48hr turnaround)
+                        <br />• MTN Desk Contact, Terminal 3 Arrivals
+                      </p>
+                    </div>
+
+                    <div className="sm:pt-4 sm:border-t border-[#DED8CC]">
+                      <h3 className="font-serif-editorial text-lg font-semibold text-[#154731] mb-2">
+                        Money &amp; safety
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52565E] leading-relaxed">
+                        Stanbic ATM at Marina Mall takes foreign Visa/Mastercard reliably. Keep 200 GHS in small bills; stick to well-lit main streets in Osu after 11 PM.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 11. BECOME A FIXER */}
+        <section className="bg-[#154731] text-[#FBF9F5] py-20 border-y border-[#0F3524]">
+          <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center space-y-6">
+            <span className="font-sans-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C59B49] block">
+              Join the Roster
+            </span>
+            <h2 className="font-serif-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#FBF9F5] leading-tight">
+              Loved Ghana? Tell someone how to do it properly.
+            </h2>
+            <p className="font-sans-ui text-base sm:text-lg text-[#FBF9F5]/85 max-w-xl mx-auto">
+              Register your story. Share what you know. Get paid for it.
+            </p>
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setFixerAppSubmitted(false);
+                  setApplyFixerOpen(true);
+                }}
+                className="px-8 py-4 bg-[#C59B49] text-[#1D1F22] font-sans-ui text-sm font-bold rounded-sm hover:bg-[#D8B365] transition-colors"
+              >
+                Apply to be a Fixer
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* 12. COMMUNITY */}
+        <section className="py-20 bg-[#FBF9F5]">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+              <div>
+                <p className="font-sans-ui text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6B24] mb-3">
+                  Traveller Notes
+                </p>
+                <h2 className="font-serif-editorial text-3xl sm:text-4xl font-semibold text-[#1D1F22]">
+                  From the community
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCommunityModalOpen(true)}
+                className="font-sans-ui text-sm font-semibold text-[#154731] hover:text-[#0F3524] transition-colors self-start"
+              >
+                Read the community →
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {COMMUNITY_POSTS.map((post) => (
+                <article
+                  key={post.id}
+                  className="bg-[#F3EFE6] border border-[#DED8CC] p-7 rounded-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-sans-ui text-[#52565E] mb-3">
+                      <span className="font-semibold text-[#8F6B24]">{post.city}</span>
+                      <span>{post.topic}</span>
+                    </div>
+                    <h3 className="font-serif-editorial text-xl font-semibold text-[#1D1F22] mb-3 leading-snug">
+                      {post.title}
+                    </h3>
+                    <p className="font-sans-ui text-sm text-[#52565E] leading-relaxed mb-6">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-[#DED8CC] flex items-center justify-between font-sans-ui text-xs">
+                    <span className="font-semibold text-[#1D1F22]">{post.author}</span>
+                    <button
+                      type="button"
+                      onClick={() => setCommunityModalOpen(true)}
+                      className="text-[#154731] font-semibold hover:underline"
+                    >
+                      Read thread
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* 13. FOOTER */}
+      <footer className="bg-[#1D1F22] text-[#FBF9F5] pt-16 pb-28 md:pb-14 border-t border-[#32363B] font-sans-ui">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-[#32363B]">
+            <div className="lg:col-span-4 space-y-4">
+              <TravelFixerLogo variant="dark" className="h-14 w-auto" />
+              <p className="text-sm text-[#B0B5BA] leading-relaxed max-w-xs">
+                Real people who know the place. Straightforward ticket bookings behind it.
+              </p>
+
+              <div className="pt-3">
+                <label
+                  htmlFor="footer-newsletter"
+                  className="block text-xs font-semibold uppercase tracking-wider text-[#C59B49] mb-2"
+                >
+                  Monthly Ghana Field Notes
+                </label>
+                {newsletterSubscribed ? (
+                  <p className="text-xs text-[#C59B49] bg-[#26292E] border border-[#3E4349] px-3.5 py-2.5 rounded-sm">
+                    Thank you — you're on the monthly dispatch list.
+                  </p>
+                ) : (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (newsletterEmail.trim()) setNewsletterSubscribed(true);
+                    }}
+                    className="flex max-w-sm"
+                  >
+                    <input
+                      id="footer-newsletter"
+                      type="email"
+                      required
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="Your email address"
+                      className="w-full px-3.5 py-2.5 bg-[#26292E] border border-[#3E4349] text-sm text-[#FBF9F5] placeholder-[#B0B5BA] rounded-l-sm outline-none focus:border-[#C59B49]"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2.5 bg-[#C59B49] text-[#1D1F22] text-xs font-bold uppercase tracking-wider rounded-r-sm hover:bg-[#D8B365] transition-colors shrink-0"
+                    >
+                      Join
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+
+            <div className="lg:col-span-2 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C59B49]">
+                Destinations
+              </h4>
+              <ul className="space-y-2.5 text-sm text-[#B0B5BA]">
+                {CITY_GUIDES_DATA.map((c) => (
+                  <li key={c.id}>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCityGuide(c)}
+                      className="hover:text-[#FBF9F5] transition-colors"
+                    >
+                      {c.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C59B49]">
+                Fixers
+              </h4>
+              <ul className="space-y-2.5 text-sm text-[#B0B5BA]">
+                <li>
+                  <a href="#fixers" className="hover:text-[#FBF9F5] transition-colors">
+                    Meet the Fixers
+                  </a>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFixerAppSubmitted(false);
+                      setApplyFixerOpen(true);
+                    }}
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Become a Fixer
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAccountTab('briefs');
+                      setAccountModalOpen(true);
+                    }}
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Trip Briefs
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => setCommunityModalOpen(true)}
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Community
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C59B49]">
+                Company
+              </h4>
+              <ul className="space-y-2.5 text-sm text-[#B0B5BA]">
+                <li>
+                  <a href="#book-tickets" className="hover:text-[#FBF9F5] transition-colors">
+                    Book Tickets
+                  </a>
+                </li>
+                <li>
+                  <a href="#how-it-works" className="hover:text-[#FBF9F5] transition-colors">
+                    How it Works
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className="hover:text-[#FBF9F5] transition-colors">
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:hello@travelfixer.co"
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C59B49]">
+                Legal
+              </h4>
+              <ul className="space-y-2.5 text-sm text-[#B0B5BA]">
+                <li>
+                  <a
+                    href="#footer-legal"
+                    onClick={(e) => e.preventDefault()}
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#footer-legal"
+                    onClick={(e) => e.preventDefault()}
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Terms
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#footer-legal"
+                    onClick={(e) => e.preventDefault()}
+                    className="hover:text-[#FBF9F5] transition-colors"
+                  >
+                    Booking Conditions
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            id="footer-legal"
+            className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#B0B5BA]"
+          >
+            <p>
+              © {new Date().getFullYear()} Travel Fixer · Part of the Fixer Venture Group. All rights reserved.
+            </p>
+            <div className="flex items-center gap-5">
+              <a href="#instagram" onClick={(e) => e.preventDefault()} className="hover:text-[#C59B49]">
+                Instagram
+              </a>
+              <a href="#x" onClick={(e) => e.preventDefault()} className="hover:text-[#C59B49]">
+                X / Twitter
+              </a>
+              <a href="#linkedin" onClick={(e) => e.preventDefault()} className="hover:text-[#C59B49]">
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* MOBILE BOTTOM NAVIGATION BAR + QUICK "ASK A FIXER..." PILL */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-30 px-3 pb-3 pt-1.5 bg-[#FBF9F5] border-t border-[#DED8CC] font-sans-ui space-y-2">
+        {/* Quick "Ask a Fixer..." pill bar above nav */}
+        <button
+          type="button"
+          onClick={() => handleTalkToFixer(FIXERS_DATA[0])}
+          className="w-full py-2 px-3.5 bg-[#F3EFE6] border border-[#DED8CC] rounded-full flex items-center justify-between text-left"
+        >
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-[#1D1F22]">
+            <Sparkles className="w-3.5 h-3.5 text-[#8F6B24]" />
+            <span>Ask a Fixer about Accra, Kumasi, or flights...</span>
+          </span>
+          <span className="text-[11px] font-semibold text-[#154731]">Ask →</span>
+        </button>
+
+        {/* 4 Clean Navigation Tabs: Search | Fixers | Trips | Profile */}
+        <nav
+          aria-label="Mobile bottom navigation"
+          className="grid grid-cols-4 bg-[#FFFFFF] border border-[#DED8CC] rounded-full p-1"
+        >
+          <a
+            href="#book-tickets"
+            className="flex flex-col items-center justify-center py-1.5 rounded-full bg-[#F3EFE6] text-[#154731]"
+          >
+            <Search className="w-4 h-4" />
+            <span className="text-[10px] font-bold mt-0.5">Search</span>
+          </a>
+
+          <a
+            href="#fixers"
+            className="flex flex-col items-center justify-center py-1.5 rounded-full text-[#52565E] hover:text-[#1D1F22]"
+          >
+            <Compass className="w-4 h-4" />
+            <span className="text-[10px] font-semibold mt-0.5">Fixers</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={() => {
+              setAccountTab('trips');
+              setAccountModalOpen(true);
+            }}
+            className="flex flex-col items-center justify-center py-1.5 rounded-full text-[#52565E] hover:text-[#1D1F22]"
+          >
+            <Bookmark className="w-4 h-4" />
+            <span className="text-[10px] font-semibold mt-0.5">Trips</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              if (userState === 'guest') {
+                setAuthMode('join');
+                setAuthModalOpen(true);
+              } else {
+                setAccountModalOpen(true);
+              }
+            }}
+            className="flex flex-col items-center justify-center py-1.5 rounded-full text-[#52565E] hover:text-[#1D1F22]"
+          >
+            <User className="w-4 h-4" />
+            <span className="text-[10px] font-semibold mt-0.5">Profile</span>
+          </button>
+        </nav>
+      </div>
+
+      {/* === MODAL 1: TALK TO A FIXER === */}
+      {talkModalFixer && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D1F22]/75"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-[#FFFFFF] border border-[#DED8CC] w-full max-w-md p-6 sm:p-8 rounded-sm relative font-sans-ui">
+            <button
+              type="button"
+              onClick={() => setTalkModalFixer(null)}
+              className="absolute top-4 right-4 p-2 text-[#52565E] hover:text-[#1D1F22]"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {userState !== 'subscriber' ? (
+              <div className="text-center space-y-4 pt-2">
+                <div className="w-11 h-11 rounded-full bg-[#F3EFE6] border border-[#C59B49] flex items-center justify-center mx-auto">
+                  <Lock className="w-5 h-5 text-[#154731]" />
+                </div>
+                <h3 className="font-serif-editorial text-3xl font-semibold text-[#1D1F22]">
+                  {userState === 'guest'
+                    ? 'Free to join. Subscribe to talk.'
+                    : 'Subscribe to Fixer+ to talk.'}
+                </h3>
+                <p className="text-sm text-[#52565E] leading-relaxed">
+                  You selected{' '}
+                  <strong className="text-[#1D1F22]">
+                    {talkModalFixer.name} ({talkModalFixer.city})
+                  </strong>
+                  . Join free to unlock local Accra field notes, or subscribe to Fixer+ for a monthly 30-minute video call and personalised Trip Brief.
+                </p>
+                <div className="pt-3 flex flex-col gap-3">
+                  {userState === 'guest' && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setTalkModalFixer(null);
+                        setAuthMode('join');
+                        setAuthModalOpen(true);
+                      }}
+                      className="w-full py-3 border border-[#1D1F22] text-[#1D1F22] text-sm font-semibold rounded-sm hover:bg-[#F3EFE6]"
+                    >
+                      Join free
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUserState('subscriber');
+                    }}
+                    className="w-full py-3.5 bg-[#154731] text-[#FBF9F5] text-sm font-semibold rounded-sm hover:bg-[#0F3524]"
+                  >
+                    Subscribe to Fixer+ ($15/mo)
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-[#8F6B24] block mb-1">
+                  Fixer+ Member Call
+                </span>
+                <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22] mb-2">
+                  Talk to {talkModalFixer.name}
+                </h3>
+                <p className="text-xs text-[#52565E] mb-5">
+                  30-minute video call · Includes written Trip Brief within 24 hours
+                </p>
+
+                {callBookedBanner ? (
+                  <div className="bg-[#F3EFE6] border border-[#154731] p-4 rounded-sm space-y-3">
+                    <p className="text-sm font-semibold text-[#154731]">
+                      Call scheduled with {talkModalFixer.name}.
+                    </p>
+                    <p className="text-xs text-[#52565E]">
+                      We've added this session to My Fixer Calls in your account.
+                    </p>
+                    <div className="flex gap-3 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setTalkModalFixer(null);
+                          setAccountTab('calls');
+                          setAccountModalOpen(true);
+                        }}
+                        className="px-4 py-2 bg-[#154731] text-[#FBF9F5] text-xs font-semibold rounded-sm"
+                      >
+                        View in My Account
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setTalkModalFixer(null)}
+                        className="px-4 py-2 border border-[#1D1F22] text-xs font-semibold rounded-sm"
+                      >
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleConfirmFixerCall} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                        Choose a time slot
+                      </label>
+                      <select
+                        value={callDate}
+                        onChange={(e) => setCallDate(e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-[#F3EFE6] border border-[#DED8CC] rounded-sm text-sm"
+                      >
+                        <option>Thursday, 19 Nov 2026 · 18:00 GMT</option>
+                        <option>Saturday, 21 Nov 2026 · 10:30 GMT</option>
+                        <option>Monday, 23 Nov 2026 · 19:00 GMT</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                        What do you want to cover?
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={callNotes}
+                        onChange={(e) => setCallNotes(e.target.value)}
+                        placeholder={`e.g. Travelling to ${talkModalFixer.city} for 8 days, need neighbourhood advice and a vetted driver.`}
+                        className="w-full px-3.5 py-2.5 bg-[#FBF9F5] border border-[#DED8CC] rounded-sm text-sm"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-3.5 bg-[#154731] text-[#FBF9F5] text-sm font-semibold rounded-sm hover:bg-[#0F3524]"
+                    >
+                      Confirm 30-minute call
+                    </button>
+                  </form>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* === MODAL 2: AUTH MODAL === */}
+      {authModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D1F22]/75"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-[#FFFFFF] border border-[#DED8CC] w-full max-w-md p-6 sm:p-8 rounded-sm relative font-sans-ui">
+            <button
+              type="button"
+              onClick={() => setAuthModalOpen(false)}
+              className="absolute top-4 right-4 p-2 text-[#52565E] hover:text-[#1D1F22]"
+              aria-label="Close authentication modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="mb-6">
+              <TravelFixerLogo variant="light" className="h-11 w-auto mb-4" />
+              <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22]">
+                {authMode === 'join' ? 'Create your free account' : 'Sign in to Travel Fixer'}
+              </h3>
+              <p className="text-xs text-[#52565E] mt-1">
+                {authMode === 'join'
+                  ? 'Unlock local Accra notes, save trips, and access community discussions.'
+                  : 'Welcome back. Access your saved trips and Trip Briefs.'}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleAuthSuccess('free')}
+              className="w-full py-3 px-4 bg-[#F3EFE6] border border-[#DED8CC] hover:border-[#1D1F22] rounded-sm text-sm font-semibold text-[#1D1F22] flex items-center justify-center gap-2.5 mb-4 transition-colors"
+            >
+              <span className="w-5 h-5 rounded-full bg-[#154731] text-[#FBF9F5] text-xs font-bold flex items-center justify-center">
+                G
+              </span>
+              <span>Continue with Google</span>
+            </button>
+
+            <div className="relative my-4 text-center">
+              <div className="border-t border-[#DED8CC]" />
+              <span className="bg-[#FFFFFF] px-3 text-[11px] uppercase tracking-wider text-[#52565E] relative -top-2.5">
+                or with email
+              </span>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAuthSuccess('free');
+              }}
+              className="space-y-3.5"
+            >
+              <div>
+                <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={authEmail}
+                  onChange={(e) => setAuthEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full px-3.5 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  placeholder="••••••••"
+                  className="w-full px-3.5 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-[#154731] text-[#FBF9F5] text-sm font-semibold rounded-sm hover:bg-[#0F3524] transition-colors"
+              >
+                {authMode === 'join' ? 'Join free' : 'Sign in'}
+              </button>
+            </form>
+
+            <div className="mt-4 pt-4 border-t border-[#DED8CC] flex items-center justify-between text-xs">
+              <button
+                type="button"
+                onClick={() => setAuthMode(authMode === 'join' ? 'signin' : 'join')}
+                className="text-[#52565E] hover:text-[#1D1F22] underline"
+              >
+                {authMode === 'join'
+                  ? 'Already have an account? Sign in'
+                  : 'Need an account? Join free'}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleAuthSuccess('subscriber')}
+                className="font-semibold text-[#8F6B24] hover:underline"
+              >
+                Demo Fixer+ Sign in →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* === MODAL 3: ACCOUNT WORKSPACE === */}
+      {accountModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D1F22]/75"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-[#FFFFFF] border border-[#DED8CC] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 rounded-sm relative font-sans-ui">
+            <button
+              type="button"
+              onClick={() => setAccountModalOpen(false)}
+              className="absolute top-4 right-4 p-2 text-[#52565E] hover:text-[#1D1F22]"
+              aria-label="Close My Account"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-5 border-b border-[#DED8CC]">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-[#8F6B24]">
+                  Member Workspace
+                </span>
+                <h3 className="font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#1D1F22]">
+                  My Account
+                </h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 bg-[#F3EFE6] border border-[#C59B49] text-xs font-semibold text-[#154731] rounded-sm">
+                  {userState === 'subscriber'
+                    ? 'Fixer+ Subscriber'
+                    : userState === 'free'
+                    ? 'Free Member'
+                    : 'Guest Preview'}
+                </span>
+                {userState !== 'guest' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUserState('guest');
+                      setAccountModalOpen(false);
+                    }}
+                    className="text-xs text-[#52565E] underline hover:text-[#1D1F22]"
+                  >
+                    Sign out
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="flex border-b border-[#DED8CC] mt-4 gap-6 text-sm font-semibold">
+              <button
+                type="button"
+                onClick={() => setAccountTab('trips')}
+                className={`pb-3 border-b-2 transition-colors ${
+                  accountTab === 'trips'
+                    ? 'border-[#154731] text-[#154731]'
+                    : 'border-transparent text-[#52565E]'
+                }`}
+              >
+                Saved Trips ({savedTrips.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setAccountTab('calls')}
+                className={`pb-3 border-b-2 transition-colors ${
+                  accountTab === 'calls'
+                    ? 'border-[#154731] text-[#154731]'
+                    : 'border-transparent text-[#52565E]'
+                }`}
+              >
+                My Fixer Calls ({fixerCalls.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setAccountTab('briefs')}
+                className={`pb-3 border-b-2 transition-colors ${
+                  accountTab === 'briefs'
+                    ? 'border-[#154731] text-[#154731]'
+                    : 'border-transparent text-[#52565E]'
+                }`}
+              >
+                My Trip Briefs (1)
+              </button>
+            </div>
+
+            <div className="pt-6 space-y-4">
+              {accountTab === 'trips' && (
+                <>
+                  {savedTrips.map((trip) => (
+                    <div
+                      key={trip.id}
+                      className="bg-[#F3EFE6] border border-[#DED8CC] p-4 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                    >
+                      <div>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#8F6B24]">
+                          {trip.type} · Ref {trip.id}
+                        </span>
+                        <h4 className="font-serif-editorial text-lg font-semibold text-[#1D1F22]">
+                          {trip.title}
+                        </h4>
+                        <p className="text-xs text-[#52565E]">
+                          {trip.dates} · {trip.details}
+                        </p>
+                      </div>
+                      <span className="text-xs font-semibold px-2.5 py-1 bg-[#FFFFFF] border border-[#DED8CC] text-[#154731] rounded-sm self-start">
+                        {trip.status}
+                      </span>
+                    </div>
+                  ))}
+                </>
+              )}
+
+              {accountTab === 'calls' && (
+                <div className="space-y-4">
+                  {userState !== 'subscriber' && (
+                    <div className="bg-[#F3EFE6] border border-[#C59B49] p-4 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <p className="text-xs text-[#1D1F22]">
+                        Upgrade to <strong>Fixer+ ($15/mo)</strong> to schedule monthly 30-minute video calls.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setUserState('subscriber')}
+                        className="px-4 py-2 bg-[#154731] text-[#FBF9F5] text-xs font-semibold rounded-sm shrink-0"
+                      >
+                        Upgrade now
+                      </button>
+                    </div>
+                  )}
+
+                  {fixerCalls.map((call) => (
+                    <div
+                      key={call.id}
+                      className="bg-[#F3EFE6] border border-[#DED8CC] p-4 rounded-sm space-y-1.5"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-sm text-[#1D1F22]">{call.fixer}</span>
+                        <span className="text-xs font-semibold text-[#154731]">{call.status}</span>
+                      </div>
+                      <p className="text-xs text-[#8F6B24] font-medium">{call.date}</p>
+                      <p className="text-xs text-[#52565E]">Topic: {call.topic}</p>
+                    </div>
+                  ))}
+
+                  {userState === 'subscriber' && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAccountModalOpen(false);
+                        handleTalkToFixer(FIXERS_DATA[0]);
+                      }}
+                      className="px-5 py-2.5 bg-[#154731] text-[#FBF9F5] text-xs font-semibold rounded-sm"
+                    >
+                      + Schedule another Fixer call
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {accountTab === 'briefs' && (
+                <div className="bg-[#F3EFE6] border border-[#DED8CC] p-5 rounded-sm space-y-4">
+                  <div className="border-b border-[#DED8CC] pb-3">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#8F6B24]">
+                      Dossier #01 · Prepared by Ama
+                    </span>
+                    <h4 className="font-serif-editorial text-xl font-semibold text-[#1D1F22]">
+                      Accra &amp; Cape Coast Field Brief
+                    </h4>
+                  </div>
+                  <div className="space-y-3 text-xs sm:text-sm text-[#1D1F22] leading-relaxed">
+                    <p>
+                      <strong>What we'd skip:</strong> Unmarked airport taxis outside Terminal 3 and weekend afternoon crowds at the Arts Centre.
+                    </p>
+                    <p>
+                      <strong>How to get around:</strong> Bolt within Osu/Labone; Kweku (+233 24 000 0192) for your full-day Cape Coast run.
+                    </p>
+                    <p>
+                      <strong>Money &amp; safety:</strong> Register MTN Mobile Money at arrivals with your passport; use Stanbic ATM at Marina Mall for cedi withdrawals.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* === MODAL 4: CITY GUIDE MODAL === */}
+      {selectedCityGuide && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D1F22]/75"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-[#FFFFFF] border border-[#DED8CC] w-full max-w-lg p-6 sm:p-8 rounded-sm relative font-sans-ui">
+            <button
+              type="button"
+              onClick={() => setSelectedCityGuide(null)}
+              className="absolute top-4 right-4 p-2 text-[#52565E] hover:text-[#1D1F22]"
+              aria-label="Close city guide"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <span className="text-xs font-bold uppercase tracking-widest text-[#8F6B24] block mb-1">
+              City Field Notes · {selectedCityGuide.fixersCount} Fixers Available
+            </span>
+            <h3 className="font-serif-editorial text-3xl font-semibold text-[#1D1F22] mb-2">
+              {selectedCityGuide.name}
+            </h3>
+            <p className="font-serif-editorial italic text-base text-[#154731] mb-4">
+              “{selectedCityGuide.quote}”
+            </p>
+            <p className="text-sm text-[#52565E] leading-relaxed mb-5">
+              {selectedCityGuide.summary}
+            </p>
+
+            <div className="bg-[#F3EFE6] border border-[#DED8CC] p-4 rounded-sm space-y-2.5 mb-6">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1D1F22]">
+                Local Fixer Takeaways
+              </h4>
+              <ul className="space-y-2 text-xs sm:text-sm text-[#1D1F22]">
+                {selectedCityGuide.highlights.map((h, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-[#154731] shrink-0 mt-0.5" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                const matched =
+                  FIXERS_DATA.find((f) => f.city.includes(selectedCityGuide.name)) ||
+                  FIXERS_DATA[0];
+                setSelectedCityGuide(null);
+                handleTalkToFixer(matched);
+              }}
+              className="w-full py-3.5 bg-[#154731] text-[#FBF9F5] text-sm font-semibold rounded-sm hover:bg-[#0F3524]"
+            >
+              Talk to a {selectedCityGuide.name} Fixer
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* === MODAL 5: BECOME A FIXER APPLICATION === */}
+      {applyFixerOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D1F22]/75"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-[#FFFFFF] border border-[#DED8CC] w-full max-w-md p-6 sm:p-8 rounded-sm relative font-sans-ui">
+            <button
+              type="button"
+              onClick={() => setApplyFixerOpen(false)}
+              className="absolute top-4 right-4 p-2 text-[#52565E] hover:text-[#1D1F22]"
+              aria-label="Close application"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <span className="text-xs font-bold uppercase tracking-widest text-[#8F6B24] block mb-1">
+              Fixer Roster
+            </span>
+            <h3 className="font-serif-editorial text-2xl font-semibold text-[#1D1F22] mb-2">
+              Apply to be a Fixer
+            </h3>
+            <p className="text-xs text-[#52565E] mb-5 leading-relaxed">
+              We verify every Fixer individually. Tell us where in Ghana you live or spend time, and what you know best.
+            </p>
+
+            {fixerAppSubmitted ? (
+              <div className="bg-[#F3EFE6] border border-[#154731] p-4 rounded-sm space-y-3">
+                <p className="text-sm font-semibold text-[#154731]">Application received.</p>
+                <p className="text-xs text-[#52565E]">
+                  Our editorial team in Accra reviews new Fixer stories every week and will be in touch shortly.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setApplyFixerOpen(false)}
+                  className="px-4 py-2 bg-[#154731] text-[#FBF9F5] text-xs font-semibold rounded-sm"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setFixerAppSubmitted(true);
+                }}
+                className="space-y-3.5"
+              >
+                <div>
+                  <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Nana Adjei"
+                    className="w-full px-3.5 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                    City / Region in Ghana
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Accra, Kumasi, Ho, Tamale"
+                    className="w-full px-3.5 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-[#52565E] mb-1">
+                    What do travellers always get wrong about your city?
+                  </label>
+                  <textarea
+                    rows={3}
+                    required
+                    placeholder="Share a brief example of your local knowledge..."
+                    className="w-full px-3.5 py-2.5 border border-[#DED8CC] rounded-sm text-sm bg-[#FBF9F5]"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-[#154731] text-[#FBF9F5] text-sm font-semibold rounded-sm hover:bg-[#0F3524]"
+                >
+                  Submit Fixer Story
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* === MODAL 6: COMMUNITY THREADS === */}
+      {communityModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D1F22]/75"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-[#FFFFFF] border border-[#DED8CC] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-6 sm:p-8 rounded-sm relative font-sans-ui">
+            <button
+              type="button"
+              onClick={() => setCommunityModalOpen(false)}
+              className="absolute top-4 right-4 p-2 text-[#52565E] hover:text-[#1D1F22]"
+              aria-label="Close community threads"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <span className="text-xs font-bold uppercase tracking-widest text-[#8F6B24] block mb-1">
+              Traveller Community
+            </span>
+            <h3 className="font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#1D1F22] mb-6">
+              Recent advice from travellers &amp; Fixers
+            </h3>
+
+            <div className="space-y-5">
+              {COMMUNITY_POSTS.map((post) => (
+                <div
+                  key={post.id}
+                  className="bg-[#F3EFE6] border border-[#DED8CC] p-5 rounded-sm space-y-2"
+                >
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-[#154731]">
+                      {post.author} · {post.city}
+                    </span>
+                    <span className="text-[#52565E]">{post.topic}</span>
+                  </div>
+                  <h4 className="font-serif-editorial text-lg font-semibold text-[#1D1F22]">
+                    {post.title}
+                  </h4>
+                  <p className="text-sm text-[#1D1F22]/85 leading-relaxed">
+                    {post.fullDiscussion}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
