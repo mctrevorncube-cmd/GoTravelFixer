@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TravelFixer | Private Local Fixers &amp; Flight Desk</title>
-  <meta name="description" content="On-the-ground local fixers and custom flight routing across India, Dubai, Indonesia, Malaysia, and Brazil." />
+  <title>TravelFixer | Flights, Stays, Cars &amp; Local Fixers</title>
+  <meta name="description" content="Book flights, stays, airport transfers, and vetted local fixers across India, Dubai, Indonesia, Malaysia, and Brazil." />
 
   <!-- Open Graph / Social Sharing Preview -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gotravelfixer.com/" />
-  <meta property="og:title" content="TravelFixer | Private Local Fixers & Flight Desk" />
-  <meta property="og:description" content="Vetted local fixers, airport transfers, and flight routing in India, Dubai, Indonesia, Malaysia, and Brazil." />
+  <meta property="og:title" content="TravelFixer | Flights, Stays, Cars & Local Fixers" />
+  <meta property="og:description" content="Book flights, stays, cars, and vetted local fixers across India, Dubai, Indonesia, Malaysia, and Brazil." />
   <meta property="og:image" content="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Editorial Typography: Playfair Display + Plus Jakarta Sans -->
+  <!-- Editorial & Clean UI Typography: Playfair Display + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -41,256 +41,613 @@
             sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
           },
           colors: {
-            obsidian: '#0F1210',
-            surface: '#171C19',
-            surfaceHover: '#1E2420',
-            borderWarm: '#29302C',
-            ivory: '#F4F1EA',
-            sand: '#A9A69E',
-            emeraldBrand: '#117A58',
-            emeraldHover: '#0D6347',
-            brass: '#C9A45C'
+            canvas: '#F6F7F5',
+            ink: '#161817',
+            muted: '#5C615E',
+            line: '#E2E4E0',
+            amberBrand: '#F5C518',
+            amberHover: '#E5B610',
+            forest: '#0F6B4E',
+            forestHover: '#0B533C'
           }
         }
       }
     };
   </script>
 </head>
-<body class="bg-obsidian text-ivory font-sans antialiased selection:bg-emeraldBrand selection:text-white">
+<body class="bg-canvas text-ink font-sans antialiased selection:bg-amberBrand selection:text-ink">
 
-  <!-- Top Navigation -->
-  <header class="sticky top-0 z-40 bg-obsidian/92 backdrop-blur border-b border-borderWarm">
-    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-18 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2.5">
-        <span class="font-serif text-2xl font-semibold tracking-tight text-ivory">
-          Travel<span class="italic text-brass">Fixer</span>
-        </span>
+  <!-- Clean Top Navigation (Booking & Contact Focused) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-line">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#book" class="font-serif text-2xl font-semibold tracking-tight text-ink">
+        Travel<span class="italic text-forest">Fixer</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm text-sand">
-        <a href="#fixers" class="hover:text-ivory transition">Local Fixers</a>
-        <a href="#insights" class="hover:text-ivory transition">Field Notes</a>
-        <a href="#quote" class="hover:text-ivory transition">Flight &amp; Trip Desk</a>
+      <nav class="flex items-center gap-5 sm:gap-8 text-sm font-medium text-muted">
+        <a href="#book" class="text-ink hover:text-forest transition">Book</a>
+        <a href="#fixers" class="hover:text-ink transition">Local Fixers</a>
+        <a href="#insights" class="hidden sm:inline hover:text-ink transition">Field Notes</a>
+        <a href="#contact" class="bg-ink text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-forest transition">
+          Contact
+        </a>
       </nav>
-      <a
-        href="https://wa.me/27766987918?text=Hi%20TravelFixer%2C%20I%20need%20help%20with%20flights%20and%20local%20logistics."
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bg-emeraldBrand hover:bg-emeraldHover text-white text-sm font-medium px-4 py-2.5 rounded-md transition">
-        WhatsApp Desk
-      </a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="py-20 sm:py-28 px-5 sm:px-8 border-b border-borderWarm">
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="text-xs uppercase tracking-[0.22em] text-brass font-semibold mb-5">
-        India &bull; Dubai &bull; Indonesia &bull; Malaysia &bull; Brazil
-      </p>
-      <h1 class="font-serif text-4xl sm:text-6xl font-medium tracking-tight leading-[1.12] mb-6 text-ivory">
-        Real ground support and <span class="italic text-brass">vetted local fixers</span> wherever you land.
-      </h1>
-      <p class="text-base sm:text-lg text-sand max-w-2xl mx-auto leading-relaxed mb-10">
-        We pair international flight routing with trusted people on the ground—handling airport pickups, inter-city transfers, drivers, and local access before your plane touches down.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a
-          href="#fixers"
-          class="w-full sm:w-auto bg-emeraldBrand hover:bg-emeraldHover text-white font-medium px-7 py-3.5 rounded-md transition">
-          Browse Fixers by Country
-        </a>
-        <a
-          href="#quote"
-          class="w-full sm:w-auto bg-surface hover:bg-surfaceHover border border-borderWarm text-ivory font-medium px-7 py-3.5 rounded-md transition">
-          Request a Flight or Trip Quote
-        </a>
+  <!-- PRIORITY 1: Booking Search Engine First (Flights | Stays | Cars) -->
+  <section id="book" class="pt-8 pb-14 px-4 sm:px-6 bg-white border-b border-line">
+    <div class="max-w-3xl mx-auto">
+      <div class="mb-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-forest mb-1.5">
+          India &bull; Dubai &bull; Indonesia &bull; Malaysia &bull; Brazil
+        </p>
+        <h1 class="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink">
+          Where are you flying next?
+        </h1>
+      </div>
+
+      <!-- Category Icon Tabs: Flights | Stays | Cars -->
+      <div class="grid grid-cols-3 gap-3 max-w-sm mb-6">
+        <button type="button" onclick="switchBookingTab('flights')" id="tab-flights"
+          class="booking-tab flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl border border-amberBrand bg-amberBrand/15 text-ink font-semibold text-xs sm:text-sm transition">
+          <span class="w-10 h-10 rounded-xl bg-amberBrand flex items-center justify-center text-ink shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </span>
+          <span>Flights</span>
+        </button>
+
+        <button type="button" onclick="switchBookingTab('stays')" id="tab-stays"
+          class="booking-tab flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl border border-line bg-canvas text-muted font-medium text-xs sm:text-sm hover:text-ink transition">
+          <span class="w-10 h-10 rounded-xl bg-white border border-line flex items-center justify-center text-ink">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </span>
+          <span>Stays</span>
+        </button>
+
+        <button type="button" onclick="switchBookingTab('cars')" id="tab-cars"
+          class="booking-tab flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl border border-line bg-canvas text-muted font-medium text-xs sm:text-sm hover:text-ink transition">
+          <span class="w-10 h-10 rounded-xl bg-white border border-line flex items-center justify-center text-ink">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 17h8M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11m-14 0h14m-14 0v5a1 1 0 001 1h1a1 1 0 001-1v-1h8v1a1 1 0 001 1h1a1 1 0 001-1v-5" />
+            </svg>
+          </span>
+          <span>Cars</span>
+        </button>
+      </div>
+
+      <!-- FLIGHTS BOOKING FORM -->
+      <form id="panel-flights" onsubmit="handleBookingSearch(event, 'Flights')" class="space-y-3.5">
+        <!-- Trip Type Sub-tabs -->
+        <div class="flex items-center gap-6 border-b border-line pb-2.5 text-sm">
+          <button type="button" onclick="setTripType('Return')" id="trip-Return" class="trip-type-btn font-semibold text-ink border-b-2 border-ink pb-2 -mb-[11px]">Return</button>
+          <button type="button" onclick="setTripType('One-way')" id="trip-One-way" class="trip-type-btn font-medium text-muted hover:text-ink pb-2 -mb-[11px]">One-way</button>
+          <button type="button" onclick="setTripType('Multi-city')" id="trip-Multi-city" class="trip-type-btn font-medium text-muted hover:text-ink pb-2 -mb-[11px]">Multi-city</button>
+        </div>
+
+        <!-- Stacked Route Inputs with Swap Button -->
+        <div class="relative bg-white border border-line rounded-2xl divide-y divide-line shadow-sm">
+          <div class="px-4 py-3">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">From</label>
+            <input type="text" id="flight-from" required value="Johannesburg (JNB)" placeholder="City or airport"
+              class="w-full text-base font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+
+          <button type="button" onclick="swapAirports()" aria-label="Swap departure and destination"
+            class="absolute right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-line shadow-sm flex items-center justify-center text-ink hover:bg-canvas transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </button>
+
+          <div class="px-4 py-3 pr-14">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">To</label>
+            <input type="text" id="flight-to" required value="Dubai (DXB)" placeholder="Destination city or airport"
+              class="w-full text-base font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+        </div>
+
+        <!-- Date Inputs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-white border border-line rounded-2xl px-4 py-2.5 shadow-sm">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Depart</label>
+            <input type="date" id="flight-depart" required class="w-full text-sm font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+          <div id="return-date-wrap" class="bg-white border border-line rounded-2xl px-4 py-2.5 shadow-sm">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Return</label>
+            <input type="date" id="flight-return" class="w-full text-sm font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+        </div>
+
+        <!-- Traveller, Cabin & Bags Pills -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <select id="flight-pax" class="bg-white border border-line rounded-xl px-3 py-2.5 text-xs sm:text-sm font-medium text-ink focus:outline-none focus:border-ink">
+            <option value="1 traveller">1 traveller</option>
+            <option value="2 travellers">2 travellers</option>
+            <option value="3 travellers">3 travellers</option>
+            <option value="4+ travellers">4+ travellers</option>
+          </select>
+          <select id="flight-cabin" class="bg-white border border-line rounded-xl px-3 py-2.5 text-xs sm:text-sm font-medium text-ink focus:outline-none focus:border-ink">
+            <option value="Economy">Economy</option>
+            <option value="Premium Economy">Premium Econ</option>
+            <option value="Business">Business</option>
+            <option value="First">First</option>
+          </select>
+          <select id="flight-bags" class="bg-white border border-line rounded-xl px-3 py-2.5 text-xs sm:text-sm font-medium text-ink focus:outline-none focus:border-ink">
+            <option value="0 checked bags">0 bags</option>
+            <option value="1 checked bag" selected>1 checked bag</option>
+            <option value="2 checked bags">2 checked bags</option>
+          </select>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-amberBrand hover:bg-amberHover text-ink font-bold text-base py-3.5 rounded-2xl shadow-sm transition">
+          Search Flights
+        </button>
+      </form>
+
+      <!-- STAYS BOOKING FORM -->
+      <form id="panel-stays" onsubmit="handleBookingSearch(event, 'Stays')" class="hidden space-y-3.5">
+        <div class="bg-white border border-line rounded-2xl px-4 py-3 shadow-sm">
+          <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Destination or Hotel</label>
+          <input type="text" id="stay-city" required value="Bali, Indonesia" placeholder="City, region, or property"
+            class="w-full text-base font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-white border border-line rounded-2xl px-4 py-2.5 shadow-sm">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Check-in</label>
+            <input type="date" id="stay-in" required class="w-full text-sm font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+          <div class="bg-white border border-line rounded-2xl px-4 py-2.5 shadow-sm">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Check-out</label>
+            <input type="date" id="stay-out" required class="w-full text-sm font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <select id="stay-guests" class="bg-white border border-line rounded-xl px-3 py-2.5 text-sm font-medium text-ink focus:outline-none">
+            <option value="1 adult">1 adult</option>
+            <option value="2 adults" selected>2 adults</option>
+            <option value="Family (2 adults, 2 children)">Family (4 guests)</option>
+          </select>
+          <select id="stay-rooms" class="bg-white border border-line rounded-xl px-3 py-2.5 text-sm font-medium text-ink focus:outline-none">
+            <option value="1 room">1 room</option>
+            <option value="2 rooms">2 rooms</option>
+            <option value="Villa / Suite">Villa / Suite</option>
+          </select>
+        </div>
+        <button type="submit"
+          class="w-full bg-amberBrand hover:bg-amberHover text-ink font-bold text-base py-3.5 rounded-2xl shadow-sm transition">
+          Search Stays
+        </button>
+      </form>
+
+      <!-- CARS & TRANSFERS BOOKING FORM -->
+      <form id="panel-cars" onsubmit="handleBookingSearch(event, 'Cars & Transfers')" class="hidden space-y-3.5">
+        <div class="bg-white border border-line rounded-2xl divide-y divide-line shadow-sm">
+          <div class="px-4 py-3">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Pick-up Airport or City</label>
+            <input type="text" id="car-pickup" required value="New Delhi Airport (DEL)" placeholder="Airport or hotel address"
+              class="w-full text-base font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+          <div class="px-4 py-3">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Drop-off Destination</label>
+            <input type="text" id="car-dropoff" required value="Jaipur City Center" placeholder="City, hotel, or airport"
+              class="w-full text-base font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-white border border-line rounded-2xl px-4 py-2.5 shadow-sm">
+            <label class="block text-[11px] uppercase tracking-wider text-muted font-semibold">Pick-up Date</label>
+            <input type="date" id="car-date" required class="w-full text-sm font-medium text-ink bg-transparent focus:outline-none pt-0.5" />
+          </div>
+          <select id="car-type" class="bg-white border border-line rounded-2xl px-4 py-2.5 text-sm font-medium text-ink focus:outline-none shadow-sm">
+            <option value="Private Sedan + Driver">Private Sedan + Driver</option>
+            <option value="SUV / 4x4 + Driver">SUV / 4x4 + Driver</option>
+            <option value="Group Van (7-12 pax)">Group Van (7-12 pax)</option>
+            <option value="Self-Drive Rental">Self-Drive Rental</option>
+          </select>
+        </div>
+        <button type="submit"
+          class="w-full bg-amberBrand hover:bg-amberHover text-ink font-bold text-base py-3.5 rounded-2xl shadow-sm transition">
+          Search Cars &amp; Transfers
+        </button>
+      </form>
+
+      <!-- Instant Search Result / Booking Lock Box (appears on Search) -->
+      <div id="search-result-box" class="hidden mt-5 bg-canvas border border-line rounded-2xl p-5">
+        <div class="flex items-start justify-between gap-4 mb-3">
+          <div>
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-forest bg-forest/10 px-2.5 py-0.5 rounded mb-1">
+              Live Desk Quote Ready
+            </span>
+            <h3 id="search-summary-title" class="font-serif text-xl font-semibold text-ink"></h3>
+            <p id="search-summary-meta" class="text-xs sm:text-sm text-muted mt-0.5"></p>
+          </div>
+          <button type="button" onclick="document.getElementById('search-result-box').classList.add('hidden')" class="text-xs text-muted hover:text-ink">
+            Close
+          </button>
+        </div>
+        <form onsubmit="submitQuickBooking(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
+          <input type="text" id="quick-name" required placeholder="Your full name"
+            class="bg-white border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink" />
+          <input type="email" id="quick-email" required placeholder="Email for itinerary & fares"
+            class="bg-white border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink" />
+          <button type="submit" class="bg-forest hover:bg-forestHover text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition">
+            Lock In Fare &amp; Availability
+          </button>
+        </form>
+        <p id="quick-status" class="text-xs font-medium text-forest mt-2 hidden"></p>
+      </div>
+
+      <!-- Popular Routes Quick-Fill Strip -->
+      <div class="mt-8 pt-6 border-t border-line">
+        <p class="text-xs font-semibold uppercase tracking-wider text-muted mb-3">Popular Routes</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-left">
+          <button type="button" onclick="fillRoute('Johannesburg (JNB)', 'Dubai (DXB)')"
+            class="bg-canvas hover:bg-amberBrand/15 border border-line rounded-xl p-3 transition">
+            <p class="text-sm font-semibold text-ink">Johannesburg &rarr; Dubai</p>
+            <p class="text-xs text-muted mt-0.5">Direct &amp; stopover fares</p>
+          </button>
+          <button type="button" onclick="fillRoute('Harare (HRE)', 'New Delhi (DEL)')"
+            class="bg-canvas hover:bg-amberBrand/15 border border-line rounded-xl p-3 transition">
+            <p class="text-sm font-semibold text-ink">Harare &rarr; New Delhi</p>
+            <p class="text-xs text-muted mt-0.5">Multi-carrier routing</p>
+          </button>
+          <button type="button" onclick="fillRoute('Johannesburg (JNB)', 'Denpasar Bali (DPS)')"
+            class="bg-canvas hover:bg-amberBrand/15 border border-line rounded-xl p-3 transition">
+            <p class="text-sm font-semibold text-ink">Johannesburg &rarr; Bali</p>
+            <p class="text-xs text-muted mt-0.5">Flights + fast-boat transfers</p>
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Verified Fixers Section -->
-  <section id="fixers" class="py-20 px-5 sm:px-8 max-w-6xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+  <!-- PRIORITY 2: Verified Local Fixers (India, Dubai, Indonesia, Malaysia, Brazil) -->
+  <section id="fixers" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
-        <p class="text-brass text-xs font-semibold uppercase tracking-[0.2em] mb-2">On-Ground Network</p>
-        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-ivory">Meet Your Local Fixers</h2>
+        <p class="text-forest text-xs font-bold uppercase tracking-[0.18em] mb-1.5">On-Ground Network</p>
+        <h2 class="font-serif text-3xl font-semibold text-ink">Verified Local Fixers</h2>
       </div>
-      <p class="text-sand text-sm max-w-md leading-relaxed">
-        Every fixer is personally vetted for reliability, clear pricing, and direct WhatsApp communication from arrival to departure.
+      <p class="text-muted text-sm max-w-md">
+        Add a vetted ground coordinator to your flight or stay for airport pickups, rail tickets, and local logistics.
       </p>
     </div>
 
     <!-- Country Filter Pills -->
-    <div id="country-filters" class="flex flex-wrap gap-2 mb-10">
-      <button type="button" onclick="filterFixers('All')" data-country="All" class="filter-btn bg-emeraldBrand text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition">All Destinations</button>
-      <button type="button" onclick="filterFixers('India')" data-country="India" class="filter-btn bg-surface text-sand hover:text-ivory border border-borderWarm text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition">India</button>
-      <button type="button" onclick="filterFixers('Dubai')" data-country="Dubai" class="filter-btn bg-surface text-sand hover:text-ivory border border-borderWarm text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition">Dubai</button>
-      <button type="button" onclick="filterFixers('Indonesia')" data-country="Indonesia" class="filter-btn bg-surface text-sand hover:text-ivory border border-borderWarm text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition">Indonesia</button>
-      <button type="button" onclick="filterFixers('Malaysia')" data-country="Malaysia" class="filter-btn bg-surface text-sand hover:text-ivory border border-borderWarm text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition">Malaysia</button>
-      <button type="button" onclick="filterFixers('Brazil')" data-country="Brazil" class="filter-btn bg-surface text-sand hover:text-ivory border border-borderWarm text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition">Brazil</button>
+    <div id="country-filters" class="flex flex-wrap gap-2 mb-8">
+      <button type="button" onclick="filterFixers('All')" data-country="All" class="filter-btn bg-ink text-white text-xs font-semibold px-4 py-2 rounded-lg transition">All Countries</button>
+      <button type="button" onclick="filterFixers('India')" data-country="India" class="filter-btn bg-white text-muted hover:text-ink border border-line text-xs font-semibold px-4 py-2 rounded-lg transition">India</button>
+      <button type="button" onclick="filterFixers('Dubai')" data-country="Dubai" class="filter-btn bg-white text-muted hover:text-ink border border-line text-xs font-semibold px-4 py-2 rounded-lg transition">Dubai</button>
+      <button type="button" onclick="filterFixers('Indonesia')" data-country="Indonesia" class="filter-btn bg-white text-muted hover:text-ink border border-line text-xs font-semibold px-4 py-2 rounded-lg transition">Indonesia</button>
+      <button type="button" onclick="filterFixers('Malaysia')" data-country="Malaysia" class="filter-btn bg-white text-muted hover:text-ink border border-line text-xs font-semibold px-4 py-2 rounded-lg transition">Malaysia</button>
+      <button type="button" onclick="filterFixers('Brazil')" data-country="Brazil" class="filter-btn bg-white text-muted hover:text-ink border border-line text-xs font-semibold px-4 py-2 rounded-lg transition">Brazil</button>
     </div>
 
-    <div id="fixers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+    <div id="fixers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- Field Notes / Local Insights Section -->
-  <section id="insights" class="py-20 px-5 sm:px-8 bg-surface/60 border-y border-borderWarm">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-12">
-        <p class="text-brass text-xs font-semibold uppercase tracking-[0.2em] mb-2">Field Notes</p>
-        <h2 class="font-serif text-3xl sm:text-4xl font-medium mb-3 text-ivory">What Travelers Learn Too Late</h2>
-        <p class="text-sand text-sm sm:text-base max-w-2xl">
-          Practical logistics notes from our coordinators in New Delhi, Dubai, Bali, Kuala Lumpur, and Rio de Janeiro.
-        </p>
+  <!-- PRIORITY 3: Destination Field Notes -->
+  <section id="insights" class="py-16 px-4 sm:px-6 bg-white border-y border-line">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-8">
+        <p class="text-forest text-xs font-bold uppercase tracking-[0.18em] mb-1.5">Field Notes</p>
+        <h2 class="font-serif text-3xl font-semibold text-ink">Arrival &amp; Transit Briefings</h2>
       </div>
-
-      <div id="insights-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="insights-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </div>
   </section>
 
-  <!-- Flight & Custom Itinerary Quote Section -->
-  <section id="quote" class="py-20 px-5 sm:px-8 max-w-3xl mx-auto">
-    <div class="bg-surface border border-borderWarm rounded-xl p-6 sm:p-10">
-      <div class="text-center mb-8">
-        <p class="text-brass text-xs font-semibold uppercase tracking-[0.2em] mb-2">Flight &amp; Ground Desk</p>
-        <h2 class="font-serif text-3xl sm:text-4xl font-medium mb-2 text-ivory">Request a Quote</h2>
-        <p class="text-sand text-sm">
-          Share your dates and destination below for flight options and fixer availability, or send it straight to our WhatsApp desk.
-        </p>
+  <!-- PRIORITY 4: Contact Section (Dedicated Home for WhatsApp Support + Email Form) -->
+  <section id="contact" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto">
+    <div class="bg-white border border-line rounded-2xl p-6 sm:p-10 shadow-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+        <!-- Left Column: WhatsApp Support & Direct Desk Info -->
+        <div class="lg:col-span-2 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-line pb-8 lg:pb-0 lg:pr-8">
+          <div>
+            <p class="text-forest text-xs font-bold uppercase tracking-[0.18em] mb-2">Contact &amp; Support</p>
+            <h2 class="font-serif text-3xl font-semibold text-ink mb-3">Talk to Our Booking Desk</h2>
+            <p class="text-sm text-muted leading-relaxed mb-6">
+              Need help with multi-city ticketing, visa transit rules, or pairing a verified local fixer with your itinerary? Reach our desk directly.
+            </p>
+
+            <div class="space-y-3 text-sm mb-8">
+              <div>
+                <p class="text-xs uppercase tracking-wider text-muted font-semibold">Coverage</p>
+                <p class="font-medium text-ink">India &bull; Dubai &bull; Indonesia &bull; Malaysia &bull; Brazil</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wider text-muted font-semibold">WhatsApp Support Line</p>
+                <p class="font-medium text-ink">+27 76 698 7918</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Dedicated WhatsApp Support CTA on Contact -->
+          <a
+            href="https://wa.me/27766987918?text=Hi%20TravelFixer%2C%20I%20would%20like%20assistance%20with%20a%20booking."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 w-full bg-forest hover:bg-forestHover text-white font-semibold text-sm py-3.5 px-5 rounded-xl transition">
+            <span>Chat with Support on WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- Right Column: Email Booking & Fixer Inquiry Form -->
+        <div class="lg:col-span-3">
+          <h3 class="font-serif text-2xl font-semibold text-ink mb-1">Send an Email Request</h3>
+          <p class="text-xs text-muted mb-5">Prefer email? Fill in your trip details and we will reply with routing and ground options.</p>
+
+          <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-3.5">
+            <!-- Replace YOUR_WEB3FORMS_ACCESS_KEY with your free key from web3forms.com -->
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="subject" value="New TravelFixer Booking & Fixer Inquiry" />
+            <input type="hidden" name="from_name" value="TravelFixer Website" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-xs font-semibold text-muted mb-1">Full Name</label>
+                <input type="text" id="c-name" name="name" required placeholder="Your full name"
+                  class="w-full bg-canvas border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-muted mb-1">Email Address</label>
+                <input type="email" id="c-email" name="email" required placeholder="you@example.com"
+                  class="w-full bg-canvas border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-xs font-semibold text-muted mb-1">Phone / WhatsApp Number</label>
+                <input type="tel" id="c-phone" name="phone" placeholder="+27 76 000 0000"
+                  class="w-full bg-canvas border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-muted mb-1">Destination / Fixer</label>
+                <select id="c-destination" name="destination"
+                  class="w-full bg-canvas border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink">
+                  <option value="India - Aarav (New Delhi & Jaipur)">India &mdash; Aarav (New Delhi &amp; Jaipur)</option>
+                  <option value="Dubai - Tariq (Dubai & Stopovers)">Dubai &mdash; Tariq (Dubai &amp; Stopovers)</option>
+                  <option value="Indonesia - Made (Bali & Java)">Indonesia &mdash; Made (Bali &amp; Java)</option>
+                  <option value="Malaysia - Nurul (Kuala Lumpur & Penang)">Malaysia &mdash; Nurul (KL &amp; Penang)</option>
+                  <option value="Brazil - Rafael (Rio & Sao Paulo)">Brazil &mdash; Rafael (Rio &amp; S&atilde;o Paulo)</option>
+                  <option value="Flight / Stay / Car Only">Flight / Stay / Car Only</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-muted mb-1">Trip Dates &amp; Requirements</label>
+              <textarea id="c-details" name="details" rows="3" required placeholder="Departure city, travel dates, number of passengers, or fixer requirements..."
+                class="w-full bg-canvas border border-line rounded-xl px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-ink"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full bg-ink hover:bg-forest text-white font-semibold text-sm py-3 rounded-xl transition">
+              Submit Inquiry
+            </button>
+
+            <p id="contact-status" class="text-xs text-center font-medium hidden pt-1"></p>
+          </form>
+        </div>
       </div>
-
-      <form id="quote-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-        <!-- Replace YOUR_WEB3FORMS_ACCESS_KEY with your free key from web3forms.com -->
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-        <input type="hidden" name="subject" value="New TravelFixer Quote & Fixer Request" />
-        <input type="hidden" name="from_name" value="TravelFixer Website" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
-
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-sand font-semibold mb-1.5">Full Name</label>
-          <input type="text" id="q-name" name="name" required placeholder="Your full name" class="w-full bg-obsidian border border-borderWarm rounded-md px-4 py-2.5 text-ivory focus:outline-none focus:border-brass" />
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-sand font-semibold mb-1.5">Email Address</label>
-            <input type="email" id="q-email" name="email" required placeholder="you@example.com" class="w-full bg-obsidian border border-borderWarm rounded-md px-4 py-2.5 text-ivory focus:outline-none focus:border-brass" />
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-sand font-semibold mb-1.5">WhatsApp Number</label>
-            <input type="tel" id="q-whatsapp" name="whatsapp" required placeholder="+27 76 000 0000" class="w-full bg-obsidian border border-borderWarm rounded-md px-4 py-2.5 text-ivory focus:outline-none focus:border-brass" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-sand font-semibold mb-1.5">Service Needed</label>
-            <select id="q-service" name="service" class="w-full bg-obsidian border border-borderWarm rounded-md px-4 py-2.5 text-ivory focus:outline-none focus:border-brass">
-              <option value="Flight Routing & Ticketing">Flight Routing &amp; Ticketing</option>
-              <option value="Verified Local Fixer">Verified Local Fixer</option>
-              <option value="Full Trip + Flight Package">Full Trip + Flight Package</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-sand font-semibold mb-1.5">Destination / Fixer</label>
-            <select id="q-fixer" name="fixer" class="w-full bg-obsidian border border-borderWarm rounded-md px-4 py-2.5 text-ivory focus:outline-none focus:border-brass">
-              <option value="India - Aarav (New Delhi & Jaipur)">India &mdash; Aarav (New Delhi &amp; Jaipur)</option>
-              <option value="Dubai - Tariq (Dubai & Desert)">Dubai &mdash; Tariq (Dubai &amp; Stopovers)</option>
-              <option value="Indonesia - Made (Bali & Java)">Indonesia &mdash; Made (Bali &amp; Java)</option>
-              <option value="Malaysia - Nurul (Kuala Lumpur & Penang)">Malaysia &mdash; Nurul (KL &amp; Penang)</option>
-              <option value="Brazil - Rafael (Rio & Sao Paulo)">Brazil &mdash; Rafael (Rio &amp; S&atilde;o Paulo)</option>
-              <option value="Multi-Country / Flight Only">Multi-Country / Flight Only</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-sand font-semibold mb-1.5">Dates &amp; Trip Notes</label>
-          <textarea id="q-details" name="details" rows="3" required placeholder="Departure airport, travel dates, number of travelers, or specific ground help needed..." class="w-full bg-obsidian border border-borderWarm rounded-md px-4 py-2.5 text-ivory focus:outline-none focus:border-brass"></textarea>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-          <button type="submit" class="w-full bg-emeraldBrand hover:bg-emeraldHover text-white font-medium py-3 rounded-md transition">
-            Send Email Quote Request
-          </button>
-          <button type="button" onclick="sendQuoteViaWhatsApp()" class="w-full bg-obsidian hover:bg-surfaceHover border border-borderWarm text-ivory font-medium py-3 rounded-md transition">
-            Send via WhatsApp
-          </button>
-        </div>
-
-        <p id="quote-status" class="text-sm text-center font-medium hidden pt-2"></p>
-      </form>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-borderWarm py-12 px-5 sm:px-8 text-center text-sm text-sand">
-    <p class="font-serif text-lg text-ivory mb-1">Travel<span class="italic text-brass">Fixer</span></p>
-    <p>India &bull; Dubai &bull; Indonesia &bull; Malaysia &bull; Brazil</p>
+  <!-- Minimal Footer -->
+  <footer class="border-t border-line py-8 px-4 sm:px-6 text-center text-xs text-muted">
+    <p class="font-serif text-base text-ink mb-1">Travel<span class="italic text-forest">Fixer</span></p>
+    <p>Flights &bull; Stays &bull; Cars &bull; Verified Local Fixers &mdash; gotravelfixer.com</p>
   </footer>
 
-  <!-- Floating WhatsApp Button -->
-  <a
-    href="https://wa.me/27766987918?text=Hi%20TravelFixer%2C%20I%20would%20like%20help%20planning%20a%20trip."
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Chat on WhatsApp"
-    class="fixed bottom-5 right-5 z-50 bg-emeraldBrand hover:bg-emeraldHover text-white text-sm font-medium px-5 py-3 rounded-md shadow-xl transition">
-    Chat on WhatsApp
-  </a>
-
   <script>
-    const WHATSAPP_NUMBER = "27766987918";
+    // Set default dates (14 days and 21 days from today)
+    (function initDates() {
+      const today = new Date();
+      const d1 = new Date(today);
+      d1.setDate(today.getDate() + 14);
+      const d2 = new Date(today);
+      d2.setDate(today.getDate() + 21);
+      const fmt = d => d.toISOString().split('T')[0];
 
+      document.getElementById('flight-depart').value = fmt(d1);
+      document.getElementById('flight-return').value = fmt(d2);
+      document.getElementById('stay-in').value = fmt(d1);
+      document.getElementById('stay-out').value = fmt(d2);
+      document.getElementById('car-date').value = fmt(d1);
+    })();
+
+    let currentTripType = 'Return';
+    let lastSearchSummary = '';
+
+    function switchBookingTab(tab) {
+      ['flights', 'stays', 'cars'].forEach(name => {
+        const panel = document.getElementById('panel-' + name);
+        const btn = document.getElementById('tab-' + name);
+        const iconBox = btn.querySelector('span');
+        if (name === tab) {
+          panel.classList.remove('hidden');
+          btn.className = 'booking-tab flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl border border-amberBrand bg-amberBrand/15 text-ink font-semibold text-xs sm:text-sm transition';
+          iconBox.className = 'w-10 h-10 rounded-xl bg-amberBrand flex items-center justify-center text-ink shadow-sm';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'booking-tab flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl border border-line bg-canvas text-muted font-medium text-xs sm:text-sm hover:text-ink transition';
+          iconBox.className = 'w-10 h-10 rounded-xl bg-white border border-line flex items-center justify-center text-ink';
+        }
+      });
+      document.getElementById('search-result-box').classList.add('hidden');
+    }
+
+    function setTripType(type) {
+      currentTripType = type;
+      ['Return', 'One-way', 'Multi-city'].forEach(t => {
+        const btn = document.getElementById('trip-' + t);
+        if (t === type) {
+          btn.className = 'trip-type-btn font-semibold text-ink border-b-2 border-ink pb-2 -mb-[11px]';
+        } else {
+          btn.className = 'trip-type-btn font-medium text-muted hover:text-ink pb-2 -mb-[11px]';
+        }
+      });
+      const retWrap = document.getElementById('return-date-wrap');
+      if (type === 'One-way') {
+        retWrap.classList.add('hidden');
+      } else {
+        retWrap.classList.remove('hidden');
+      }
+    }
+
+    function swapAirports() {
+      const fromEl = document.getElementById('flight-from');
+      const toEl = document.getElementById('flight-to');
+      const temp = fromEl.value;
+      fromEl.value = toEl.value;
+      toEl.value = temp;
+    }
+
+    function fillRoute(fromCity, toCity) {
+      switchBookingTab('flights');
+      document.getElementById('flight-from').value = fromCity;
+      document.getElementById('flight-to').value = toCity;
+      document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleBookingSearch(e, category) {
+      e.preventDefault();
+      let title = '';
+      let meta = '';
+
+      if (category === 'Flights') {
+        const from = document.getElementById('flight-from').value;
+        const to = document.getElementById('flight-to').value;
+        const depart = document.getElementById('flight-depart').value;
+        const ret = document.getElementById('flight-return').value;
+        const pax = document.getElementById('flight-pax').value;
+        const cabin = document.getElementById('flight-cabin').value;
+        const bags = document.getElementById('flight-bags').value;
+        title = `${from} → ${to} (${currentTripType})`;
+        meta = `${depart}${currentTripType !== 'One-way' && ret ? ' to ' + ret : ''} • ${pax} • ${cabin} • ${bags}`;
+      } else if (category === 'Stays') {
+        const city = document.getElementById('stay-city').value;
+        const checkIn = document.getElementById('stay-in').value;
+        const checkOut = document.getElementById('stay-out').value;
+        const guests = document.getElementById('stay-guests').value;
+        const rooms = document.getElementById('stay-rooms').value;
+        title = `Stay in ${city}`;
+        meta = `${checkIn} to ${checkOut} • ${guests} • ${rooms}`;
+      } else {
+        const pickup = document.getElementById('car-pickup').value;
+        const dropoff = document.getElementById('car-dropoff').value;
+        const date = document.getElementById('car-date').value;
+        const carType = document.getElementById('car-type').value;
+        title = `${pickup} → ${dropoff}`;
+        meta = `${date} • ${carType}`;
+      }
+
+      lastSearchSummary = `${category}: ${title} (${meta})`;
+      document.getElementById('search-summary-title').textContent = title;
+      document.getElementById('search-summary-meta').textContent = meta;
+      document.getElementById('search-result-box').classList.remove('hidden');
+      document.getElementById('quick-status').classList.add('hidden');
+    }
+
+    async function submitQuickBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('quick-name').value.trim();
+      const email = document.getElementById('quick-email').value.trim();
+      const statusEl = document.getElementById('quick-status');
+      const accessKey = document.querySelector('#contact-form input[name="access_key"]').value;
+
+      // Pre-fill contact form as backup
+      document.getElementById('c-name').value = name;
+      document.getElementById('c-email').value = email;
+      document.getElementById('c-details').value = lastSearchSummary;
+
+      if (accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+        statusEl.textContent = 'Search details copied to the Contact desk below—scroll down to finalize via email or WhatsApp.';
+        statusEl.classList.remove('hidden');
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      statusEl.textContent = 'Locking in your request...';
+      statusEl.classList.remove('hidden');
+
+      const formData = new FormData();
+      formData.append('access_key', accessKey);
+      formData.append('subject', 'New Booking Search Request - TravelFixer');
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('details', lastSearchSummary);
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success) {
+          statusEl.textContent = 'Request logged! Our ticketing desk will email your live options shortly.';
+        } else {
+          statusEl.textContent = 'Saved below—scroll to Contact to submit directly.';
+        }
+      } catch (err) {
+        statusEl.textContent = 'Saved below—scroll to Contact to submit directly.';
+      }
+    }
+
+    // Multi-Country Local Fixers (India, Dubai, Indonesia, Malaysia, Brazil)
     const FIXERS = [
       {
-        id: 'aarav',
         country: 'India',
         name: 'Aarav',
         city: 'New Delhi & Jaipur',
         years: '14 yrs',
-        quote: "First-time visitors lose days to station chaos and bad routing. I line up vetted private drivers, confirmed rail berths, and guides who actually know the history.",
-        speciality: 'Golden Triangle drivers, rail ticketing & heritage stays',
+        optionValue: 'India - Aarav (New Delhi & Jaipur)',
+        quote: 'First-time visitors lose days to station chaos and bad routing. I arrange vetted private drivers, confirmed rail berths, and heritage guides.',
+        speciality: 'Golden Triangle drivers, rail ticketing & airport transfers',
         image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80'
       },
       {
-        id: 'tariq',
         country: 'Dubai',
         name: 'Tariq',
         city: 'Dubai, UAE',
         years: '11 yrs',
-        quote: "Dubai moves fast and tourist markups are steep. I coordinate direct desert camp operators, tight stopover transfers, and last-minute dining or yacht bookings.",
+        optionValue: 'Dubai - Tariq (Dubai & Stopovers)',
+        quote: 'Dubai moves fast and tourist markups are steep. I coordinate direct desert camp operators, tight layover transfers, and last-minute bookings.',
         speciality: 'Layover transit, private desert camps & VIP airport pickups',
         image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80'
       },
       {
-        id: 'made',
         country: 'Indonesia',
         name: 'Made',
         city: 'Bali & East Java',
         years: '16 yrs',
-        quote: "Skip the two-hour Canggu gridlock. I route you through quiet highland roads, reliable fast-boat operators to Nusa Penida, and sunrise runs to Mount Bromo.",
-        speciality: 'Inter-island fast boats, Bromo/Ijen logistics & private drivers',
+        optionValue: 'Indonesia - Made (Bali & Java)',
+        quote: 'Skip the Canggu gridlock. I route you through quiet highland roads, reliable fast-boats to Nusa Penida, and sunrise runs to Mount Bromo.',
+        speciality: 'Inter-island fast boats, Bromo logistics & private drivers',
         image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80'
       },
       {
-        id: 'nurul',
         country: 'Malaysia',
         name: 'Nurul',
         city: 'Kuala Lumpur & Penang',
         years: '12 yrs',
-        quote: "From late-night hawker lanes in George Town to overland transfers into Taman Negara, I handle the regional connections that booking apps get wrong.",
+        optionValue: 'Malaysia - Nurul (Kuala Lumpur & Penang)',
+        quote: 'From late-night hawker lanes in George Town to overland transfers into Taman Negara, I handle the connections booking apps miss.',
         speciality: 'Penang heritage routes, rainforest transfers & domestic hops',
         image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80'
       },
       {
-        id: 'rafael',
         country: 'Brazil',
         name: 'Rafael',
         city: 'Rio de Janeiro & São Paulo',
         years: '15 yrs',
-        quote: "Knowing which neighborhoods to stay in and having a trusted driver waiting outside Galeão airport changes your entire experience of Brazil.",
-        speciality: 'Safe airport transfers, Ilha Grande boats & Iguazu connections',
+        optionValue: 'Brazil - Rafael (Rio & Sao Paulo)',
+        quote: 'Knowing which neighborhoods to stay in and having a trusted driver waiting outside Galeão airport changes your entire trip to Brazil.',
+        speciality: 'Safe airport transfers, Ilha Grande boats & Iguazu links',
         image: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=800&q=80'
       }
     ];
@@ -298,161 +655,128 @@
     const FIELD_NOTES = [
       {
         country: 'India',
-        title: 'Delhi & Mumbai terminal transfer trap',
-        body: 'Domestic and international terminals sit miles apart in heavy traffic. Never book a self-transfer under 3.5 hours without a pre-arranged driver waiting curbside.'
+        title: 'Delhi & Mumbai terminal transfer rule',
+        body: 'Domestic and international terminals sit miles apart in heavy traffic. Keep at least 3.5 hours between self-transfer flights with a pre-booked driver.'
       },
       {
         country: 'Dubai',
-        title: 'Friday prayer hours & direct desert operators',
-        body: 'Plan Old Dubai creek crossings and mosque visits around Friday midday hours, and book desert camps directly rather than through hotel concierge markups.'
+        title: 'Friday hours & direct desert operators',
+        body: 'Plan Old Dubai creek crossings around Friday midday prayer hours, and book desert camps directly rather than through hotel concierge markups.'
       },
       {
         country: 'Indonesia',
-        title: 'Morning fast-boats & flight buffer rule',
-        body: 'Morning sea crossings from Sanur to Nusa Penida or Lombok run far calmer than afternoon boats. Always keep a 24-hour buffer before flights out of Denpasar.'
+        title: 'Morning fast-boats & flight buffers',
+        body: 'Morning sea crossings from Sanur to Nusa Penida or Lombok are far calmer than afternoon boats. Keep a 24-hour buffer before flights out of Denpasar.'
       },
       {
         country: 'Malaysia',
         title: 'East Coast monsoon & hawker cash',
-        body: 'Check November–February monsoon closures before booking Perhentian or Tioman islands, and keep small ringgit notes handy for Penang street stalls.'
+        body: 'Check November–February monsoon closures before booking Perhentian or Tioman islands, and carry small ringgit notes for Penang street stalls.'
       },
       {
         country: 'Brazil',
-        title: 'PIX payments & domestic baggage tiers',
-        body: 'Beach vendors and local drivers rely on Brazil’s PIX transfer system rather than foreign cards, and basic domestic fares on LATAM or Gol exclude checked bags.'
+        title: 'PIX transfers & domestic baggage tiers',
+        body: 'Local drivers and beach vendors rely on Brazil’s PIX payment system, and basic domestic fares on LATAM or Gol exclude checked luggage.'
       }
     ];
 
-    function openFixerWhatsApp(fixerName, city, country) {
-      const message = `Hi TravelFixer, I'd like to connect with ${fixerName} (${city}, ${country}) to plan my trip.`;
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
-
-    function unlockNoteWhatsApp(country, title) {
-      const message = `Hi TravelFixer, please share the full ${country} ground briefing on: "${title}"`;
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
-
-    function sendQuoteViaWhatsApp() {
-      const name = document.getElementById("q-name").value.trim() || "Traveler";
-      const service = document.getElementById("q-service").value;
-      const fixer = document.getElementById("q-fixer").value;
-      const details = document.getElementById("q-details").value.trim() || "Looking for availability and rates.";
-      const message = `Hi TravelFixer, I'd like a quote:
-• Name: ${name}
-• Service: ${service}
-• Destination/Fixer: ${fixer}
-• Details: ${details}`;
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank", "noopener,noreferrer");
+    function selectFixerForBooking(optionValue, fixerName, city) {
+      const selectEl = document.getElementById('c-destination');
+      selectEl.value = optionValue;
+      const detailsEl = document.getElementById('c-details');
+      if (!detailsEl.value.trim()) {
+        detailsEl.value = `Interested in booking ground support with ${fixerName} in ${city}.`;
+      }
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     }
 
     function renderFixers(selectedCountry = 'All') {
-      const fixersGrid = document.getElementById("fixers-grid");
-      const list = selectedCountry === 'All'
-        ? FIXERS
-        : FIXERS.filter(f => f.country === selectedCountry);
+      const grid = document.getElementById('fixers-grid');
+      const list = selectedCountry === 'All' ? FIXERS : FIXERS.filter(f => f.country === selectedCountry);
 
-      fixersGrid.innerHTML = list.map(fixer => `
-        <article class="bg-surface border border-borderWarm rounded-xl overflow-hidden flex flex-col justify-between">
+      grid.innerHTML = list.map(fixer => `
+        <article class="bg-white border border-line rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm">
           <div>
-            <div class="h-52 overflow-hidden relative">
+            <div class="h-48 overflow-hidden relative">
               <img src="${fixer.image}" alt="${fixer.city}, ${fixer.country}" class="w-full h-full object-cover" />
-              <span class="absolute top-3 left-3 bg-obsidian/90 text-ivory text-xs font-medium px-3 py-1 rounded border border-borderWarm">
+              <span class="absolute top-3 left-3 bg-white/95 text-ink text-xs font-semibold px-3 py-1 rounded-lg shadow-sm">
                 ${fixer.country} &bull; ${fixer.years}
               </span>
             </div>
-            <div class="p-6">
-              <p class="text-xs uppercase tracking-wider text-brass font-semibold mb-1">${fixer.city}</p>
-              <h3 class="font-serif text-2xl font-medium text-ivory mb-2">${fixer.name}</h3>
-              <p class="text-xs text-sand mb-4">${fixer.speciality}</p>
-              <p class="text-ivory/90 text-sm leading-relaxed border-l-2 border-brass/60 pl-3.5 italic">
+            <div class="p-5">
+              <p class="text-xs uppercase tracking-wider text-forest font-bold mb-0.5">${fixer.city}</p>
+              <h3 class="font-serif text-2xl font-semibold text-ink mb-1.5">${fixer.name}</h3>
+              <p class="text-xs text-muted mb-3">${fixer.speciality}</p>
+              <p class="text-ink/85 text-sm leading-relaxed border-l-2 border-amberBrand pl-3 italic">
                 "${fixer.quote}"
               </p>
             </div>
           </div>
-          <div class="px-6 pb-6">
-            <button
-              type="button"
-              onclick="openFixerWhatsApp('${fixer.name}', '${fixer.city}', '${fixer.country}')"
-              class="w-full bg-emeraldBrand hover:bg-emeraldHover text-white text-sm font-medium py-2.5 px-4 rounded-md transition">
-              Message ${fixer.name} on WhatsApp
+          <div class="px-5 pb-5">
+            <button type="button"
+              onclick="selectFixerForBooking('${fixer.optionValue.replace(/'/g, "\'")}', '${fixer.name}', '${fixer.city}')"
+              class="w-full bg-canvas hover:bg-amberBrand border border-line text-ink font-semibold text-sm py-2.5 px-4 rounded-xl transition">
+              Request ${fixer.name} for Your Trip
             </button>
           </div>
         </article>
-      `).join("");
+      `).join('');
     }
 
     function filterFixers(country) {
       document.querySelectorAll('.filter-btn').forEach(btn => {
         if (btn.dataset.country === country) {
-          btn.className = 'filter-btn bg-emeraldBrand text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition';
+          btn.className = 'filter-btn bg-ink text-white text-xs font-semibold px-4 py-2 rounded-lg transition';
         } else {
-          btn.className = 'filter-btn bg-surface text-sand hover:text-ivory border border-borderWarm text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-md transition';
+          btn.className = 'filter-btn bg-white text-muted hover:text-ink border border-line text-xs font-semibold px-4 py-2 rounded-lg transition';
         }
       });
       renderFixers(country);
     }
 
-    // Initial Render
     renderFixers('All');
 
-    // Render Field Notes
-    const insightsGrid = document.getElementById("insights-grid");
-    insightsGrid.innerHTML = FIELD_NOTES.map(item => `
-      <article class="bg-obsidian border border-borderWarm rounded-xl p-6 flex flex-col justify-between">
-        <div>
-          <span class="inline-block text-xs font-semibold uppercase tracking-wider text-brass mb-2.5">
-            ${item.country}
-          </span>
-          <h3 class="font-serif text-xl font-medium text-ivory mb-2.5">${item.title}</h3>
-          <p class="text-sand text-sm leading-relaxed mb-5">${item.body}</p>
-        </div>
-        <button
-          type="button"
-          onclick="unlockNoteWhatsApp('${item.country}', '${item.title.replace(/'/g, "\'")}')"
-          class="text-left text-xs uppercase tracking-wider font-semibold text-emeraldBrand hover:text-brass transition">
-          Request ${item.country} briefing on WhatsApp &rarr;
-        </button>
+    document.getElementById('insights-grid').innerHTML = FIELD_NOTES.map(item => `
+      <article class="bg-canvas border border-line rounded-2xl p-5">
+        <span class="inline-block text-xs font-bold uppercase tracking-wider text-forest mb-2">${item.country}</span>
+        <h3 class="font-serif text-lg font-semibold text-ink mb-2">${item.title}</h3>
+        <p class="text-muted text-sm leading-relaxed">${item.body}</p>
       </article>
-    `).join("");
+    `).join('');
 
-    // Web3Forms Async Submission
-    const quoteForm = document.getElementById("quote-form");
-    const quoteStatus = document.getElementById("quote-status");
+    // Web3Forms Contact Form Handler
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-status');
 
-    quoteForm.addEventListener("submit", async (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const accessKey = quoteForm.querySelector('input[name="access_key"]').value;
-      if (accessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
-        quoteStatus.textContent = "Email key not configured yet—use the 'Send via WhatsApp' button next to it.";
-        quoteStatus.className = "text-sm text-center font-medium text-brass block pt-2";
+      const accessKey = contactForm.querySelector('input[name="access_key"]').value;
+      if (accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+        contactStatus.textContent = 'Email key not added yet—tap "Chat with Support on WhatsApp" on the left to send immediately.';
+        contactStatus.className = 'text-xs text-center font-semibold text-forest block pt-1';
         return;
       }
 
-      quoteStatus.textContent = "Sending your request...";
-      quoteStatus.className = "text-sm text-center font-medium text-sand block pt-2";
+      contactStatus.textContent = 'Sending inquiry...';
+      contactStatus.className = 'text-xs text-center font-medium text-muted block pt-1';
 
       try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: new FormData(quoteForm)
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(contactForm)
         });
         const result = await response.json();
-
         if (result.success) {
-          quoteStatus.textContent = "Request received. Our flight and ground desk will reply shortly.";
-          quoteStatus.className = "text-sm text-center font-medium text-emeraldBrand block pt-2";
-          quoteForm.reset();
+          contactStatus.textContent = 'Inquiry received. Our booking desk will reply shortly.';
+          contactStatus.className = 'text-xs text-center font-semibold text-forest block pt-1';
+          contactForm.reset();
         } else {
-          quoteStatus.textContent = "Could not send email—tap 'Send via WhatsApp' to reach us directly.";
-          quoteStatus.className = "text-sm text-center font-medium text-red-400 block pt-2";
+          contactStatus.textContent = 'Could not send email—please use the WhatsApp Support button on the left.';
+          contactStatus.className = 'text-xs text-center font-semibold text-red-600 block pt-1';
         }
       } catch (err) {
-        quoteStatus.textContent = "Network error—tap 'Send via WhatsApp' to send your inquiry.";
-        quoteStatus.className = "text-sm text-center font-medium text-red-400 block pt-2";
+        contactStatus.textContent = 'Network error—please use the WhatsApp Support button on the left.';
+        contactStatus.className = 'text-xs text-center font-semibold text-red-600 block pt-1';
       }
     });
   </script>
